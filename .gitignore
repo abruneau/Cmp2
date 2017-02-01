@@ -1,0 +1,9 @@
+/node_modules
+/dist
+/.tmp
+/bower_components
+/cmp-darwin-x64
+/exec
+npm-debug.log
+/doc
+sfLogin.txt

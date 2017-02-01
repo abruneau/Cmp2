@@ -1,0 +1,73 @@
+<div id="content">
+  <div class="spinner" ng-if="loadingAccount">
+    <div class="sk-chasing-dots">
+      <div class="sk-child sk-dot1"></div>
+      <div class="sk-child sk-dot2"></div>
+    </div>
+  </div>
+  <div class="tabs-wrapper">
+    <div class="panel">
+      <div class="panel-body" style="padding-bottom:0px;">
+        <div class="col-md-12 col-sm-12">
+          <a class="pull-right" ng-click="updateAccountInfo()">
+            <i class="fa fa-refresh"></i>
+          </a>
+          <h3 class="animated fadeInLeft"> <a href="{{sf.loginUrl}}/{{account.Id}}" class="openExternal">{{account.Name}}</a>
+            <small>{{account.Industry}}</small>
+            <small ng-if="account.IsPartner">(Parner)</small>
+            <small>
+              |
+              {{account.Type}}</small>
+          </h3>
+          <div ng-if="account.Full_Address__c">
+            <i class="fa fa-map-marker"></i>
+            {{account.Full_Address__c}}
+          </div>
+        </div>
+        <ul id="tabs-demo" class="nav nav-tabs content-header-tab" style="padding-top:10px;">
+          <li ng-class="{'active': active === 0}" role="presentation">
+            <a ng-click="active = 0">Account</a>
+          </li>
+          <li ng-class="{'active': active === 1}" role="presentation">
+            <a ng-click="active = 1">Opportunities</a>
+          </li>
+          <li ng-class="{'active': active === 2}">
+            <a ng-click="active = 2">Notes</a>
+          </li>
+          <li ng-class="{'active': active === 3}">
+            <a ng-click="active = 3">Files</a>
+          </li>
+          <li ng-class="{'active': active === 4}">
+            <a ng-click="active = 4">Settings</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-12 tab-page">
+      <uib-tabset active="active">
+        <uib-tab index="0" class="hide">
+          <div class="" ng-include=" 'views/account_home.html' "></div>
+        </uib-tab>
+        <uib-tab index="1" class="hide oppy">
+          <div class="" ng-include=" 'views/account_opportunities.html' "></div>
+        </uib-tab>
+        <uib-tab index="2" class="notes">
+          <notes></notes>
+        </uib-tab>
+        <uib-tab index="3" class="files">
+          <files></files>
+        </uib-tab>
+        <uib-tab index="4" class="settings">
+          <div class="" ng-include=" 'views/account_info.html' "></div>
+        </uib-tab>
+      </uib-tabset>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.nav-tabs').addClass('content-header-tab');
+    $('.nav-tabs').attr('id', 'tabs-demo');
+    $('.tab-page .nav-tabs').addClass('hide');
+  });
+</script>

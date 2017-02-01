@@ -1,0 +1,142 @@
+<!-- start: Header -->
+<nav class="navbar navbar-default header navbar-fixed-top" style="z-index: 9">
+  <div class="col-md-12 nav-wrapper">
+    <div class="navbar-header" style="width:100%;">
+      <div class="opener-left-menu is-open" ng-click="openLeftMenu()">
+        <span class="top"></span>
+        <span class="middle"></span>
+        <span class="bottom"></span>
+      </div>
+      <a href="#/" class="navbar-brand">
+        <b>Cmp2</b>
+      </a>
+
+      <ul class="nav navbar-nav search-nav">
+        <li>
+          <div class="search">
+            <span class="fa fa-search icon-search" style="font-size:23px;"></span>
+            <div class="form-group form-animate-text">
+              <input type="text" class="form-text" required>
+              <span class="bar"></span>
+              <label class="label-search">Type anywhere to
+                <b>Search</b>
+              </label>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right user-nav">
+        <li class="user-name">
+          <span>{{identity.display_name}}</span>
+        </li>
+        <li class="dropdown avatar-dropdown">
+          <img src="images/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
+          <ul class="dropdown-menu user-dropdown">
+            <li>
+              <a href="#/profile">
+                <span class="fa fa-user"></span>
+                My Profile</a>
+            </li>
+            <!-- <li>
+              <a href="#">
+                <span class="fa fa-calendar"></span>
+                My Calendar</a>
+            </li> -->
+            <!-- <li role="separator" class="divider"></li>
+            <li class="more">
+              <ul>
+                <li>
+                  <a href="">
+                    <span class="fa fa-cogs"></span>
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    <span class="fa fa-lock"></span>
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    <span class="fa fa-power-off "></span>
+                  </a>
+                </li>
+              </ul>
+            </li> -->
+          </ul>
+        </li>
+        <!-- <li >
+          <a href="#/" class="opener-right-menu">
+            <span class="fa fa-coffee"></span>
+          </a>
+        </li> -->
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- end: Header -->
+
+<!-- start:Left Menu -->
+<div id="left-menu">
+  <div class="sub-left-menu scroll" style="z-index: 8;">
+    <ul class="nav nav-list">
+      <li>
+        <div class="left-bg"></div>
+      </li>
+      <li class="time">
+        <h1 class="animated fadeInLeft">{{datetime}}</h1>
+        <p class="animated fadeInRight">{{datetime2}}</p>
+      </li>
+      <!-- <li class="active ripple">
+        <a class="tree-toggle nav-header" ng-click="treeToggle($event)">
+          <span class="fa-home fa"></span>
+          Dashboard
+          <span class="fa-angle-right fa right-arrow text-right"></span>
+        </a>
+        <ul class="nav nav-list tree">
+          <li>
+            <a href="dashboard-v1.html">Dashboard v.1</a>
+          </li>
+          <li>
+            <a href="dashboard-v2.html">Dashboard v.2</a>
+          </li>
+        </ul>
+      </li> -->
+      <!-- <li class="ripple">
+        <a href="#/mail">
+          <span class="fa-home fa"></span>
+          Mail
+        </a>
+      </li> -->
+      <li class="ripple">
+        <a href="#/" ng-click="treeToggle($event)">
+          <span class="fa-home fa"></span>
+          Home
+        </a>
+      </li>
+      <li class="ripple">
+        <a class="tree-toggle nav-header" ng-click="treeToggle($event)">
+          <span class="fa-briefcase fa"></span>
+          Accounts
+          <span class="fa-angle-right fa right-arrow text-right"></span>
+        </a>
+        <ul class="nav nav-list tree">
+          <li>
+            <a href="#/account_form">
+              <i class="fa fa-plus-circle"></i>Add Account</a>
+          </li>
+          <li>
+            <input type="text" class="form-control" id="search" placeholder="Search" ng-model="search">
+          </li>
+          <li ng-repeat="account in accountList | filter:search | orderBy: 'Name'  track by $index">
+            <a href="#/account/{{account.Id}}">{{account.Name | titleCase}}</a>
+          </li>
+        </ul>
+      </li>
+
+    </ul>
+  </div>
+</div>
+<!-- end: Left Menu -->
+
+<!-- <script src="scripts/main.js"></script> -->

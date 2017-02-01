@@ -1,0 +1,84 @@
+<div class="panel box-v3">
+  <div class="panel-heading bg-white border-none">
+    <h4>Todo List</h4>
+  </div>
+  <div class="panel-body">
+    <section id="todoapp">
+      <header id="header">
+        <form id="todo-form" ng-keyup="$event.keyCode == 13 && addTodo()" ng-submit="addTodo()">
+          <input id="new-todo" placeholder="What needs to be done?" ng-model="newTodo.task" ng-disabled="saving" autofocus>
+          <div id="new-todo-date" class="dropdown pull-right">
+            <a class="dropdown-toggle" id="dropdown" role="button" data-toggle="dropdown">
+              <div class="input-group">
+                <input type="text" class="form-control" data-ng-model="newTodo.dueDate" placeholder="Due Date?">
+              </div>
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+              <datetimepicker data-ng-model="newTodo.dueDate" data-datetimepicker-config="{ dropdownSelector: '#dropdown' }" data-on-set-time="addTodo()"/>
+            </ul>
+          </div>
+        </form>
+      </header>
+      <section id="main" ng-show="todos.length" ng-cloak>
+        <input id="toggle-all" type="checkbox" ng-model="allChecked" ng-click="markAll(allChecked)">
+        <label for="toggle-all">Mark all as complete</label>
+        <ul id="todo-list">
+          <li ng-repeat="todo in todos | orderBy: 'dueDate' | filter:statusFilter track by $index" ng-class="{completed: todo.completed, editing: todo == editedTodo}" ng-style="isLate(todo)">
+            <div class="todo-view">
+              <input class="todo-toggle" type="checkbox" ng-model="todo.completed" ng-change="toggleCompleted(todo)">
+              <div ng-dblclick="editTodo(todo)">
+                <a ng-if="todo.AccountId && !isAccountPage" href="#/account/{{todo.AccountId}}">
+                  <label>{{todo.task}}
+                    <small ng-if="todo.dueDate">
+                      <i>{{formatDate(todo.dueDate)}}</i>
+                    </small>
+                  </label>
+                </a>
+                <label ng-if="!todo.AccountId || isAccountPage">{{todo.task}}
+                  <small ng-if="todo.dueDate">
+                    <i>{{formatDate(todo.dueDate)}}</i>
+                  </small>
+                </label>
+              </div>
+              <button class="todo-destroy" ng-click="removeTodo(todo)"></button>
+            </div>
+            <form class="edit" ng-keyup="$event.keyCode == 13 && saveEdits(todo, 'submit')" ng-submit="saveEdits(todo, 'submit')">
+              <input ng-trim="false" ng-model="todo.task" todo-escape="revertEdits(todo)" todo-focus="todo == editedTodo">
+              <div class="dropdown pull-right edit-todo-date">
+	            <a class="dropdown-toggle" id="dropdown" role="button" data-toggle="dropdown">
+	              <div class="input-group">
+	                <input type="text" class="form-control" data-ng-model="todo.dueDate" todo-escape="revertEdits(todo)" placeholder="Due Date?">
+	              </div>
+	            </a>
+	            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+	              <datetimepicker todo-escape="revertEdits(todo)" data-ng-model="todo.dueDate" data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle' }" data-on-set-time="saveEdits(todo, 'submit')"/>
+	            </ul>
+	          </div>
+            </form>
+          </li>
+        </ul>
+      </section>
+      <footer id="footer" ng-show="todos.length" ng-cloak>
+        <span id="todo-count">
+          <strong>{{remainingCount}}</strong>
+          <ng-pluralize count="remainingCount" when="{ one: 'item left', other: 'items left' }"></ng-pluralize>
+        </span>
+        <ul id="filters">
+          <li>
+            <a ng-click="changeStatus('')" ng-class="{selected: status == ''} ">All</a>
+          </li>
+          <li>
+            <a ng-click="changeStatus('active')" ng-class="{selected: status == 'active'}">Active</a>
+          </li>
+          <li>
+            <a ng-click="changeStatus('completed')" ng-class="{selected: status == 'completed'}">Completed</a>
+          </li>
+        </ul>
+        <button id="clear-completed" ng-click="clearCompletedTodos()" ng-show="completedCount">Clear completed</button>
+      </footer>
+    </section>
+    <footer id="info">
+      <p>Double-click to edit a todo</p>
+    </footer>
+  </div>
+</div>
