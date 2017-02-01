@@ -480,7 +480,7 @@ module.exports = function(grunt) {
     electron: {
       macosBuild: {
         options: {
-          name: 'cmp',
+          name: 'Cmp2',
           dir: 'dist',
           out: 'exec',
           version: '1.4.0',
