@@ -1,8 +1,9 @@
 'use strict';
 
 /**
- * @ngdoc function
- * @name cmp2App.controller:AboutCtrl
+ * @memberof cmp2App
+ * @ngdoc controller
+ * @name AboutCtrl
  * @description
  * # AboutCtrl
  * Controller of the cmp2App

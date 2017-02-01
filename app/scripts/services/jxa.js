@@ -19,6 +19,7 @@ angular.module('cmp2App').factory('jxa', function() {
 
   /**
    * Check if a notebook exists
+   * @memberof jxa
    * @param  {String} name
    * @return {Boolean}
    */
@@ -37,6 +38,7 @@ angular.module('cmp2App').factory('jxa', function() {
 
   /**
    * Create a notebook
+   * @memberof jxa
    * @param  {String} name
    * @return {String}      command to execute
    */
@@ -65,6 +67,12 @@ angular.module('cmp2App').factory('jxa', function() {
   // Note //
   //////////
 
+  /**
+   * Get Note Html
+   * @memberof jxa
+   * @param  {Object} note Target note
+   * @return {String}      html content
+   */
   self.getHtml = function(note) {
     var Evernote = Application('Evernote');
     var matche;
@@ -88,6 +96,12 @@ angular.module('cmp2App').factory('jxa', function() {
     return matche.htmlContent();
   };
 
+	/**
+	 * Update note HTML
+	 * @memberof jxa
+	 * @param  {object} note    target note
+	 * @param  {String} newHtml New HTML
+	 */
   self.updateHtml = function(note, newHtml) {
     var Evernote = Application('Evernote');
     var matche;
