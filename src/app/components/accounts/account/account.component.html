@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body text-center">
+        <div class="h2 py-3">
+          {{closed | meganumber}}
+          {{account.CurrencyIsoCode}}
+        </div>
+        <div class="text-muted small text-uppercase font-weight-bold">Closed</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body text-center">
+        <div class="h2 py-3">
+          {{forcast | meganumber}}
+          {{account.CurrencyIsoCode}}
+        </div>
+        <div class="text-muted small text-uppercase font-weight-bold">Forcast</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <app-todolist [currentAccount]="account"></app-todolist>
+  </div>
+</div>

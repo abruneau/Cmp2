@@ -1,0 +1,27 @@
+<div class="row" style=" padding: 20px;">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header">
+        <span *ngIf="forcastLoading" class="fa fa-spinner rotate" aria-hidden="true"></span>Forcast
+      </div>
+      <div class="card-body">
+        <div *ngIf="forcastError">{{forcastError}}</div>
+        <div class="row">
+          <div [ngClass]="forcastClass()" *ngFor="let category of forcast">
+            <div class="card">
+              <div class="card-body text-center">
+                <div class="h2 py-3">{{(category.amount || 0) | meganumber}}</div>
+                <div class="text-muted small text-uppercase font-weight-bold">{{category.ForecastCategoryName}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-todolist></app-todolist>
+  </div>
+  <div class="col-md-4">
+    <app-weather></app-weather>
+  </div>
+
+</div>

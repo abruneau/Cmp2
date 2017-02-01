@@ -1,0 +1,80 @@
+<div class="sidebar">
+  <nav class="sidebar-nav">
+    <ul class="nav">
+      <li class="nav-title time">
+        <h1 class="animated fadeInLeft">{{clock | async | date:'HH:mm'}}</h1>
+        <p class="animated fadeInRight">{{clock | async | date:'fullDate'}}</p>
+      </li>
+      <!-- Home -->
+      <li class="nav-item">
+        <a class="nav-link" routerLinkActive="active" [routerLink]="['/']" [routerLinkActiveOptions]="{ exact: true }"><span class="fa-home fa"></span> Home</a>
+      </li>
+      <!-- DashBoard -->
+      <li class="nav-item nav-dropdown" routerLinkActive="open" appNavDropdown>
+        <a class="nav-link nav-dropdown-toggle" appNavDropdownToggle><span class="fa fa-tachometer"></span> Dashboards</a>
+        <ul class="nav-dropdown-items">
+          <li class="nav-item"><a (click)="dashModal.show()"><i class="fa fa-plus-circle"></i> Add Dashboard</a></li>
+          <li class="nav-item" *ngFor="let dash of dashboards">
+            <a class="nav-link" routerLinkActive="active" [routerLink]="['/dashboards', dash._id]">{{dash.title}}</a>
+          </li>
+        </ul>
+      </li>
+      <!-- Accounts -->
+      <li class="nav-item nav-dropdown" routerLinkActive="open" appNavDropdown>
+        <a class="nav-link nav-dropdown-toggle" appNavDropdownToggle><span class="fa-briefcase fa"></span> Accounts</a>
+        <ul class="nav-dropdown-items">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/search" routerLinkActive="active"><i class="fa fa-plus-circle"></i> Add Account</a>
+          </li>
+          <li class="nav-item">
+            <input type="text" class="form-control" name="search" placeholder="Search" [(ngModel)]="search">
+          </li>
+          <li class="nav-item" *ngFor="let account of accounts | orderBy: ['-Stared', 'Name'] | filterBy: ['Name']: search">
+            <a class="nav-link" routerLinkActive="active" [routerLink]="['/account', account.Id]">
+               <span class="glyphicon glyphicon-star" aria-hidden="true" *ngIf="account.Stared"></span>
+               {{account.Name}}
+             </a>
+          </li>
+        </ul>
+      </li>
+      <!-- Editor -->
+      <li class="nav-item nav-dropdown" routerLinkActive="open" appNavDropdown>
+        <a class="nav-link nav-dropdown-toggle" appNavDropdownToggle><span class="fa fa-pencil-square-o"></span> Editor</a>
+        <ul class="nav-dropdown-items">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/templates" routerLinkActive="active"><i class="fa fa-file-text-o"></i> Templates</a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-title">
+        External Links
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [appOpenExternal]="'https://mail.google.com'"><span class="fa fa-envelope"></span> Gmail</a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+<!-- Dashboard Modal -->
+<div class="modal fade" bsModal #dashModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="dashModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Create a new Dashboard</h4>
+      </div>
+      <div class="modal-body">
+        <form #dashForm="ngForm" (ngSubmit)="createDashboard(dashForm)" novalidate>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Title</label>
+            <input type="text" class="form-control" name="title" ngModel required>
+          </div>
+          <button (click)="dashModal.hide()" type="Submit" [disabled]="!dashForm.valid" class="btn btn-primary">Create Note</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
