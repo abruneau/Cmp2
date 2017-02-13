@@ -1,5 +1,6 @@
 {
   "name": "Cmp2",
+  "version": "2.0",
   "main": "index.js",
   "private": true,
   "devDependencies": {
@@ -54,6 +55,7 @@
     "apple-java-script": "^1.0.1",
     "bluebird": "^3.4.6",
     "cheerio": "^0.22.0",
+    "electron-gh-releases": "^2.0.4",
     "jsforce": "^1.7.1",
     "markdown-it": "^8.2.1",
     "markdown-it-checkbox": "^1.1.0",
