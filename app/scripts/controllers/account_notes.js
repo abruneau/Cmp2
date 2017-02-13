@@ -188,8 +188,6 @@ angular.module('cmp2App').controller('AccountNotesCtrl', function($scope, $windo
 
     var md = "## Table of Content\r\r{!toc}\r\r# Title 1";
 
-    console.log(newNote);
-
     if (newNote.md) {
       md = $scope.templates.filter(function(t) {
         return t._id === newNote.md;
@@ -241,9 +239,7 @@ angular.module('cmp2App').controller('AccountNotesCtrl', function($scope, $windo
   Accounts.registerObserverCallback(init);
 
   mdTemplate.getAll().then(function(templates) {
-    $scope.$apply(function() {
-      $scope.templates = templates;
-    });
+    $scope.templates = templates;
   }, function(err) {
     console.log(err);
   });
