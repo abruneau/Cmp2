@@ -31,12 +31,11 @@
           <span>{{identity.display_name}}</span>
         </li>
         <li class="dropdown avatar-dropdown">
-          <img src="images/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
+          <img src="images/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" />
           <ul class="dropdown-menu user-dropdown">
             <li>
               <a href="#/profile">
-                <span class="fa fa-user"></span>
-                My Profile</a>
+                <span class="fa fa-user"></span> My Profile</a>
             </li>
             <!-- <li>
               <a href="#">
@@ -110,14 +109,12 @@
       </li> -->
       <li class="ripple">
         <a href="#/" ng-click="treeToggle($event)">
-          <span class="fa-home fa"></span>
-          Home
+          <span class="fa-home fa"></span> Home
         </a>
       </li>
       <li class="ripple">
         <a class="tree-toggle nav-header" ng-click="treeToggle($event)">
-          <span class="fa-briefcase fa"></span>
-          Accounts
+          <span class="fa-briefcase fa"></span> Accounts
           <span class="fa-angle-right fa right-arrow text-right"></span>
         </a>
         <ul class="nav nav-list tree">
@@ -133,7 +130,19 @@
           </li>
         </ul>
       </li>
-
+      <li class="ripple">
+        <a class="tree-toggle nav-header" ng-click="treeToggle($event)">
+          <span class="fa fa-pencil-square-o"></span> Editor
+          <span class="fa-angle-right fa right-arrow text-right"></span>
+        </a>
+        <ul class="nav nav-list tree">
+          <li>
+            <a href="#/templates">
+              <i class="fa fa-file-text-o"></i> Templates
+            </a>
+          </li>
+        </ul>
+      </li>
     </ul>
   </div>
 </div>

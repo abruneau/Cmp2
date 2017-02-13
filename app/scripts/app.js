@@ -46,6 +46,11 @@ angular
         controller: 'AccountFormCtrl',
         controllerAs: 'accountForm'
       })
+      .when('/templates', {
+        templateUrl: 'views/templates.html',
+        controller: 'TemplatesCtrl',
+        controllerAs: 'templates'
+      })
       .otherwise({
         redirectTo: '/'
       });

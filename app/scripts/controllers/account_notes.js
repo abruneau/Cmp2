@@ -8,7 +8,7 @@
  * # AccountNotesCtrl
  * Controller of the cmp2App
  */
-angular.module('cmp2App').controller('AccountNotesCtrl', function($scope, $window, Accounts, jxa) {
+angular.module('cmp2App').controller('AccountNotesCtrl', function($scope, $window, Accounts, jxa, mdTemplate) {
 
   /* global moment */
   /* global EvernoteHelper */
@@ -49,6 +49,11 @@ angular.module('cmp2App').controller('AccountNotesCtrl', function($scope, $windo
 
   var simplemde = null;
 
+  /**
+   * Setup the editor
+   * @memberof AccountNotesCtrl
+   * @function loadEditor
+   */
   function loadEditor() {
     if ($("#editor").length) {
       simplemde = new SimpleMDE({
@@ -81,7 +86,7 @@ angular.module('cmp2App').controller('AccountNotesCtrl', function($scope, $windo
    * Update markdown file with new data
    * @memberof AccountNotesCtrl
    * @function save
-   * @param  {Object} data New md value
+   * @param  {String} data New md value
    */
   function save() {
     saving = true;
@@ -109,12 +114,19 @@ angular.module('cmp2App').controller('AccountNotesCtrl', function($scope, $windo
     });
   });
 
+  /**
+   * Change autosave mode
+   * @memberof AccountNotesCtrl
+   * @function $scope.changeAutosave
+   */
   $scope.changeAutosave = function() {
     $scope.autosave = !$scope.autosave;
     if ($scope.autosave && !saving && $scope.note) {
       save();
     }
   };
+
+  $scope.templates = [];
 
 
   /**
@@ -172,20 +184,26 @@ angular.module('cmp2App').controller('AccountNotesCtrl', function($scope, $windo
    * @memberof AccountNotesCtrl
    * @function createNote
    */
-  $scope.createNote = function(newNoteTitle) {
-    if (newNoteTitle === undefined) {
-      console.log("You didn't save the file");
-      return;
-    }
-    // newNoteTitle is a string that contains the path and filename created in the save file dialog.
+  $scope.createNote = function(newNote) {
+
     var md = "## Table of Content\r\r{!toc}\r\r# Title 1";
-    if (simplemde.value() !== "") {
+
+    console.log(newNote);
+
+    if (newNote.md) {
+      md = $scope.templates.filter(function(t) {
+        return t._id === newNote.md;
+      })[0].md;
+    }
+    if (simplemde.value() !== "" && !$scope.note) {
       md = simplemde.value();
     }
     simplemde.value(md);
     var html = EvernoteHelper.prepareHtml(markdown(md));
-    $scope.note = ajs(newNoteTitle, $scope.account.Name, html, jxa.createNoteWithHtml);
+    $scope.note = ajs(newNote.title, $scope.account.Name, html, jxa.createNoteWithHtml);
     $scope.noteList.push($scope.note);
+
+    $scope.newNote = null;
 
     if ($scope.autosave && !saving) {
       save();
@@ -215,10 +233,19 @@ angular.module('cmp2App').controller('AccountNotesCtrl', function($scope, $windo
         ajs(note, jxa.deleteNote);
         $scope.noteList = ajs(note.notebook, jxa.getNoteList);
         simplemde.value("");
+        $scope.changed = false;
       }
     }
   };
 
   Accounts.registerObserverCallback(init);
+
+  mdTemplate.getAll().then(function(templates) {
+    $scope.$apply(function() {
+      $scope.templates = templates;
+    });
+  }, function(err) {
+    console.log(err);
+  });
 
 });
