@@ -137,7 +137,7 @@ angular.module('cmp2App').controller('AccountNotesCtrl', function($scope, $windo
   function init() {
     if ($scope.account) {
       var notebook = $scope.account.Name;
-      if (notebook && ajs(notebook, jxa.notebookExists)) {
+      if (notebook) {
         $scope.safeApply(function() {
           $scope.noteList = ajs(notebook, jxa.getNoteList);
         });
