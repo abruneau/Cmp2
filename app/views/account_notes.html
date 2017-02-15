@@ -18,6 +18,7 @@
   </div>
   <div class="col-md-9">
     <div ng-if="note">
+	  <h4>{{note.title}}</h4>
       <button ng-click="deleteNote(note)" class="btn btn-sm btn-default" type="button" data-placement="top" data-toggle="tooltip" data-original-title="Trash">
         <i class="fa fa-trash-o"></i>
       </button>
@@ -48,13 +49,16 @@
         <form>
           <div class="form-group">
             <label for="exampleInputEmail1">Note Title</label>
-            <input type="text" ng-model="newNoteTitle" class="form-control">
+            <input type="text" ng-model="newNote.title" class="form-control">
+			<select class="form-control" name="" ng-model="newNote.md">
+				<option ng-repeat="template in templates" value="{{template._id}}">{{template.title}}</option>
+			</select>
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" ng-click="createNote(newNoteTitle)" data-dismiss="modal" class="btn btn-primary">Create Note</button>
+        <button type="button" ng-click="createNote(newNote)" data-dismiss="modal" class="btn btn-primary">Create Note</button>
       </div>
     </div>
   </div>

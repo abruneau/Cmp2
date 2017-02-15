@@ -19,6 +19,7 @@ angular.module('cmp2App').factory('jxa', function() {
 
   /**
    * Check if a notebook exists
+   * @memberof jxa
    * @param  {String} name
    * @return {Boolean}
    */
@@ -37,12 +38,19 @@ angular.module('cmp2App').factory('jxa', function() {
 
   /**
    * Create a notebook
+   * @memberof jxa
    * @param  {String} name
    * @return {String}      command to execute
    */
   self.createNotebook = function(name) {
-	var Evernote = Application('Evernote');
-	Evernote.createNotebook(name.replace(/'/g, "\\'"));
+    var Evernote = Application('Evernote');
+    var notebook = Evernote.notebooks.whose({
+      name: name.replace(/'/g, "\\'")
+    });
+    if (!notebook().length) {
+      Evernote.createNotebook(name.replace(/'/g, "\\'"));
+    }
+
   };
 
   self.getNoteList = function(notebook) {
@@ -65,6 +73,12 @@ angular.module('cmp2App').factory('jxa', function() {
   // Note //
   //////////
 
+  /**
+   * Get Note Html
+   * @memberof jxa
+   * @param  {Object} note Target note
+   * @return {String}      html content
+   */
   self.getHtml = function(note) {
     var Evernote = Application('Evernote');
     var matche;
@@ -88,6 +102,12 @@ angular.module('cmp2App').factory('jxa', function() {
     return matche.htmlContent();
   };
 
+  /**
+   * Update note HTML
+   * @memberof jxa
+   * @param  {object} note    target note
+   * @param  {String} newHtml New HTML
+   */
   self.updateHtml = function(note, newHtml) {
     var Evernote = Application('Evernote');
     var matche;
@@ -129,8 +149,8 @@ angular.module('cmp2App').factory('jxa', function() {
 
   self.deleteNote = function(note) {
 
-	var Evernote = Application('Evernote');
-	var matche;
+    var Evernote = Application('Evernote');
+    var matche;
     if (note.noteLink) {
       matche = Evernote.findNote(note.noteLink);
     } else {
@@ -149,7 +169,7 @@ angular.module('cmp2App').factory('jxa', function() {
       }
     }
 
-	matche.delete();
+    matche.delete();
   };
 
   return self;

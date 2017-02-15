@@ -25,9 +25,7 @@ angular.module('cmp2App').controller('TodosCtrl', function(Todo, $scope, $routeP
   $scope.editedTodo = null;
 
   Todo.getAll(accountId).then(function(todos) {
-    $scope.$apply(function() {
-      $scope.todos = todos;
-    });
+    $scope.todos = todos;
   }, function(err) {
     console.log(err);
   });

@@ -406,6 +406,7 @@ module.exports = function(grunt) {
             '*.{ico,png,txt}',
             '*.html',
             'images/{,*/}*.{webp}',
+			'images/*/*/*',
             'styles/fonts/{,*/}*.*',
             'index.js'
           ]
@@ -467,7 +468,7 @@ module.exports = function(grunt) {
         command: 'electron .'
       },
       build: {
-		command: 'cd <%= yeoman.dist %>/node_modules/deasync && rm -r bin && npm install --runtime=electron --target=1.4.0 --disturl=https://atom.io/download/atom-shell --abi=51'
+        command: 'cd <%= yeoman.dist %>/node_modules/deasync && rm -r bin && npm install --runtime=electron --target=1.4.0 --disturl=https://atom.io/download/atom-shell --abi=51'
       }
     },
 
@@ -486,7 +487,8 @@ module.exports = function(grunt) {
           version: '1.4.0',
           platform: 'darwin',
           arch: 'x64',
-          overwrite: 'true'
+          overwrite: 'true',
+          icon: __dirname + '/app/images/icons/mac/logo.icns'
         }
       }
     },
@@ -550,7 +552,7 @@ module.exports = function(grunt) {
     'usemin',
     'htmlmin',
     'install-dependencies',
-	'shell:build',
+    'shell:build',
     'electron',
     'wiredep'
   ]);

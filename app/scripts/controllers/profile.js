@@ -1,8 +1,9 @@
 'use strict';
 
 /**
- * @ngdoc function
- * @name cmp2App.controller:ProfileCtrl
+ * @memberof cmp2App
+ * @ngdoc controller
+ * @name ProfileCtrl
  * @description
  * # ProfileCtrl
  * Controller of the cmp2App

@@ -1,5 +1,6 @@
 {
   "name": "Cmp2",
+  "version": "2.1.0",
   "main": "index.js",
   "private": true,
   "devDependencies": {
