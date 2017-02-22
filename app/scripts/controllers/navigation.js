@@ -8,7 +8,7 @@
  * # NavigationCtrl
  * Controller of the cmp2App
  */
-angular.module('cmp2App').controller('NavigationCtrl', function($scope, salesForce, Accounts) {
+angular.module('cmp2App').controller('NavigationCtrl', function($scope, salesForce, Accounts, localAccount) {
 
   /* global moment */
   /* global $ */
@@ -103,12 +103,46 @@ angular.module('cmp2App').controller('NavigationCtrl', function($scope, salesFor
   };
 
   var updateAccounts = function() {
-    $scope.accountList = Accounts.list;
+    if (localAccount.list && Accounts.list) {
+
+      var idList = localAccount.list.filter(function(e) {
+        return e.stared;
+      }).map(function(e) {
+        return e.accountId;
+      });
+
+      $scope.stared = Accounts.list.filter(function(e) {
+        return this.indexOf(e.Id) >= 0;
+      }, idList);
+
+      $scope.unstared = Accounts.list.filter(function(e) {
+        return this.indexOf(e.Id) < 0;
+      }, idList);
+    }
+  };
+
+  var updateLocalInfo = function() {
+    updateAccounts();
+  };
+
+  $scope.isStared = function(account) {
+    var filtre = $scope.localAccountList.filter(function(element) {
+      return element.accountId === account.Id;
+    });
+
+    if (filtre) {
+      return filtre[0].stared;
+    }
+
+    return false;
+
   };
 
   salesForce.registerObserverCallback(updateSf);
   Accounts.registerObserverCallback(updateAccounts);
+  localAccount.registerObserverCallback(updateLocalInfo);
 
   Accounts.updateList();
+  localAccount.updateList();
 
 });

@@ -12,7 +12,7 @@
           <a class="pull-right" ng-click="updateAccountInfo()">
             <i class="fa fa-refresh"></i>
           </a>
-          <h3 class="animated fadeInLeft"> <a href="{{sf.loginUrl}}/{{account.Id}}" class="openExternal">{{account.Name}}</a>
+          <h3 class="animated fadeInLeft"> <span ng-click="changeFavoritStatus()" ng-class="localInfo.stared ? 'glyphicon-star' : 'glyphicon-star-empty'" class="glyphicon" aria-hidden="true"></span> <a href="{{sf.loginUrl}}/{{account.Id}}" class="openExternal">{{account.Name}}</a>
             <small>{{account.Industry}}</small>
             <small ng-if="account.IsPartner">(Parner)</small>
             <small>

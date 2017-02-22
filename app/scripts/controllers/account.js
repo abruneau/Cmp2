@@ -46,9 +46,9 @@ angular.module('cmp2App').controller('AccountCtrl', function($scope, $routeParam
   /**
    * Observer Callback for local infos
    * @memberof AccountCtrl
-   * @function updateLocalInfo
+   * @function updateLocalAccount
    */
-  var updateLocalInfo = function() {
+  var updateLocalAccount = function() {
     $scope.localInfo = localAccount.selected;
   };
 
@@ -58,13 +58,16 @@ angular.module('cmp2App').controller('AccountCtrl', function($scope, $routeParam
     });
   };
 
-  $scope.localInfo = {
+  var localInfo = {
     path: '',
     attributes: {
       type: 'LocalInfo'
     },
-    accountId: accountId
+    accountId: accountId,
+    stared: false
   };
+
+  $scope.localInfo = localInfo;
 
   $scope.showClosedOpport = false;
   $scope.sortReverse = true; // set the default sort order
@@ -84,6 +87,7 @@ angular.module('cmp2App').controller('AccountCtrl', function($scope, $routeParam
     }, function(path) {
       $scope.$apply(function() {
         $scope.localInfo.path = path[0];
+        $scope.updateLocalInfo();
       });
     });
   };
@@ -118,9 +122,22 @@ angular.module('cmp2App').controller('AccountCtrl', function($scope, $routeParam
     $scope.loadingAccount = true;
   };
 
+  $scope.changeFavoritStatus = function() {
+	if ($scope.localInfo) {
+		$scope.localInfo.stared = !$scope.localInfo.stared;
+	} else {
+		$scope.localInfo = localInfo;
+		$scope.localInfo.stared = true;
+	}
+    $scope.updateLocalInfo();
+  };
+
   Accounts.registerObserverCallback(updateAccounts);
-  localAccount.registerObserverCallback(updateLocalInfo);
+  localAccount.registerObserverCallback(updateLocalAccount);
   salesForce.registerObserverCallback(updateSf);
   Accounts.get(accountId);
   localAccount.get(accountId);
+
+
+
 });

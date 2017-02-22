@@ -26,11 +26,7 @@ angular.module('cmp2App').factory('localAccount', function(database) {
   self.updateList = function() {
     database.find({
       "attributes.type": 'LocalInfo'
-    }, {
-      group: 1,
-      accountId: 1,
-      _id: 0
-    }, function(err, docs) {
+    }, {}, function(err, docs) {
       if (err) {
         console.log(err);
       }
