@@ -16,7 +16,7 @@
           <div class="search">
             <span class="fa fa-search icon-search" style="font-size:23px;"></span>
             <div class="form-group form-animate-text">
-              <input type="text" class="form-text" required>
+              <input ng-model="selected" typeahead-on-select="openAccount()" uib-typeahead="account as account.Name for account in accounts | filter:$viewValue | limitTo:8" class="form-text" type="text" required>
               <span class="bar"></span>
               <label class="label-search">Type anywhere to
                 <b>Search</b>
