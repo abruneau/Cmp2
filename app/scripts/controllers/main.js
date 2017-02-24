@@ -33,8 +33,10 @@ angular.module('cmp2App').controller('MainCtrl', function(salesForce, $scope) {
 
   var whereAmI = require('@rainder/where-am-i');
 
-  whereAmI.getLocation().then(function(location) {
-    loadWeather(location.point.latitude + ',' + location.point.longitude);
+  $(document).ready(function() {
+    whereAmI.getLocation().then(function(location) {
+      loadWeather(location.point.latitude + ',' + location.point.longitude);
+    });
   });
 
   function loadForcast() {
