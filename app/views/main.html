@@ -1,4 +1,27 @@
 <div id="content">
+  <div class="panel">
+    <div class="panel-body">
+      <div class="col-md-6 col-sm-12"></div>
+      <div class="col-md-6 col-sm-12" ng-if="weather">
+        <div class="col-md-8 col-sm-8 text-right">
+          <h3 style="color:#DDDDDE;">
+			<span class="fa  fa-map-marker"></span>
+			{{weather.city}}, {{weather.region}}
+		</h3>
+          <h1 style="margin-top: -10px;color: #ddd;">
+			{{weather.temp}}&deg;{{weather.units.temp}}
+		</h1>
+        </div>
+        <div class="col-md-4 col-sm-4">
+          <div class="weather-icon">
+            <img src="{{weather.image}}" alt="{{weather.currently}}" width="150">
+			<br/>
+            <i>{{weather.currently}}</i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="row" ng-if="forcastBoard">
     <div class="col-md-12 top-20">
       <div class="col-md-3">
@@ -58,5 +81,4 @@
   <div class="col-md-12 top-20">
     <todos></todos>
   </div>
-
 </div>

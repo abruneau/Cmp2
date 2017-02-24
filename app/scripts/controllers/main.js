@@ -10,13 +10,38 @@
  */
 angular.module('cmp2App').controller('MainCtrl', function(salesForce, $scope) {
 
+  /* global $ */
+  // Docs at http://simpleweatherjs.com
+
+  $scope.weather = null;
+
+  function loadWeather(location, woeid) {
+    $.simpleWeather({
+      location: location,
+      woeid: woeid,
+      unit: 'c',
+      success: function(weather) {
+        $scope.$apply(function() {
+          $scope.weather = weather;
+        });
+      },
+      error: function(error) {
+        $("#weather").html('<p>' + error + '</p>');
+      }
+    });
+  }
+
+  var whereAmI = require('@rainder/where-am-i');
+
+  whereAmI.getLocation().then(function(location) {
+    loadWeather(location.point.latitude + ',' + location.point.longitude);
+  });
 
   function loadForcast() {
     salesForce.loadForcastBoard().then(function(res) {
       if (res) {
         $scope.$apply(function() {
           $scope.forcastBoard = res.records[0];
-          console.log($scope.forcastBoard);
         });
       }
     });
