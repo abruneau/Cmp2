@@ -142,6 +142,36 @@ angular.module('cmp2App').factory('Accounts', function(database) {
     });
   };
 
+  function removeAccountOppy(accountId) {
+    return database.removeAsync({
+      AccountId: accountId
+    }, {
+      multi: true
+    });
+  }
+
+  self.removeAccount = function(accountId) {
+    return removeAccountOppy(accountId).then(function() {
+      self.getOpportunities(accountId);
+      return database.removeAsync({
+        Id: accountId
+      }, {});
+    }).then(function() {
+      return database.removeAsync({
+        $and: [{
+          "attributes.type": 'LocalInfo'
+        }, {
+          "accountId": accountId
+        }]
+      });
+    }).then(function() {
+      self.updateList();
+      return true;
+    }).catch(function(err) {
+      console.error(err);
+    });
+  };
+
 
   //register an observer
   self.registerObserverCallback = function(callback) {

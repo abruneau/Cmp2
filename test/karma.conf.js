@@ -37,7 +37,6 @@ module.exports = function(config) {
       'bower_components/asimplemde/dist/asimplemde.min.js',
       'bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js',
       'bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.templates.js',
-      'bower_components/simpleWeather/jquery.simpleWeather.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

@@ -23,6 +23,9 @@
             <i class="fa fa-map-marker"></i>
             {{account.Full_Address__c}}
           </div>
+		  <a class="pull-right" ng-click="removeAccount(account)">
+            <i class="fa fa-trash-o"></i>
+          </a>
         </div>
         <ul id="tabs-demo" class="nav nav-tabs content-header-tab" style="padding-top:10px;">
           <li ng-class="{'active': active === 0}" role="presentation">

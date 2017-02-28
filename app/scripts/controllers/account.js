@@ -8,7 +8,7 @@
  * # AccountCtrl
  * Controller of the cmp2App
  */
-angular.module('cmp2App').controller('AccountCtrl', function($scope, $routeParams, Accounts, salesForce, localAccount) {
+angular.module('cmp2App').controller('AccountCtrl', function($scope, $routeParams, $location, Accounts, salesForce, localAccount) {
   var accountId = $routeParams.id;
   var remote = require('electron').remote;
   var dialog = remote.dialog; // Load the dialogs component of the OS
@@ -123,13 +123,20 @@ angular.module('cmp2App').controller('AccountCtrl', function($scope, $routeParam
   };
 
   $scope.changeFavoritStatus = function() {
-	if ($scope.localInfo) {
-		$scope.localInfo.stared = !$scope.localInfo.stared;
-	} else {
-		$scope.localInfo = localInfo;
-		$scope.localInfo.stared = true;
-	}
+    if ($scope.localInfo) {
+      $scope.localInfo.stared = !$scope.localInfo.stared;
+    } else {
+      $scope.localInfo = localInfo;
+      $scope.localInfo.stared = true;
+    }
     $scope.updateLocalInfo();
+  };
+
+  $scope.removeAccount = function(account) {
+	Accounts.removeAccount(account.Id).then(function () {
+		$location.path('/');
+		console.log(account.Id);
+	});
   };
 
   Accounts.registerObserverCallback(updateAccounts);
