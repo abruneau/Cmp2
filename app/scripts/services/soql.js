@@ -34,8 +34,12 @@ angular.module('cmp2App').factory('SOQL', function() {
     return "SELECT " + opportunityFields + ", (SELECT Name, TeamMemberRole FROM OpportunityTeamMembers) FROM Opportunity WHERE AccountId = '" + id + "'";
   };
 
-  self.findAccountByName = function (name) {
-  	return "SELECT " + accountFields + " FROM Account WHERE Name LIKE '%" + name + "%' LIMIT 10";
+  self.findAccountByName = function(name) {
+    return "SELECT " + accountFields + " FROM Account WHERE Name LIKE '%" + name + "%' LIMIT 10";
+  };
+
+  self.forcastBoard = function(fullName) {
+    return "SELECT sum(Amount) forcast, count(Id) oppyNb, COUNT_DISTINCT( AccountId) accountNb, AVG(Amount) avgDeal FROM Opportunity WHERE Opportunity_Sales_Engineer__c = '" + fullName + "' and CloseDate = THIS_FISCAL_YEAR AND IsClosed =  false";
   };
 
   return self;

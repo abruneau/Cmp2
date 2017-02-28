@@ -8,7 +8,7 @@
  * # NavigationCtrl
  * Controller of the cmp2App
  */
-angular.module('cmp2App').controller('NavigationCtrl', function($scope, salesForce, Accounts, localAccount) {
+angular.module('cmp2App').controller('NavigationCtrl', function($scope, $location, salesForce, Accounts, localAccount) {
 
   /* global moment */
   /* global $ */
@@ -118,6 +118,8 @@ angular.module('cmp2App').controller('NavigationCtrl', function($scope, salesFor
       $scope.unstared = Accounts.list.filter(function(e) {
         return this.indexOf(e.Id) < 0;
       }, idList);
+
+      $scope.accounts = Accounts.list;
     }
   };
 
@@ -136,6 +138,15 @@ angular.module('cmp2App').controller('NavigationCtrl', function($scope, salesFor
 
     return false;
 
+  };
+
+  // $scope.$watch($scope.selected, function() {
+  //   console.log($scope.selected);
+  // });
+
+  $scope.openAccount = function () {
+	$location.path('/account/' + $scope.selected.Id);
+	$scope.selected = null;
   };
 
   salesForce.registerObserverCallback(updateSf);

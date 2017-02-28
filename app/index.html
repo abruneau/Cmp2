@@ -1,124 +1,130 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Cmp2</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(.) styles/vendor.css -->
-    <!-- bower:css -->
-    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.css" />
-    <link rel="stylesheet" href="../bower_components/SpinKit/css/spinkit.css" />
-    <link rel="stylesheet" href="../bower_components/asimplemde/dist/asimplemde.min.css" />
-    <link rel="stylesheet" href="../bower_components/angular-bootstrap-datetimepicker/src/css/datetimepicker.css" />
-    <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/style.css">
-    <link rel="stylesheet" href="styles/todo.css">
-    <!-- endbuild -->
-  </head>
-  <body ng-app="cmp2App">
-    <!--[if lte IE 8]> <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p> <![endif]-->
 
-    <!-- Add your site or application content here -->
+<head>
+  <meta charset="utf-8">
+  <title>Cmp2</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- build:css(.) styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.css" />
+  <link rel="stylesheet" href="../bower_components/SpinKit/css/spinkit.css" />
+  <link rel="stylesheet" href="../bower_components/asimplemde/dist/asimplemde.min.css" />
+  <link rel="stylesheet" href="../bower_components/angular-bootstrap-datetimepicker/src/css/datetimepicker.css" />
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/todo.css">
+  <!-- endbuild -->
+</head>
 
-    <!-- navigation -->
-    <navigation></navigation>
-    <!-- /navigation -->
+<body ng-app="cmp2App">
+  <!--[if lte IE 8]> <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p> <![endif]-->
 
-    <!-- <div class="container"> -->
-      <div ng-view=""></div>
-    <!-- </div> -->
+  <!-- Add your site or application content here -->
 
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-    <script>
-      !function(A, n, g, u, l, a, r) {
-        A.GoogleAnalyticsObject = l,
+  <!-- navigation -->
+  <navigation></navigation>
+  <!-- /navigation -->
+
+  <!-- <div class="container"> -->
+  <div ng-view=""></div>
+  <!-- </div> -->
+
+  <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+  <script>
+    ! function(A, n, g, u, l, a, r) {
+      A.GoogleAnalyticsObject = l,
         A[l] = A[l] || function() {
           (A[l].q = A[l].q || []).push(arguments)
         },
-        A[l].l =+ new Date,
+        A[l].l = +new Date,
         a = n.createElement(g),
         r = n.getElementsByTagName(g)[0],
         a.src = u,
         r.parentNode.insertBefore(a, r)
-      }(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+    }(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-      ga('create', 'UA-XXXXX-X');
-      ga('send', 'pageview');
-    </script>
+    ga('create', 'UA-XXXXX-X');
+    ga('send', 'pageview');
+  </script>
 
-    <script>
-      if (typeof module === 'object') {
-        window.module = module;
-        module = undefined;
-      }
-    </script>
+  <script>
+    if (typeof module === 'object') {
+      window.module = module;
+      module = undefined;
+    }
+  </script>
 
-    <!-- build:js(.) scripts/vendor.js -->
-    <!-- bower:js -->
-    <script src="../bower_components/jquery/dist/jquery.js"></script>
-    <script src="../bower_components/angular/angular.js"></script>
-    <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="../bower_components/angular-animate/angular-animate.js"></script>
-    <script src="../bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="../bower_components/angular-resource/angular-resource.js"></script>
-    <script src="../bower_components/angular-route/angular-route.js"></script>
-    <script src="../bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="../bower_components/angular-touch/angular-touch.js"></script>
-    <script src="../bower_components/moment/moment.js"></script>
-    <script src="../bower_components/jquery.nicescroll/jquery.nicescroll.min.js"></script>
-    <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="../bower_components/evernote-helper/dist/evernote-helper.js"></script>
-    <script src="../bower_components/EpicEditor/epiceditor/js/epiceditor.js"></script>
-    <script src="../bower_components/asimplemde/dist/asimplemde.min.js"></script>
-    <script src="../bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js"></script>
-    <script src="../bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.templates.js"></script>
-    <!-- endbower -->
-    <!-- endbuild -->
+  <!-- build:js(.) scripts/vendor.js -->
+  <!-- bower:js -->
+  <script src="../bower_components/jquery/dist/jquery.js"></script>
+  <script src="../bower_components/angular/angular.js"></script>
+  <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="../bower_components/angular-animate/angular-animate.js"></script>
+  <script src="../bower_components/angular-cookies/angular-cookies.js"></script>
+  <script src="../bower_components/angular-resource/angular-resource.js"></script>
+  <script src="../bower_components/angular-route/angular-route.js"></script>
+  <script src="../bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="../bower_components/angular-touch/angular-touch.js"></script>
+  <script src="../bower_components/moment/moment.js"></script>
+  <script src="../bower_components/jquery.nicescroll/jquery.nicescroll.min.js"></script>
+  <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="../bower_components/evernote-helper/dist/evernote-helper.js"></script>
+  <script src="../bower_components/EpicEditor/epiceditor/js/epiceditor.js"></script>
+  <script src="../bower_components/asimplemde/dist/asimplemde.min.js"></script>
+  <script src="../bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js"></script>
+  <script src="../bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.templates.js"></script>
+  <!-- endbower -->
+  <!-- endbuild -->
 
-    <script>
-      if (window.module)
-        module = window.module;
-    </script>
+  <script>
+    if (window.module)
+      module = window.module;
+  </script>
 
-    <!-- build:js({.tmp,app}) scripts/scripts.js -->
-    <script src="scripts/app.js"></script>
-    <script src="scripts/controllers/main.js"></script>
-    <script src="scripts/controllers/about.js"></script>
-    <script src="scripts/directives/navigation.js"></script>
-    <script src="scripts/controllers/navigation.js"></script>
-    <script src="scripts/services/salesforce.js"></script>
-    <script src="scripts/services/database.js"></script>
-    <script src="scripts/controllers/profile.js"></script>
-    <script src="scripts/services/settings.js"></script>
-    <script src="scripts/services/soql.js"></script>
-    <script src="scripts/services/accounts.js"></script>
-    <script src="scripts/controllers/account.js"></script>
-    <script src="scripts/filters/meganumber.js"></script>
-    <script src="scripts/services/localaccount.js"></script>
-    <script src="scripts/directives/files.js"></script>
-    <script src="scripts/controllers/account_files.js"></script>
-    <script src="scripts/services/fs.js"></script>
-    <script src="scripts/filters/truncate.js"></script>
-    <script src="scripts/directives/sglclick.js"></script>
-    <script src="scripts/filters/titlecase.js"></script>
-    <script src="scripts/services/jxa.js"></script>
-    <script src="scripts/controllers/account_notes.js"></script>
-    <script src="scripts/directives/notes.js"></script>
-    <script src="scripts/directives/openexternal.js"></script>
-    <script src="scripts/controllers/account_form.js"></script>
-    <script src="scripts/services/todo.js"></script>
-    <script src="scripts/directives/todos.js"></script>
-    <script src="scripts/controllers/todos.js"></script>
-    <script src="scripts/directives/todoescape.js"></script>
-    <script src="scripts/directives/todofocus.js"></script>
-    <script src="scripts/services/mdtemplate.model.js"></script>
-    <script src="scripts/controllers/templates.js"></script>
-    <!-- endbuild -->
-  </body>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.simpleWeather/3.1.0/jquery.simpleWeather.min.js"></script>
+
+
+  <!-- build:js({.tmp,app}) scripts/scripts.js -->
+  <script src="scripts/app.js"></script>
+  <script src="scripts/controllers/main.js"></script>
+  <script src="scripts/controllers/about.js"></script>
+  <script src="scripts/directives/navigation.js"></script>
+  <script src="scripts/controllers/navigation.js"></script>
+  <script src="scripts/services/salesforce.js"></script>
+  <script src="scripts/services/database.js"></script>
+  <script src="scripts/controllers/profile.js"></script>
+  <script src="scripts/services/settings.js"></script>
+  <script src="scripts/services/soql.js"></script>
+  <script src="scripts/services/accounts.js"></script>
+  <script src="scripts/controllers/account.js"></script>
+  <script src="scripts/filters/meganumber.js"></script>
+  <script src="scripts/services/localaccount.js"></script>
+  <script src="scripts/directives/files.js"></script>
+  <script src="scripts/controllers/account_files.js"></script>
+  <script src="scripts/services/fs.js"></script>
+  <script src="scripts/filters/truncate.js"></script>
+  <script src="scripts/directives/sglclick.js"></script>
+  <script src="scripts/filters/titlecase.js"></script>
+  <script src="scripts/services/jxa.js"></script>
+  <script src="scripts/controllers/account_notes.js"></script>
+  <script src="scripts/directives/notes.js"></script>
+  <script src="scripts/directives/openexternal.js"></script>
+  <script src="scripts/controllers/account_form.js"></script>
+  <script src="scripts/services/todo.js"></script>
+  <script src="scripts/directives/todos.js"></script>
+  <script src="scripts/controllers/todos.js"></script>
+  <script src="scripts/directives/todoescape.js"></script>
+  <script src="scripts/directives/todofocus.js"></script>
+  <script src="scripts/services/mdtemplate.model.js"></script>
+  <script src="scripts/controllers/templates.js"></script>
+  <!-- endbuild -->
+</body>
+
 </html>

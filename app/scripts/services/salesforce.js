@@ -210,8 +210,22 @@ angular.module('cmp2App').factory('salesForce', function(database, SOQL, Account
   };
 
   self.findAccountByName = function(name) {
-	return self.query(SOQL.findAccountByName(name));
+    return self.query(SOQL.findAccountByName(name));
   };
+
+  self.loadForcastBoard = function() {
+    return database.findOneAsync({
+      setting: 'identity'
+    }).then(function(identity) {
+      if (self.connected) {
+        return self.query(SOQL.forcastBoard(identity.display_name));
+      } else {
+        return false;
+      }
+    });
+  };
+
+
 
   //register an observer
   self.registerObserverCallback = function(callback) {

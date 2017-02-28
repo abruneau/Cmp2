@@ -1,3 +1,84 @@
 <div id="content">
-	<todos></todos>
+  <div class="panel">
+    <div class="panel-body">
+      <div class="col-md-6 col-sm-12"></div>
+      <div class="col-md-6 col-sm-12" ng-if="weather">
+        <div class="col-md-8 col-sm-8 text-right">
+          <h3 style="color:#DDDDDE;">
+			<span class="fa  fa-map-marker"></span>
+			{{weather.city}}, {{weather.region}}
+		</h3>
+          <h1 style="margin-top: -10px;color: #ddd;">
+			{{weather.temp}}&deg;{{weather.units.temp}}
+		</h1>
+        </div>
+        <div class="col-md-4 col-sm-4">
+          <div class="weather-icon">
+            <img src="{{weather.image}}" alt="{{weather.currently}}" width="150">
+			<br/>
+            <i>{{weather.currently}}</i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" ng-if="forcastBoard">
+    <div class="col-md-12 top-20">
+      <div class="col-md-3">
+        <div class="panel box-v1">
+          <div class="panel-heading bg-white border-none">
+            <div class="col-md-12 col-sm-12 col-xs-12 text-left padding-0">
+              <h4 class="text-left">Forcast</h4>
+            </div>
+          </div>
+          <div class="panel-body text-center">
+            <h1>{{forcastBoard.forcast | megaNumber}} $</h1>
+            <hr>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="panel box-v1">
+          <div class="panel-heading bg-white border-none">
+            <div class="col-md-12 col-sm-12 col-xs-12 text-left padding-0">
+              <h4 class="text-left">Number of Opportunities</h4>
+            </div>
+          </div>
+          <div class="panel-body text-center">
+            <h1>{{forcastBoard.oppyNb | megaNumber}}</h1>
+            <hr>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="panel box-v1">
+          <div class="panel-heading bg-white border-none">
+            <div class="col-md-12 col-sm-12 col-xs-12 text-left padding-0">
+              <h4 class="text-left">Number of Accounts</h4>
+            </div>
+          </div>
+          <div class="panel-body text-center">
+            <h1>{{forcastBoard.accountNb | megaNumber}}</h1>
+            <hr>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="panel box-v1">
+          <div class="panel-heading bg-white border-none">
+            <div class="col-md-12 col-sm-12 col-xs-12 text-left padding-0">
+              <h4 class="text-left">Average opportunity size</h4>
+            </div>
+          </div>
+          <div class="panel-body text-center">
+            <h1>{{forcastBoard.avgDeal | megaNumber}} $</h1>
+            <hr>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12 top-20">
+    <todos></todos>
+  </div>
 </div>
