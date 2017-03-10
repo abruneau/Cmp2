@@ -19,7 +19,7 @@ angular.module('cmp2App').factory('SOQL', function() {
 
 
   self.preloadAccounts = function(fullName) {
-    return "SELECT " + accountFields + " FROM Account WHERE Id in (SELECT AccountId FROM Opportunity WHERE Opportunity_Sales_Engineer__c = '" + fullName + "' AND IsClosed = false)";
+    return "SELECT " + accountFields + " FROM Account WHERE Id in (SELECT AccountId FROM Opportunity WHERE Id in (SELECT OpportunityId FROM OpportunityTeamMember WHERE Name = '" + fullName + "') AND IsClosed = false)";
   };
 
   self.loadAccount = function(id) {
@@ -39,7 +39,7 @@ angular.module('cmp2App').factory('SOQL', function() {
   };
 
   self.forcastBoard = function(fullName) {
-    return "SELECT sum(Amount) forcast, count(Id) oppyNb, COUNT_DISTINCT( AccountId) accountNb, AVG(Amount) avgDeal FROM Opportunity WHERE Opportunity_Sales_Engineer__c = '" + fullName + "' and CloseDate = THIS_FISCAL_YEAR AND IsClosed =  false";
+    return "SELECT sum(Amount) forcast, count(Id) oppyNb, COUNT_DISTINCT( AccountId) accountNb, AVG(Amount) avgDeal FROM Opportunity WHERE CloseDate = THIS_FISCAL_YEAR AND IsClosed =  false AND Id in (SELECT OpportunityId FROM OpportunityTeamMember WHERE Name = '" + fullName + "')";
   };
 
   return self;
