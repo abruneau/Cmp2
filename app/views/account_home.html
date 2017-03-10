@@ -75,13 +75,13 @@
             <div class="pre-scrollable">
               <div class="list-group" ng-repeat="contact in account.Contacts.records | orderBy:'Name' | filter:contactSearch">
                 <div class="list-group-item">
-                  <h4 class="list-group-item-heading">{{contact.Name | titleCase}}</h4>
+                  <h4 class="list-group-item-heading"><a href="{{sf.loginUrl}}/{{contact.Id}}" class="openExternal">{{contact.Name | titleCase}}</a></h4>
                   <p class="list-group-item-text">
                     <div ng-if="contact.Title">
                       {{contact.Title}}
                     </div>
                     <div ng-if="contact.Email">
-                      {{contact.Email}}
+                      <a href="mailto:{{contact.Email}}">{{contact.Email}}</a>
                     </div>
                     <div ng-if="contact.Phone">
                       {{contact.Phone}}

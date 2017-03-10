@@ -23,7 +23,7 @@ angular.module('cmp2App').factory('SOQL', function() {
   };
 
   self.loadAccount = function(id) {
-    return "SELECT " + accountFields + ", (SELECT Email,FirstName,LastName,MobilePhone,Name,Phone,Title FROM Contacts) FROM Account WHERE Id = '" + id + "'";
+    return "SELECT " + accountFields + ", (SELECT Id, Email,FirstName,LastName,MobilePhone,Name,Phone,Title FROM Contacts) FROM Account WHERE Id = '" + id + "'";
   };
 
   self.findAccountByName = function(name) {
