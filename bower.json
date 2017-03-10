@@ -1,6 +1,6 @@
 {
   "name": "cmp2",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "dependencies": {
     "angular": "^1.3.0",
     "bootstrap": "^3.3.7",
