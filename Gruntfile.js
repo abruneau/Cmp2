@@ -468,7 +468,7 @@ module.exports = function(grunt) {
         command: 'electron .'
       },
       build: {
-        command: 'cd <%= yeoman.dist %>/node_modules/deasync && rm -r bin && npm install --runtime=electron --target=1.6.0 --disturl=https://atom.io/download/atom-shell --abi=51'
+        command: 'cd <%= yeoman.dist %>/node_modules/deasync && rm -r bin && npm install --runtime=electron --target=1.4.0 --disturl=https://atom.io/download/atom-shell --abi=51'
       }
     },
 
