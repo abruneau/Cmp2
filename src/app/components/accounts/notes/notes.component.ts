@@ -5,32 +5,33 @@ import { EvernoteService } from '../../../providers/evernote.service';
 import { EditorComponent } from '../../modules/editor/editor.component';
 
 @Component({
-	selector: 'app-accounts-notes',
-	templateUrl: './notes.component.html',
-	styleUrls: ['./notes.component.scss'],
-	encapsulation: ViewEncapsulation.None
+  selector: 'app-accounts-notes',
+  templateUrl: './notes.component.html',
+  styleUrls: ['./notes.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AccountsNotesComponent implements OnInit, AfterViewInit {
-	account
-    notes: Array<any> = []
+  account
+  notes: Array<any> = []
+  markdown: string
 
-	@Input()
-	set currentAccount(account) {
-		this.account = account;
-	}
-	constructor(private _evernote: EvernoteService) {
-	}
+  @Input()
+  set currentAccount(account) {
+    this.account = account;
+  }
+  constructor(private _evernote: EvernoteService) {
+  }
 
-	ngOnInit() {
-        this.notes = this._evernote.getAllNotes(this.account.Name)
-        console.log(this.notes);
-	}
+  ngOnInit() {
+    this.notes = this._evernote.getAllNotes(this.account.Name)
+    console.log(this.notes);
+  }
 
-	ngAfterViewInit() {
-	}
+  ngAfterViewInit() {
+  }
 
-	mdChange(event) {
-		//console.log(event)
-	}
+  mdChange(event) {
+    // console.log(event)
+  }
 
 }
