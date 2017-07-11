@@ -1,0 +1,17 @@
+@import "~simplemde/dist/simplemde.min.css";
+
+.editor-toolbar.fullscreen {
+	z-index: 5000;
+}
+
+.cm-s-paper {
+	z-index: 5000;
+}
+
+.editor-preview-side {
+	z-index: 5000;
+}
+
+.editor-statusbar {
+	z-index: 5000;
+}

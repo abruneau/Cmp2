@@ -1,0 +1,66 @@
+<div class="panel-body">
+  <div class="col-md-3">
+    <!-- <button id="compose" type="button" class="btn btn-sm btn-success btn-block" data-toggle="modal" data-target="#myModal">
+      COMPOSE
+    </button>
+    <ul class="mini-timeline">
+      <li class="mini-timeline-highlight" ng-repeat="note in noteList | orderBy:'formatDate(creationDate).format()' track by $index">
+
+        <div class="mini-timeline-panel">
+          <a ng-click="loadNote(note)">
+            <h5 class="time">{{formatDate(note.creationDate).calendar()}}</h5>
+            <p>{{note.title}}</p>
+          </a>
+        </div>
+
+      </li>
+    </ul> -->
+  </div>
+  <div class="col-md-9">
+    <!-- <div ng-if="note">
+	  <h4>{{note.title}}</h4>
+      <button ng-click="deleteNote(note)" class="btn btn-sm btn-default" type="button" data-placement="top" data-toggle="tooltip" data-original-title="Trash">
+        <i class="fa fa-trash-o"></i>
+      </button>
+      <input type="checkbox" ng-change="changeAutosave()" ng-model="autosave">
+      Autosave
+      <button ng-if="!autosave && changed" ng-click="save()" class="btn btn-success">Save</button>
+      <div ng-class="changed ? 'text-warning' : 'text-success'" class="pull-right">
+        <span ng-class="changed ? 'glyphicon-warning-sign' : 'glyphicon-ok'" class="glyphicon" aria-hidden="true"></span>
+        Last Saved :
+        {{formatDate(lastSaved).fromNow(s)}}
+      </div>
+    </div> -->
+	<app-editor [markdown]="markdown" (update)="mdChange($event)"></app-editor>
+    <!-- <textarea id="editor"></textarea> -->
+  </div>
+</div>
+
+<!-- Modal -->
+<!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Create a new note</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Note Title</label>
+            <input type="text" ng-model="newNote.title" class="form-control">
+			<select class="form-control" name="" ng-model="newNote.md">
+				<option ng-repeat="template in templates" value="{{template._id}}">{{template.title}}</option>
+			</select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" ng-click="createNote(newNote)" data-dismiss="modal" class="btn btn-primary">Create Note</button>
+      </div>
+    </div>
+  </div>
+</div> -->
