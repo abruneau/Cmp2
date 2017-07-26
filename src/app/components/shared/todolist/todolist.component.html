@@ -1,0 +1,53 @@
+<div class="panel box-v3">
+  <div class="panel-heading bg-white border-none">
+    <h4>Todo List</h4>
+  </div>
+  <div class="panel-body">
+    <section id="todoapp" class="todoapp">
+      <header class="header">
+        <div class="input-group">
+          <input class="new-todo" placeholder="What needs to be done?" autofocus="" [(ngModel)]="newTodoText" (keyup.enter)="addTodo()" />
+          <div class="input-group-addon">
+            <ng-template #popTemplate>
+              <div style="display:inline-block; min-height:290px;">
+                <datepicker [(ngModel)]="dt" [minDate]="minDate" [showWeeks]="true" [dateDisabled]="dateDisabled"></datepicker>
+              </div>
+            </ng-template>
+            <button type="button" [popover]="popTemplate" container="body" placement="bottom">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+        </button>
+          </div>
+        </div>
+      </header>
+      <section class="main" *ngIf="todos.length > 0">
+        <ul class="todo-list">
+          <li *ngFor="let todo of todos" [class.completed]="todo.completed" [class.editing]="todo.editing">
+            <div class="view">
+              <input class="toggle" type="checkbox" (click)="toggleCompletion(todo)" [checked]="todo.completed">
+              <label (dblclick)="editTodo(todo)">
+            <a *ngIf="todo.AccountId && !isAccountPage; else elseBlock" [routerLink]="['/account', todo.AccountId]">
+              {{todo.task}}
+              <small *ngIf="todo.dueDate">
+                <i>{{formatDate(todo.dueDate)}}</i>
+              </small>
+            </a>
+            <ng-template #elseBlock>
+              {{todo.task}}
+              <small *ngIf="todo.dueDate">
+                <i>{{formatDate(todo.dueDate)}}</i>
+              </small>
+            </ng-template>
+          </label>
+              <button class="destroy" (click)="remove(todo)"></button>
+            </div>
+            <input class="edit" *ngIf="todo.editing" [value]="todo.task" #editedtodo (blur)="stopEditing(todo, editedtodo.value)" (keyup.enter)="updateEditingTodo(todo, editedtodo.value)" (keyup.escape)="cancelEditingTodo(todo)">
+          </li>
+        </ul>
+      </section>
+      <footer style="height: 40px" class="footer" *ngIf="todos.length > 0">
+        <span class="todo-count"><strong>{{getNbRemaining()}}</strong> {{getNbRemaining() == 1 ? 'item' : 'items'}} left</span>
+        <button class="clear-completed" *ngIf="getNbComplited() > 0" (click)="removeCompleted()">Clear completed</button>
+      </footer>
+    </section>
+  </div>
+</div>

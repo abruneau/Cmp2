@@ -12,23 +12,23 @@ Promise.promisifyAll(Datastore.prototype);
 @Injectable()
 export class DatabaseService {
 
-	public database
+  public database
 
-	constructor(model: String) {
-		const db = model + '.db';
+  constructor(model: String) {
+    const db = model + '.db';
 
-		if (environment.production) {
-			this.database = new Datastore({
-				filename: path.join(remote.app.getPath('userData'), 'database', db),
-				autoload: true
-			});
-		} else {
-			this.database = new Datastore({
-				filename: path.join(remote.app.getPath('userData'), 'dev', 'database', db),
-				autoload: true
-			});
-		}
+    if (environment.production) {
+      this.database = new Datastore({
+        filename: path.join(remote.app.getPath('userData'), 'database', db),
+        autoload: true
+      });
+    } else {
+      this.database = new Datastore({
+        filename: path.join(remote.app.getPath('userData'), 'dev', 'database', db),
+        autoload: true
+      });
+    }
 
-	}
+  }
 
 }

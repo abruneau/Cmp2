@@ -18,7 +18,7 @@ const DEFAULT_OPTS = {
     buildVersion: buildVersion
 };
 
-const icon = 'assets/favicon';
+let icon = './src/assets/images/icons/logo.icns';
 
 if (icon) {
     DEFAULT_OPTS.icon = icon;

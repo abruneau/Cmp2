@@ -7,26 +7,26 @@ export { Account } from './account';
 @Injectable()
 export class AccountService {
 
-	public List = new BehaviorSubject([]);
+  public List = new BehaviorSubject([]);
 
-	constructor() {
-		Account.getList().then((accounts) => {
-			this.List.next(accounts);
-		})
-	}
+  constructor() {
+    Account.getList().then((accounts) => {
+      this.List.next(accounts);
+    })
+  }
 
-	create(account?): Account {
-		return new Account(account);
-	}
+  create(account?): Account {
+    return new Account(account);
+  }
 
-	get(id): Promise<any> {
-		return Account.get(id);
-	}
+  get(id): Promise<any> {
+    return Account.get(id);
+  }
 
-	notifyChanges() {
-		Account.getList().then((accounts) => {
-			this.List.next(accounts);
-		})
-	}
+  notifyChanges() {
+    Account.getList().then((accounts) => {
+      this.List.next(accounts);
+    })
+  }
 
 }

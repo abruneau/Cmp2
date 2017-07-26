@@ -1,0 +1,24 @@
+{
+	"name": "Cmp2",
+	"version": "2.0.0",
+	"description": "Angular 4 with Electron (Typescript + SASS + Hot Reload)",
+	"homepage": "https://github.com/maximegris/angular-electron",
+	"author": {
+		"name": "Antonin Bruneau",
+		"email": "antonin.bruneau@gmail.com"
+	},
+	"keywords": [
+		"angular",
+		"electron",
+		"typescript",
+		"sass"
+	],
+	"main": "main.js",
+	"dependencies": {
+    "about-window": "^1.7.0",
+    "run-jxa": "^1.1.0",
+    "ipc-promise": "^0.1.4",
+    "@rainder/where-am-i": "0.0.1"
+  }
+
+}

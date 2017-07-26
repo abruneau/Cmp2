@@ -1,69 +1,69 @@
 import { Database } from './database'
 
 export class Todo {
-	protected static database = new Database('todos').database
+  protected static database = new Database('todos').database
 
-	_id: String;
-	task: String;
-	dueDate: String;
-	AccountId: String;
-	completed: Boolean;
-	editing: Boolean = false;
+  _id: string;
+  task: string;
+  dueDate: Date;
+  AccountId: string;
+  completed: boolean;
+  editing = false;
 
-	constructor(object?) {
-		if (object) {
-			this._id = object._id
-			this.task = object.task
-			this.dueDate = object.dueDate
-			this.AccountId = object.AccountId
-			this.completed = object.completed
-		}
-	}
+  static getAll(AccountId?): Promise<any> {
+    let query;
 
-	save(): Promise<any> {
-		const self = this
-		if (self._id) {
-			return Todo.database.updateAsync({
-				_id: self._id
-			}, self, {});
-		} else {
-			return Todo.database.insertAsync(self).then(function(newDoc) {
-				self._id = newDoc._id;
-				return self;
-			});
-		}
-	}
+    if (AccountId) {
+      query = { 'AccountId': AccountId };
+    } else {
+      query = {};
+    }
 
-	delete(): Promise<any> {
-		return Todo.database.removeAsync({
-			_id: this._id
-		}, {});
-	}
+    return Todo.database.findAsync(query).then((todos) => {
+      if (todos.length) {
+        return todos.map((t) => {
+          return new Todo(t)
+        })
+      } else {
+        return []
+      }
+    })
+  }
 
-	static getAll(AccountId?): Promise<any> {
-		var query;
+  static get(id): Promise<any> {
+    return Todo.database.findOneAsync({ _id: id }).then((todo) => {
+      return new Todo(todo);
+    })
+  }
 
-		if (AccountId) {
-			query = { "AccountId": AccountId };
-		} else {
-			query = {};
-		}
+  constructor(object?) {
+    if (object) {
+      this._id = object._id
+      this.task = object.task
+      this.dueDate = object.dueDate
+      this.AccountId = object.AccountId
+      this.completed = object.completed
+    }
+  }
 
-		return Todo.database.findAsync(query).then((todos) => {
-			if (todos.length) {
-				return todos.map((t) => {
-					return new Todo(t)
-				})
-			} else {
-				return []
-			}
-		})
-	}
+  save(): Promise<any> {
+    const self = this
+    if (self._id) {
+      return Todo.database.updateAsync({
+        _id: self._id
+      }, self, {});
+    } else {
+      return Todo.database.insertAsync(self).then(function(newDoc) {
+        self._id = newDoc._id;
+        return self;
+      });
+    }
+  }
 
-	static get(id): Promise<any> {
-		return Todo.database.findOneAsync({ _id: id }).then((todo) => {
-			return new Todo(todo);
-		})
-	}
+  delete(): Promise<any> {
+    return Todo.database.removeAsync({
+      _id: this._id
+    }, {});
+  }
 
 }

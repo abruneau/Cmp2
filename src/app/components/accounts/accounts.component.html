@@ -36,7 +36,7 @@
 	</div>
 	<div class="col-md-12 tab-page">
 		<tabset #staticTabs>
-			<tab heading="Other">Static content 1</tab>
+			<tab heading="Other"><app-account [currentAccount]="account"></app-account></tab>
 			<tab heading="Opportunities"><app-accounts-opportunities [currentAccount]="account"></app-accounts-opportunities></tab>
 			<tab heading="Notes"><app-accounts-notes [currentAccount]="account"></app-accounts-notes></tab>
 			<tab heading="Files"><app-accounts-files [account]="account"></app-accounts-files></tab>

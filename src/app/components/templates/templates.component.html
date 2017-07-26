@@ -1,0 +1,58 @@
+<div class="panel-body">
+  <div class="col-md-3">
+    <button id="compose" type="button" class="btn btn-sm btn-success btn-block" (click)="staticModal.show()">
+      COMPOSE
+    </button>
+    <ul class="mini-timeline">
+      <li class="mini-timeline-highlight" *ngFor="let template of templates">
+
+        <div class="mini-timeline-panel">
+          <a (click)="loadTemplate(template)">
+            <h5 class="time">{{formatDate(template.lastUpdate).fromNow(s)}}</h5>
+            <p>{{template.title}}</p>
+          </a>
+        </div>
+
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-9">
+    <div *ngIf="template">
+      <h4>{{template.title}}</h4>
+      <button (click)="deleteTemplate()" class="btn btn-sm btn-default" type="button" data-placement="top" data-toggle="tooltip" data-original-title="Trash">
+	        <i class="fa fa-trash-o"></i>
+	    </button>
+      <input type="checkbox" [checked]="autosave" (change)="changeAutosave()"> Autosave
+      <button *ngIf="!autosave" (click)="save()" class="btn btn-success">Save</button>
+      <div [ngClass]="changed ? 'text-warning' : 'text-success'" class="pull-right">
+        <span [ngClass]="changed ? 'glyphicon-warning-sign' : 'glyphicon-ok'" class="glyphicon" aria-hidden="true"></span> Last Saved : {{formatDate(lastSaved).fromNow(s)}}
+      </div>
+    </div>
+    <app-editor [markdown]="markdown" (update)="mdChange($event)"></app-editor>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Create a new template</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Template Title</label>
+            <input type="text" class="form-control" name="newTemplate" [(ngModel)]="newTemplate">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="createTemplate(); staticModal.hide()">Create Note</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,10 +1,15 @@
-import { app, BrowserWindow, screen } from 'electron';
+import { app, BrowserWindow, screen, Menu } from 'electron';
 import * as path from 'path';
+import * as runJxa from 'run-jxa';
+import * as ipcPromise from 'ipc-promise';
+import * as whereAmI from '@rainder/where-am-i';
+import * as jxa from './electron/jxa';
+import setApplicationMenu from './electron/menu';
 
 
 let win, serve;
 const args = process.argv.slice(1);
-serve = args.some(val => val === "--serve");
+serve = args.some(val => val === '--serve');
 
 if (serve) {
   require('electron-reload')(__dirname, {
@@ -13,8 +18,8 @@ if (serve) {
 
 function createWindow() {
 
-  let electronScreen = screen;
-  let size = electronScreen.getPrimaryDisplay().workAreaSize;
+  const electronScreen = screen;
+  const size = electronScreen.getPrimaryDisplay().workAreaSize;
 
   // Create the browser window.
   win = new BrowserWindow({
@@ -46,7 +51,12 @@ try {
   // This method will be called when Electron has finished
   // initialization and is ready to create browser windows.
   // Some APIs can only be used after this event occurs.
-  app.on('ready', createWindow);
+  app.on('ready', () => {
+    createWindow()
+    if (!serve) {
+      setApplicationMenu();
+    }
+  });
 
   // Quit when all windows are closed.
   app.on('window-all-closed', () => {
@@ -67,5 +77,33 @@ try {
 
 } catch (e) {
   // Catch Error
-  //throw e;
+  // throw e;
 }
+
+ipcPromise.on('jxa-evernote-createNotebook', (params) => {
+  return runJxa(jxa.createNotebook, [params.title])
+})
+
+ipcPromise.on('jxa-evernote-getNoteList', (params) => {
+  return runJxa(jxa.getNoteList, [params.notebook])
+})
+
+ipcPromise.on('jxa-evernote-getHtml', (params) => {
+  return runJxa(jxa.getHtml, [params.note])
+})
+
+ipcPromise.on('jxa-evernote-updateHtml', (params) => {
+  return runJxa(jxa.updateHtml, [params.note, params.newHtml])
+})
+
+ipcPromise.on('jxa-evernote-createNoteWithHtml', (params) => {
+  return runJxa(jxa.createNoteWithHtml, [params.title, params.notebook, params.html])
+})
+
+ipcPromise.on('jxa-evernote-deleteNote', (params) => {
+  return runJxa(jxa.deleteNote, [params.note])
+})
+
+ipcPromise.on('location', () => {
+  return whereAmI.getLocation();
+})

@@ -9,23 +9,23 @@ Promise.promisifyAll(Datastore.prototype);
 
 export class Database {
 
-	database
+  database
 
-	constructor(model: String) {
-		const db = model + '.db';
+  constructor(model: String) {
+    const db = model + '.db';
 
-		if (environment.production) {
-			this.database = new Datastore({
-				filename: path.join(remote.app.getPath('userData'), 'database', db),
-				autoload: true
-			});
-		} else {
-			this.database = new Datastore({
-				filename: path.join(remote.app.getPath('userData'), 'dev', 'database', db),
-				autoload: true
-			});
-		}
+    if (environment.production) {
+      this.database = new Datastore({
+        filename: path.join(remote.app.getPath('userData'), 'database', db),
+        autoload: true
+      });
+    } else {
+      this.database = new Datastore({
+        filename: path.join(remote.app.getPath('userData'), 'dev', 'database', db),
+        autoload: true
+      });
+    }
 
-	}
+  }
 
 }

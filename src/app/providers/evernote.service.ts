@@ -1,30 +1,45 @@
 import { Injectable } from '@angular/core';
 
-import { JxaService } from './jxa.service';
-import * as ajs from 'apple-java-script';
-import { Note } from '../models/note';
+import * as ipcPromise from 'ipc-promise';
 import * as EvernoteHelper from 'evernote-helper';
+import { MarkdownService } from '../providers/markdown.service';
 
 @Injectable()
 export class EvernoteService {
+  private _md = new MarkdownService();
 
-	constructor(private jxa: JxaService) { }
+  constructor() { }
 
-	getAllNotes(notebook: string): Array<Note> {
-		return ajs(notebook, this.jxa.getNoteList)
-			.map((note) => { new Note(note) });
-	}
+  getAllNotes(notebook: string): Promise<Array<any>> {
+    return ipcPromise.send('jxa-evernote-getNoteList', { notebook: notebook })
+  }
 
-	createNotebook(name: string) {
-		return ajs(name, this.jxa.createNotebook)
-	}
+  createNotebook(name: string) {
+    return ipcPromise.send('jxa-evernote-createNotebook', { title: name })
+  }
 
-	getHtml(note: Note): string {
-		return ajs(note, this.jxa.getHtml)
-	}
+  getHtml(note): Promise<string> {
+    return ipcPromise.send('jxa-evernote-getHtml', { note: note })
+  }
 
-	getMarkdown(note: Note): string {
-		return EvernoteHelper.toMarkdown(this.getHtml(note))
-	}
+  getMarkdown(note): Promise<string> {
+    return this.getHtml(note).then((html) => {
+      return EvernoteHelper.toMarkdown(html)
+    })
+  }
+
+  updateHtmlFromMd(note, md) {
+    const newHtml = EvernoteHelper.prepareHtml(this._md.toHtml(md))
+    ipcPromise.send('jxa-evernote-updateHtml', { note: note, newHtml: newHtml })
+  }
+
+  createNote(notebook, title, md): Promise<any> {
+    const html = EvernoteHelper.prepareHtml(this._md.toHtml(md))
+    return ipcPromise.send('jxa-evernote-createNoteWithHtml', { title, notebook, html })
+  }
+
+  deleteNote(note) {
+    return ipcPromise.send('jxa-evernote-deleteNote', { note: note })
+  }
 
 }

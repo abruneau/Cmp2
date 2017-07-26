@@ -8,14 +8,14 @@ export { Setting } from './setting';
 @Injectable()
 export class SettingsService {
 
-	public settings: Setting
-	public ready = new BehaviorSubject(false);
+  public settings: Setting
+  public ready = new BehaviorSubject(false);
 
-	constructor() {
-		Setting.get().then((set) => {
-			this.settings = set;
-			this.ready.next(true);
-		})
-	}
+  constructor() {
+    Setting.get().then((set) => {
+      this.settings = set;
+      this.ready.next(true);
+    })
+  }
 
 }

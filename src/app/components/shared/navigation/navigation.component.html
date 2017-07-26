@@ -1,0 +1,95 @@
+<!-- start: Header -->
+<nav class="navbar navbar-default header navbar-fixed-top">
+  <div class="col-md-12 nav-wrapper">
+    <div class="navbar-header" style="width:100%;">
+      <div class="opener-left-menu is-open">
+        <span class="top"></span>
+        <span class="middle"></span>
+        <span class="bottom"></span>
+      </div>
+      <a href="#/" class="navbar-brand">
+				<b>Cmp2</b>
+			</a>
+
+      <ul class="nav navbar-nav search-nav">
+        <li>
+          <div class="search">
+            <span class="fa fa-search icon-search" style="font-size:23px;"></span>
+            <div class="form-group form-animate-text">
+              <input (typeaheadOnSelect)="typeaheadOnSelect($event)" [(ngModel)]="selected" [typeahead]="accounts" typeaheadOptionField="Name" typeaheadOptionsLimit="7" type="text" class="form-text" required>
+              <span class="bar"></span>
+              <label class="label-search">Type anywhere to <b>Search</b> </label>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right user-nav">
+        <li class="user-name">
+          <span>{{identity.display_name || 'Unknow User'}}</span>
+        </li>
+        <li class="dropdown avatar-dropdown">
+          <img src="../../../../assets/images/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" />
+          <ul class="dropdown-menu user-dropdown">
+            <li><a href="#/profile"><span class="fa fa-user"></span> My Profile</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- end: Header -->
+<div class="container-fluid mimin-wrapper">
+
+  <!-- start:Left Menu -->
+  <div id="left-menu">
+    <div class="sub-left-menu scroll">
+      <ul class="nav nav-list">
+        <li>
+          <div class="left-bg"></div>
+        </li>
+        <li class="time">
+          <h1 class="animated fadeInLeft">{{clock | async | date:'HH:mm'}}</h1>
+          <p class="animated fadeInRight">{{clock | async | date:'fullDate'}}</p>
+        </li>
+        <!-- Home -->
+        <li class="ripple">
+          <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><span class="fa-home fa"></span> Home</a>
+        </li>
+        <!-- Accounts -->
+        <li class="ripple">
+          <a class="tree-toggle nav-header">
+						<span class="fa-briefcase fa"></span> Accounts
+						<span class="fa-angle-right fa right-arrow text-right"></span>
+					</a>
+          <ul class="nav nav-list tree">
+            <li>
+              <a routerLink="/search" routerLinkActive="active"><i class="fa fa-plus-circle"></i> Add Account</a>
+            </li>
+            <li>
+              <input type="text" class="form-control" name="search" placeholder="Search" [(ngModel)]="search">
+            </li>
+            <li *ngFor="let account of accounts | orderBy: ['-Stared', 'Name'] | filterBy: ['Name']: search"><a routerLinkActive="active" [routerLink]="['/account', account.Id]"><span class="glyphicon glyphicon-star" aria-hidden="true" *ngIf="account.Stared"></span> {{account.Name}}</a></li>
+          </ul>
+        </li>
+        <!-- Editor -->
+        <li class="ripple">
+          <a class="tree-toggle nav-header">
+          <span class="fa fa-pencil-square-o"></span> Editor
+          <span class="fa-angle-right fa right-arrow text-right"></span>
+        </a>
+          <ul class="nav nav-list tree">
+            <li>
+              <a routerLink="/templates" routerLinkActive="active">
+              <i class="fa fa-file-text-o"></i> Templates
+            </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- end: Left Menu -->
+</div>
+
+<script src="../../../assets/js/miminium.js"></script>
