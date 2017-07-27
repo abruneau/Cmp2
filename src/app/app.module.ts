@@ -21,7 +21,6 @@ import { AccountsModule } from './components/accounts/accounts.module';
 
 import { ModelsModule } from './models/models.module';
 
-import { ElectronService } from './providers/electron.service';
 import { SalesforceService } from './providers/salesforce.service';
 import { ThemeSpinnerService } from './providers/theme-spinner.service';
 import { JxaService } from './providers/jxa.service';
@@ -31,7 +30,6 @@ import { MarkdownService } from './providers/markdown.service';
 
 import { PipesModule } from './pipes/pipes.module';
 import { OpenExternalDirective } from './providers/open-external.directive';
-// import { EditorComponent } from './components/modules/editor/editor.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +38,6 @@ import { OpenExternalDirective } from './providers/open-external.directive';
     ProfileComponent,
     TemplatesComponent,
     OpenExternalDirective,
-    // EditorComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,7 +54,6 @@ import { OpenExternalDirective } from './providers/open-external.directive';
     Ng2DeviceDetectorModule.forRoot()
   ],
   providers: [
-    ElectronService,
     SalesforceService,
     ThemeSpinnerService,
     JxaService,

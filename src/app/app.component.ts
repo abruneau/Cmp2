@@ -1,5 +1,4 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { ElectronService } from './providers/electron.service';
 import { ThemeSpinnerService } from './providers/theme-spinner.service'
 
 // import $ from 'jquery';
@@ -13,18 +12,7 @@ import { NavigationComponent } from './components/shared/navigation/navigation.c
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements AfterViewInit {
-  constructor(public electronService: ElectronService, private _spinner: ThemeSpinnerService, ) {
-
-    if (electronService.isElectron()) {
-      console.log('Mode electron');
-      // Check if electron is correctly injected (see externals in webpack.config.js)
-      console.log('c', electronService.ipcRenderer);
-      // Check if nodeJs childProcess is correctly injected (see externals in webpack.config.js)
-      console.log('c', electronService.childProcess);
-    } else {
-      console.log('Mode web');
-    }
-  }
+  constructor(private _spinner: ThemeSpinnerService, ) { }
 
   public ngAfterViewInit(): void {
     // hide spinner once all loaders are completed
