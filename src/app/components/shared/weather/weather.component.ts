@@ -21,19 +21,10 @@ export class WeatherComponent implements AfterViewInit {
 
     ipcPromise.send('location', {}).then((location) => {
       this.loadWeather(location.point.latitude + ',' + location.point.longitude);
+    }).catch(() => {
+      this.loadWeather(this.search)
     })
-
-    // this.loadWeather(this.search)
   }
-
-  // public getLocationAndWeather() {
-  // 	whereAmI.getLocation().then((location) => {
-  // 		console.log(location)
-  // 		this.loadWeather(location.point.latitude + ',' + location.point.longitude);
-  // 	}).catch((e) => {
-  // 		console.error(e)
-  // 	});
-  // }
 
   public loadWeather(location, woeid?) {
     const self = this
