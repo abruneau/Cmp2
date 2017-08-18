@@ -5,8 +5,9 @@ import { TabsetComponent } from 'ngx-bootstrap';
 import { shell, remote } from 'electron'
 const process = remote.process;
 
-import {AccountService} from '../../models/account.service';
-import {SalesforceService} from '../../providers/salesforce.service';
+import { SalesforceService, SharedDataService } from '../../providers';
+
+import { Account } from '../../models'
 
 import { AccountComponent } from './account/account.component';
 import { AccountsSettingsComponent } from './settings/settings.component';
@@ -31,9 +32,9 @@ export class AccountsComponent implements OnInit {
   active = 0;
 
   constructor(private route: ActivatedRoute,
-    private _account: AccountService,
     private _sf: SalesforceService,
-    private router: Router) {
+    private router: Router,
+    private _sharedData: SharedDataService) {
     _sf.loginUrl.subscribe((url) => {
       this.sfLoginUrl = url;
     })
@@ -46,7 +47,7 @@ export class AccountsComponent implements OnInit {
   }
 
   getAccount(id) {
-    this._account.get(id).then((account) => this.account = account)
+    Account.get(id).then((account) => this.account = account)
   }
 
   openSfAccount() {
@@ -55,7 +56,7 @@ export class AccountsComponent implements OnInit {
 
   removeAccount() {
     this.account.delete().then(() => {
-      this._account.notifyChanges();
+      this._sharedData.accountsChanges()
       this.router.navigate(['/']);
     })
   }

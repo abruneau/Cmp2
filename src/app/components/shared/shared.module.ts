@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { TypeaheadModule, PopoverModule, DatepickerModule } from 'ngx-bootstrap';
+import { TypeaheadModule, PopoverModule, DatepickerModule, ModalModule } from 'ngx-bootstrap';
 
 import {NgPipesModule} from 'ngx-pipes';
 
@@ -20,6 +20,7 @@ import { WeatherComponent } from './weather/weather.component';
     TypeaheadModule.forRoot(),
     PopoverModule.forRoot(),
     DatepickerModule.forRoot(),
+    ModalModule,
   ],
   declarations: [
     EditorComponent,

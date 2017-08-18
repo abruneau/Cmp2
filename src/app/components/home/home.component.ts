@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { SalesforceService } from '../../providers/salesforce.service';
+import { SalesforceService } from '../../providers';
 import {WeatherComponent} from '../shared/weather/weather.component';
 import { TodolistComponent } from '../shared/todolist/todolist.component'
 

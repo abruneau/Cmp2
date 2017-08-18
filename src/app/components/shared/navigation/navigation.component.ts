@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
+import {NgForm} from '@angular/forms';
 import {Observable} from 'rxjs/Rx';
 import 'rxjs/add/observable/of';
 import { Router } from '@angular/router';
@@ -11,9 +12,8 @@ import 'bootstrap'
 import * as moment from 'moment'
 declare const $: any;
 
-import { IdentityService } from '../../../models/identity.service';
-import { Identity, Account } from '../../../models';
-import { AccountService } from '../../../models/account.service';
+import { Identity, Account, Dashboard } from '../../../models';
+import { SharedDataService } from '../../../providers';
 
 @Component({
   selector: 'app-navigation',
@@ -22,8 +22,9 @@ import { AccountService } from '../../../models/account.service';
 })
 export class NavigationComponent implements OnInit, AfterViewInit {
 
-  public identity = {};
+  public identity: Identity = new Identity();
   public accounts: Array<Account> = [];
+  public dashboards: Array<Dashboard> = []
   public selected: string;
   public search: '';
 
@@ -31,22 +32,43 @@ export class NavigationComponent implements OnInit, AfterViewInit {
     .interval(1000)
     .map(() => new Date());
 
-  constructor(private _identity: IdentityService, private _account: AccountService, private _router: Router) {
-    _identity.ready.subscribe((ready: boolean) => {
-      if (ready) {
-        this.identity = _identity.identity;
+  constructor(private _sharedData: SharedDataService, private _router: Router) {
+    _sharedData.identity.subscribe((id) => {
+      if (id) {
+        this.identity = id
       }
     })
 
-    _account.List.subscribe((list) => {
+    _sharedData.AccountList.subscribe((list) => {
       this.accounts = list;
     })
+
+    _sharedData.DashboardList.subscribe((list) => {
+      this.dashboards = list
+    })
+
+
+  }
+
+  createDashboard(f: NgForm) {
+    const dash = new Dashboard({
+      title: f.value.title
+    })
+    dash.save().then((d) => {
+      this._sharedData.dashboardChanges()
+      const route = '/dashboards/' + d._id;
+      this._router.navigate([route]);
+    })
+    f.reset()
   }
 
   ngOnInit() {
+    $('#left-menu .sub-left-menu').niceScroll();
   }
 
   ngAfterViewInit() {
+    $('#left-menu .sub-left-menu').niceScroll();
+
     $.fn.ripple = function() {
       $(this).click(function(e) {
         const $rippler = $(this);

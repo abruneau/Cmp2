@@ -56,6 +56,19 @@
         <li class="ripple">
           <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><span class="fa-home fa"></span> Home</a>
         </li>
+        <!-- DashBoard -->
+        <li class="ripple">
+          <a class="tree-toggle nav-header">
+            <span class="fa fa-tachometer"></span> Dashboards
+            <span class="fa-angle-right fa right-arrow text-right"></span>
+          </a>
+          <ul class="nav nav-list tree">
+            <li><a (click)="dashModal.show()"><i class="fa fa-plus-circle"></i> Add Dashboard</a></li>
+            <li *ngFor="let dash of dashboards">
+              <a routerLinkActive="active" [routerLink]="['/dashboards', dash._id]">{{dash.title}}</a>
+            </li>
+          </ul>
+        </li>
         <!-- Accounts -->
         <li class="ripple">
           <a class="tree-toggle nav-header">
@@ -90,6 +103,29 @@
     </div>
   </div>
   <!-- end: Left Menu -->
+</div>
+
+<!-- Dashboard Modal -->
+<div class="modal fade" bsModal #dashModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="dashModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Create a new Dashboard</h4>
+      </div>
+      <div class="modal-body">
+        <form #dashForm="ngForm" (ngSubmit)="createDashboard(dashForm)" novalidate>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Title</label>
+            <input type="text" class="form-control" name="title" ngModel required>
+          </div>
+          <button (click)="dashModal.hide()" type="Submit" [disabled]="!dashForm.valid" class="btn btn-primary">Create Note</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script src="../../../assets/js/miminium.js"></script>

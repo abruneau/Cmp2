@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import * as ipcPromise from 'ipc-promise';
 import * as EvernoteHelper from 'evernote-helper';
-import { MarkdownService } from '../providers/markdown.service';
+import { MarkdownService } from '../providers';
 
 @Injectable()
 export class EvernoteService {

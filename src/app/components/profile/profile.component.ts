@@ -1,10 +1,9 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { TabsetComponent } from 'ngx-bootstrap';
 
-import { Setting, SettingsService } from '../../models/settings.service';
-import { IdentityService } from '../../models/identity.service';
+import { Setting } from '../../models';
 import { Identity } from '../../models';
-import { SalesforceService } from '../../providers/salesforce.service';
+import { SalesforceService, SharedDataService } from '../../providers';
 
 declare const $: any;
 
@@ -21,23 +20,20 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   public identity: Identity;
   public connected = false;
 
-  constructor(private _settings: SettingsService, private _sf: SalesforceService, private _identity: IdentityService) {
-    this.settings = _settings.settings;
+  constructor(private _sharedData: SharedDataService,
+    private _sf: SalesforceService,
+  ) {
 
-    _settings.ready.subscribe((ready: boolean) => {
-      if (ready) {
-        this.settings = _settings.settings;
-      }
-    });
+    _sharedData.settings.subscribe((set) => {
+      this.settings = set
+    })
 
     _sf.connected.subscribe((connected: boolean) => {
       this.connected = connected;
     })
 
-    _identity.ready.subscribe((ready: boolean) => {
-      if (ready) {
-        this.identity = _identity.identity;
-      }
+    _sharedData.identity.subscribe((id) => {
+      this.identity = id
     })
   }
 
@@ -56,8 +52,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
 
   public updateIdentity() {
-    this._identity.update().then(() => {
-      this.identity = this._identity.identity;
+    this._sf.getIdentity().then((res) => {
+      this.identity = res
+      return this.identity.update()
+    }).then(() => {
+      this._sharedData.identityChanges()
     })
   }
 

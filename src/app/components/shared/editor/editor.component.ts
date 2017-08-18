@@ -1,7 +1,7 @@
 import { Component, AfterViewInit, ViewEncapsulation, EventEmitter, Input, Output } from '@angular/core';
 
 import * as SimpleMDE from 'simplemde';
-import { MarkdownService } from '../../../providers/markdown.service';
+import { MarkdownService } from '../../../providers';
 
 @Component({
   selector: 'app-editor',

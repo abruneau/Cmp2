@@ -1,6 +1,7 @@
 import { HomeComponent } from './components/home/home.component';
 import { AccountsComponent } from './components/accounts/accounts.component';
 import { AccountsSearchComponent } from './components/accounts/search/search.component';
+import { DashboardsComponent } from './components/dashboards/dashboards.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { TemplatesComponent } from './components/templates/templates.component';
 import { NgModule } from '@angular/core';
@@ -22,6 +23,9 @@ const routes: Routes = [
   }, {
     path: 'templates',
     component: TemplatesComponent
+  }, {
+    path: 'dashboards/:id',
+    component: DashboardsComponent
   }
 ];
 

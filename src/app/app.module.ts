@@ -3,7 +3,7 @@ import 'reflect-metadata';
 import 'polyfills';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { APP_BASE_HREF } from '@angular/common';
 
@@ -18,18 +18,12 @@ import { TemplatesComponent} from './components/templates/templates.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './components/shared/shared.module';
 import { AccountsModule } from './components/accounts/accounts.module';
+import { ServicesModule } from './providers/services.module';
 
-import { ModelsModule } from './models/models.module';
-
-import { SalesforceService } from './providers/salesforce.service';
-import { ThemeSpinnerService } from './providers/theme-spinner.service';
-import { JxaService } from './providers/jxa.service';
-import { FsService } from './providers/fs.service';
-import { EvernoteService } from './providers/evernote.service';
-import { MarkdownService } from './providers/markdown.service';
-
+import {NgPipesModule} from 'ngx-pipes';
 import { PipesModule } from './pipes/pipes.module';
-import { OpenExternalDirective } from './providers/open-external.directive';
+import { OpenExternalDirective } from './directives/open-external.directive';
+import { DashboardsComponent } from './components/dashboards/dashboards.component';
 
 @NgModule({
   declarations: [
@@ -38,28 +32,25 @@ import { OpenExternalDirective } from './providers/open-external.directive';
     ProfileComponent,
     TemplatesComponent,
     OpenExternalDirective,
+    DashboardsComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     AppRoutingModule,
     SharedModule,
     PipesModule,
+    NgPipesModule,
     AccountsModule,
-    ModelsModule,
+    ServicesModule,
     TabsModule.forRoot(),
     TypeaheadModule.forRoot(),
     ModalModule,
     Ng2DeviceDetectorModule.forRoot()
   ],
   providers: [
-    SalesforceService,
-    ThemeSpinnerService,
-    JxaService,
-    FsService,
-    EvernoteService,
-    MarkdownService,
     { provide: APP_BASE_HREF, useValue: './' }
   ],
   bootstrap: [AppComponent]

@@ -1,6 +1,4 @@
-import { FsService } from '../providers/fs.service';
-
-import { EvernoteService } from '../providers/evernote.service';
+import { EvernoteService, FsService } from '../providers';
 
 export class Note {
   protected static _evernote = new EvernoteService()

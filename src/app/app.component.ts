@@ -1,5 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { ThemeSpinnerService } from './providers/theme-spinner.service'
+import { ThemeSpinnerService } from './providers'
 
 // import $ from 'jquery';
 import * as bootstrap from 'bootstrap';

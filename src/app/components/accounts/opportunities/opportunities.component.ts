@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { shell } from 'electron'
 
-import { SalesforceService } from '../../../providers/salesforce.service';
+import { SalesforceService } from '../../../providers';
 import { Opportunity } from '../../../models'
 
 @Component({
