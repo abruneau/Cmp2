@@ -106,13 +106,17 @@ export class FsService {
     fs.mkdirSync(path + '/' + name);
   }
 
-  exists(p: string): Boolean {
+  exists(p: string): boolean {
     try {
       fs.accessSync(p);
       return true;
     } catch (e) {
       return false;
     }
+  }
+
+  mv(oldPath: string, nextPath: string): void {
+    fs.renameSync(oldPath, nextPath)
   }
 
   creationDate(p: string): Date {

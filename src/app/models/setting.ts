@@ -27,7 +27,7 @@ export class Setting {
     }
   }
 
-  save(): Promise<any> {
+  protected save(): Promise<any> {
     return Setting.database.insertAsync(this).then((newDoc) => {
       this._id = newDoc._id;
       return this;
@@ -35,6 +35,6 @@ export class Setting {
   }
 
   update(): Promise<any> {
-    return Setting.database.updateAsync({}, this, { upsert: true })
+    return Setting.database.updateAsync({ _id: this._id }, this, {})
   }
 }

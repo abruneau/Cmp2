@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
-import {Params, ActivatedRoute, Router } from '@angular/router';
+import { Params, ActivatedRoute, Router } from '@angular/router';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { shell } from 'electron'
 
@@ -248,22 +248,14 @@ export class DashboardsComponent implements OnInit {
    * Refresh eash Report of the Dashboard
    */
   refreshDashboard(): void {
-    this.dashboard.top.forEach(report => {
-      this.refreshReport(report)
-    });
-    this.dashboard.right.forEach(report => {
-      this.refreshReport(report)
-    });
-    this.dashboard.main.forEach(report => {
-      this.refreshReport(report)
-    });
+    this.dashboard.refresh(this._sf)
   }
 
   /**
    * Save Dashboard after it was updated with dashboardModal
    */
   updateDashboard(): void {
-    this.dashboard.save().then(this._sharedData.dashboardChanges())
+    this.dashboard.save().then(() => { this._sharedData.dashboardChanges() })
   }
 
   /**

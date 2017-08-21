@@ -1,3 +1,5 @@
+import { SalesforceService } from '../providers';
+
 import { Database } from './database'
 import { Report } from './report'
 
@@ -40,21 +42,35 @@ export class Dashboard {
     }
   }
 
-  save() {
+  save(): Promise<any> {
     const self = this
     if (self._id) {
-      Dashboard.database.update({
+      return Dashboard.database.updateAsync({
         _id: self._id
-      }, self, {}, (err, numReplaced) => {
-        console.log(err)
-        console.log(numReplaced)
-      })
+      }, self, {})
     } else {
       return Dashboard.database.insertAsync(self).then(function(newDoc) {
         self._id = newDoc._id;
         return self;
       });
     }
+  }
+
+  refresh(sf: SalesforceService): Promise<any> {
+    const self = this
+    const p: Array<Promise<any>> = []
+    if (self.top) {
+      p.concat(self.top.map((r) => { return r.refresh(sf) }))
+    }
+    if (self.main) {
+      p.concat(self.main.map((r) => { return r.refresh(sf) }))
+    }
+    if (self.right) {
+      p.concat(self.right.map((r) => { return r.refresh(sf) }))
+    }
+    return Promise.all(p).then(() => {
+      return self.save()
+    })
   }
 
   delete(): Promise<any> {

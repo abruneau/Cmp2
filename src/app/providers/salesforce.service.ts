@@ -4,13 +4,13 @@ import { BehaviorSubject, Observable } from 'rxjs/Rx'
 
 import * as jsforce from 'jsforce';
 
-import {SharedDataService } from './shared-data.service';
+import { SharedDataService } from './shared-data.service';
 
 
 @Injectable()
 export class SalesforceService {
 
-  private connection;
+  private connection: jsforce.Connection;
   private connectedSource = new BehaviorSubject<boolean>(false);
   public connected: Observable<boolean> = this.connectedSource.asObservable()
   public loginUrl = new BehaviorSubject<string>('');

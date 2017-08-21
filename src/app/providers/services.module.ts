@@ -8,6 +8,7 @@ import { MarkdownService } from './markdown.service'
 import { SalesforceService } from './salesforce.service'
 import { SharedDataService } from './shared-data.service'
 import { ThemeSpinnerService } from './theme-spinner.service'
+import { DatabaseMigrationService } from './database-migration.service'
 
 
 
@@ -23,6 +24,7 @@ import { ThemeSpinnerService } from './theme-spinner.service'
     SalesforceService,
     SharedDataService,
     ThemeSpinnerService,
+    DatabaseMigrationService,
   ]
 })
 export class ServicesModule { }

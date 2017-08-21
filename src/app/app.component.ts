@@ -1,5 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { ThemeSpinnerService } from './providers'
+import { ThemeSpinnerService } from './providers';
+import { DatabaseMigrationService } from './providers'
 
 // import $ from 'jquery';
 import * as bootstrap from 'bootstrap';
@@ -12,7 +13,13 @@ import { NavigationComponent } from './components/shared/navigation/navigation.c
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements AfterViewInit {
-  constructor(private _spinner: ThemeSpinnerService, ) { }
+
+  constructor(private _spinner: ThemeSpinnerService, private _dbMigrate: DatabaseMigrationService) {
+    if (_dbMigrate.migrationNeeded()) {
+      const self = this
+      _dbMigrate.migrate()
+    }
+  }
 
   public ngAfterViewInit(): void {
     // hide spinner once all loaders are completed
