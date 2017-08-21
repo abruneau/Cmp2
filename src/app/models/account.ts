@@ -8,7 +8,7 @@ export class Account {
   Id: string;
   Name: string;
   Industry: string;
-  IsPartner: Boolean;
+  IsPartner: boolean;
   Type: string;
   Full_Address__c: string;
   CurrencyIsoCode: string;

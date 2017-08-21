@@ -10,7 +10,7 @@ export class Database {
 
   database
 
-  constructor(model: String) {
+  constructor(model: string) {
     const db = model + '.db';
 
     if (environment.production) {

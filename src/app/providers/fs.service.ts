@@ -8,7 +8,7 @@ import { Ng2DeviceService } from 'ng2-device-detector';
 class File {
   name: string;
   path: string;
-  directory: Boolean;
+  directory: boolean;
   type: string;
 
   constructor(object) {

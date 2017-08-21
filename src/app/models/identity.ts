@@ -3,12 +3,12 @@ import { Database } from './database'
 export class Identity {
   protected static database = new Database('identity').database
 
-  _id: String;
-  display_name: String;
-  addr_street: String;
-  addr_zip: String;
-  addr_city: String;
-  email: String;
+  _id: string;
+  display_name: string;
+  addr_street: string;
+  addr_zip: string;
+  addr_city: string;
+  email: string;
 
   static init(): Promise<any> {
     return Identity.database.insertAsync(new Identity()).then((newDoc) => {

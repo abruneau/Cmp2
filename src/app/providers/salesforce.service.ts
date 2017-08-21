@@ -14,7 +14,7 @@ export class SalesforceService {
   private connectedSource = new BehaviorSubject<boolean>(false);
   public connected: Observable<boolean> = this.connectedSource.asObservable()
   public loginUrl = new BehaviorSubject<string>('');
-  private fullName: String
+  private fullName: string
 
   constructor(private _sharedData: SharedDataService) {
     this.init()
@@ -46,7 +46,7 @@ export class SalesforceService {
     })
   }
 
-  private settingsAreComplit(sf): Boolean {
+  private settingsAreComplit(sf): boolean {
     if (sf && sf.loginUrl && sf.email && sf.password && sf.token) {
       return true;
     } else {
@@ -62,11 +62,11 @@ export class SalesforceService {
     return this.connection.identity();
   }
 
-  findAccountByName(name: String): Promise<any> {
+  findAccountByName(name: string): Promise<any> {
     return this.connection.query('SELECT Id, Name, Owner.FirstName, Owner.LastName, Description FROM Account WHERE Name LIKE \'%' + name + '%\' LIMIT 10');
   }
 
-  getAccount(id: String): Promise<any> {
+  getAccount(id: string): Promise<any> {
     return this.connection.query('SELECT Id, Name, Industry, IsPartner, Type, Full_Address__c, CurrencyIsoCode, AnnualRevenue FROM Account WHERE Id = \'' + id + '\'')
   }
 

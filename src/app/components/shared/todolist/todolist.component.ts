@@ -57,7 +57,7 @@ export class TodolistComponent {
     }
   }
 
-  allCompleted(): Boolean {
+  allCompleted(): boolean {
     return this.todos.length === this.todos.filter((todo: Todo) => todo.completed === true).length
   }
 

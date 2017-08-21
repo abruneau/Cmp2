@@ -2,7 +2,7 @@ import { Database } from './database'
 
 export class Setting {
   protected static database = new Database('settings').database
-  _id: String;
+  _id: string;
   sf: {
     loginUrl: '',
     email: '',
