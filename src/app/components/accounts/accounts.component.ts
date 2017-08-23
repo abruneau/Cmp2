@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import {Params, ActivatedRoute, Router } from '@angular/router';
+import { Params, ActivatedRoute, Router } from '@angular/router';
 import { TabsetComponent } from 'ngx-bootstrap';
 
-import { shell, remote } from 'electron'
+import { remote } from 'electron'
 const process = remote.process;
 
 import { SalesforceService, SharedDataService } from '../../providers';
@@ -48,10 +48,6 @@ export class AccountsComponent implements OnInit {
 
   getAccount(id) {
     Account.get(id).then((account) => this.account = account)
-  }
-
-  openSfAccount() {
-    shell.openExternal(this.sfLoginUrl + '/' + this.account.Id)
   }
 
   removeAccount() {

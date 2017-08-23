@@ -13,17 +13,17 @@ import { Ng2DeviceDetectorModule } from 'ng2-device-detector';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { TemplatesComponent} from './components/templates/templates.component';
+import { TemplatesComponent } from './components/templates/templates.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './components/shared/shared.module';
 import { AccountsModule } from './components/accounts/accounts.module';
 import { ServicesModule } from './providers/services.module';
 
-import {NgPipesModule} from 'ngx-pipes';
+import { NgPipesModule } from 'ngx-pipes';
 import { PipesModule } from './pipes/pipes.module';
-import { OpenExternalDirective } from './directives/open-external.directive';
 import { DashboardsComponent } from './components/dashboards/dashboards.component';
+import { DirectivesModule } from './directives/directives.module'
 
 @NgModule({
   declarations: [
@@ -31,7 +31,6 @@ import { DashboardsComponent } from './components/dashboards/dashboards.componen
     HomeComponent,
     ProfileComponent,
     TemplatesComponent,
-    OpenExternalDirective,
     DashboardsComponent,
   ],
   imports: [
@@ -48,7 +47,8 @@ import { DashboardsComponent } from './components/dashboards/dashboards.componen
     TabsModule.forRoot(),
     TypeaheadModule.forRoot(),
     ModalModule,
-    Ng2DeviceDetectorModule.forRoot()
+    Ng2DeviceDetectorModule.forRoot(),
+    DirectivesModule
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: './' }

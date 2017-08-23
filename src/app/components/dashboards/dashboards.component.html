@@ -87,7 +87,7 @@
                 <tbody>
                   <tr *ngFor="let row of report.data">
                     <td *ngFor="let col of report.columns">
-                      <a *ngIf="col.key === 'Id'; else elseBlock" (click)="openExternal(row[col.key])">{{ row[col.key] | shorten: 4: '...' }}</a>
+                      <a *ngIf="col.key === 'Id'; else elseBlock" [appOpenExternal]="sfLoginUrl + '/' + row[col.key]">{{ row[col.key] | shorten: 4: '...' }}</a>
                       <ng-template #elseBlock>{{ row[col.key] | meganumber }}</ng-template>
                     </td>
                   </tr>

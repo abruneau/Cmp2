@@ -52,7 +52,7 @@
         <tbody>
           <ng-container *ngFor="let oppy of oppies | orderBy: sort() | filterBy: ['Name']: search">
             <tr *ngIf="oppy.IsClosed == showClosedOpport">
-              <td><a (click)="openSfOpport(oppy.Id)">{{oppy.Name}}</a></td>
+              <td><a [appOpenExternal]="sfLoginUrl + '/' + oppy.Id">{{oppy.Name}}</a></td>
               <td>{{oppy.Amount | number}}</td>
               <td>{{oppy.Fiscal}}</td>
               <td>{{oppy.StageName}}</td>

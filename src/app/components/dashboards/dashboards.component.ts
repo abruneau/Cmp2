@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { Params, ActivatedRoute, Router } from '@angular/router';
 import { ModalDirective } from 'ngx-bootstrap/modal';
-import { shell } from 'electron'
 
 import { Dashboard, Report, ReportTypes } from '../../models'
 import { SalesforceService, SharedDataService } from '../../providers';
@@ -219,10 +218,6 @@ export class DashboardsComponent implements OnInit {
    */
   topReportClass(r: Report): string {
     return 'col-md-' + (12 / r.data.length)
-  }
-
-  openExternal(id) {
-    shell.openExternal(this.sfLoginUrl + '/' + id)
   }
 
   ///////////////

@@ -1,7 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { shell } from 'electron'
-
 import { SalesforceService } from '../../../providers';
 import { Opportunity } from '../../../models'
 
@@ -55,10 +53,6 @@ export class AccountsOpportunitiesComponent implements OnInit {
         })
       }
     })
-  }
-
-  openSfOpport(Id) {
-    shell.openExternal(this.sfLoginUrl + '/' + Id)
   }
 
   sort(): string {

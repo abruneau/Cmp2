@@ -5,7 +5,7 @@
 				<a (click)="updateAccountInfo()" class="pull-right"><i class="fa fa-refresh"></i></a>
 				<h3 class="animated fadeInLeft">
 					<span (click)="changeFavoritStatus()" [ngClass]="account.Stared ? 'glyphicon-star' : 'glyphicon-star-empty'" class="glyphicon" aria-hidden="true"></span>
-					<a (click)="openSfAccount()">{{account.Name}}</a>
+					<a [appOpenExternal]="sfLoginUrl + '/' + account.Id">{{account.Name}}</a>
             		<small>{{account.Industry}}</small>
             		<small *ngIf="account.IsPartner">(Parner)</small>
             		<small>| {{account.Type}}</small>

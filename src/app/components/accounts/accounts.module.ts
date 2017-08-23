@@ -4,10 +4,11 @@ import { FormsModule } from '@angular/forms';
 
 import { TabsModule } from 'ngx-bootstrap';
 import { ModalModule } from 'ngx-bootstrap';
-import {NgPipesModule} from 'ngx-pipes';
+import { NgPipesModule } from 'ngx-pipes';
 
 import { SharedModule } from '../shared/shared.module';
 import { PipesModule } from '../../pipes/pipes.module';
+import { DirectivesModule } from '../../directives/directives.module'
 
 import { AccountsComponent } from './accounts.component';
 import { AccountComponent } from './account/account.component';
@@ -26,6 +27,7 @@ import { AccountsOpportunitiesComponent } from './opportunities/opportunities.co
     FormsModule,
     SharedModule,
     PipesModule,
+    DirectivesModule,
     NgPipesModule,
     TabsModule.forRoot(),
     ModalModule.forRoot(),

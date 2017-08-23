@@ -7,12 +7,13 @@ import { shell } from 'electron'
 })
 export class OpenExternalDirective {
 
+  @Input('appOpenExternal') url: string
+
   constructor() {
   }
 
   @HostListener('click', ['$event'])
   confirmFirst(event: Event) {
-    event.preventDefault();
-    console.log(event)
+    shell.openExternal(this.url)
   }
 }
