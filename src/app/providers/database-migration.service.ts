@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/Rx'
 import { remote } from 'electron';
 import * as path from 'path';
+import { environment } from 'environments';
 import * as Database from '../models'
 import * as Promise from 'bluebird';
 import * as Datastore from 'nedb';
@@ -30,7 +31,12 @@ export class DatabaseMigrationService {
 
   migrationNeeded(): boolean {
     const oldDb = path.join(remote.app.getPath('userData'), 'cmp.db')
-    const newDb = path.join(remote.app.getPath('userData'), 'dev', 'database')
+    let newDb: string
+    if (environment.production) {
+      newDb = path.join(remote.app.getPath('userData'), 'database')
+    } else {
+      newDb = path.join(remote.app.getPath('userData'), 'dev', 'database')
+    }
     return this._fs.exists(oldDb) && !this._fs.exists(newDb)
   }
 

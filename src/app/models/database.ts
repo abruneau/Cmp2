@@ -2,7 +2,7 @@ import { remote } from 'electron';
 import * as path from 'path';
 import * as Promise from 'bluebird';
 import * as Datastore from 'nedb';
-import { environment } from './../../environments';
+import { environment } from 'environments';
 
 Promise.promisifyAll(Datastore.prototype);
 
