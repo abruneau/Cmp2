@@ -2,7 +2,7 @@
 <nav class="navbar navbar-default header navbar-fixed-top">
   <div class="col-md-12 nav-wrapper">
     <div class="navbar-header" style="width:100%;">
-      <div class="opener-left-menu is-open">
+      <div class="opener-left-menu is-open" appLeftMenu>
         <span class="top"></span>
         <span class="middle"></span>
         <span class="bottom"></span>
@@ -54,11 +54,11 @@
         </li>
         <!-- Home -->
         <li class="ripple">
-          <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><span class="fa-home fa"></span> Home</a>
+          <a appTreeToggle class="tree-toggle nav-header" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><span class="fa-home fa"></span> Home</a>
         </li>
         <!-- DashBoard -->
         <li class="ripple">
-          <a class="tree-toggle nav-header">
+          <a appTreeToggle class="tree-toggle nav-header">
             <span class="fa fa-tachometer"></span> Dashboards
             <span class="fa-angle-right fa right-arrow text-right"></span>
           </a>
@@ -71,7 +71,7 @@
         </li>
         <!-- Accounts -->
         <li class="ripple">
-          <a class="tree-toggle nav-header">
+          <a appTreeToggle class="tree-toggle nav-header">
 						<span class="fa-briefcase fa"></span> Accounts
 						<span class="fa-angle-right fa right-arrow text-right"></span>
 					</a>
@@ -87,7 +87,7 @@
         </li>
         <!-- Editor -->
         <li class="ripple">
-          <a class="tree-toggle nav-header">
+          <a appTreeToggle class="tree-toggle nav-header">
           <span class="fa fa-pencil-square-o"></span> Editor
           <span class="fa-angle-right fa right-arrow text-right"></span>
         </a>

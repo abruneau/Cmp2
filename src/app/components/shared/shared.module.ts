@@ -4,8 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TypeaheadModule, PopoverModule, DatepickerModule, ModalModule } from 'ngx-bootstrap';
 
-import {NgPipesModule} from 'ngx-pipes';
+import { NgPipesModule } from 'ngx-pipes';
 
+import { DirectivesModule } from './../../directives/directives.module'
 import { EditorComponent } from './editor/editor.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { TodolistComponent } from './todolist/todolist.component';
@@ -21,6 +22,7 @@ import { WeatherComponent } from './weather/weather.component';
     PopoverModule.forRoot(),
     DatepickerModule.forRoot(),
     ModalModule,
+    DirectivesModule,
   ],
   declarations: [
     EditorComponent,

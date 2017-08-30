@@ -2243,7 +2243,7 @@ ul li a:focus {
   height: 100px;
   left: 0;
   position: relative;
-  margin-left: -2px;
+  margin-left: -4px;
 }
 
 #left-menu .sub-left-menu {
@@ -2251,7 +2251,7 @@ ul li a:focus {
   left: 0;
   padding-top: 50px;
   z-index: 222;
-  width: 230px;
+  width: 227px;
   height: 100%;
   position: fixed;
   overflow-y: hidden;
