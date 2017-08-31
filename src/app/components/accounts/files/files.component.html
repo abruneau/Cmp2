@@ -22,11 +22,11 @@
 				</a>
 			</div>
 			<div *ngFor="let f of fileList" class="col-lg-2 col-md-2 col-sm-3 col-xs-3" style="text-align: center;">
-				<a (click)="openFile(f)">
+				<a (click)="openFile(f)" tooltip="{{f.name}}" placement="bottom">
 					<div class="jumbotron" style="margin-bottom: 0px; margin-top: 30px;">
 						<span [ngClass]="fileIcon(f)" class="fa fa-5x" aria-hidden="true"></span>
 					</div>
-					{{f.name}}
+					{{f.name | shorten: 15:'...'}}
 				</a>
 			</div>
 			<!-- <div class='col-lg-2 col-md-2 col-sm-3 col-xs-3 ' ng-repeat="f in fileList" style="text-align: center;">

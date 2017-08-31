@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { TabsModule } from 'ngx-bootstrap';
-import { ModalModule } from 'ngx-bootstrap';
+import { ModalModule, TooltipModule } from 'ngx-bootstrap';
 import { NgPipesModule } from 'ngx-pipes';
 
 import { SharedModule } from '../shared/shared.module';
@@ -31,6 +31,7 @@ import { AccountsOpportunitiesComponent } from './opportunities/opportunities.co
     NgPipesModule,
     TabsModule.forRoot(),
     ModalModule.forRoot(),
+    TooltipModule.forRoot()
   ],
   declarations: [
     AccountsComponent,
