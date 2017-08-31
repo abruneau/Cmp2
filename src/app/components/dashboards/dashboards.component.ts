@@ -21,6 +21,7 @@ export class DashboardsComponent implements OnInit {
   reportTypes = ReportTypes
   newReportType: number = null
   reportForm: FormGroup
+  options: any
 
   reportUpdating = false
   private updatedReport: Report
@@ -34,6 +35,11 @@ export class DashboardsComponent implements OnInit {
     _sf.loginUrl.subscribe((url) => {
       this.sfLoginUrl = url;
     })
+    this.options = {
+      onUpdate: (event: any) => {
+        this.sortChanged();
+      }
+    };
   }
 
   ngOnInit() {
@@ -243,7 +249,9 @@ export class DashboardsComponent implements OnInit {
    * Refresh eash Report of the Dashboard
    */
   refreshDashboard(): void {
-    this.dashboard.refresh(this._sf)
+    this.dashboard.refresh(this._sf).then(() => {
+      this.dashboard.save()
+    })
   }
 
   /**
@@ -260,6 +268,10 @@ export class DashboardsComponent implements OnInit {
     this.dashboard.delete()
     this._sharedData.dashboardChanges()
     this._router.navigate(['/']);
+  }
+
+  sortChanged(): void {
+    this.dashboard.save()
   }
 
 }

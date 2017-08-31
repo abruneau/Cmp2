@@ -53,11 +53,11 @@
   </div>
 
   <!-- Dashboard Main -->
-  <div class="col-md-8">
+  <div class="col-md-12">
     <div *ngIf="dashboard.todo">
       <app-todolist></app-todolist>
     </div>
-    <div *ngIf="dashboard.main" class="row">
+    <div *ngIf="dashboard.main" [sortablejs]="dashboard.main" [sortablejsOptions]="options" class="row">
       <div *ngFor="let report of dashboard.main; let idx = index" class="col-md-12">
         <div class="panel">
           <div class="panel-heading bg-white border-none">
@@ -101,7 +101,7 @@
   </div>
 
   <!-- Dashboard Right -->
-  <div class="col-md-4">
+  <!-- <div class="col-md-4">
     <div *ngIf="dashboard.weather">
       <app-weather></app-weather>
     </div>
@@ -126,7 +126,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>
 
 <!-- Report Modal -->

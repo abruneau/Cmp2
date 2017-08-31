@@ -43,6 +43,7 @@
     "@angular/platform-browser": "4.3.5",
     "@angular/platform-browser-dynamic": "4.3.5",
     "@angular/router": "4.3.5",
+    "angular-sortablejs": "^2.0.6",
     "bluebird": "^3.5.0",
     "bootstrap": "^3.3.7",
     "core-js": "2.4.1",
@@ -66,6 +67,7 @@
     "rxjs": "5.4.2",
     "simplemde": "^1.11.2",
     "simpleweather": "^3.1.0",
+    "sortablejs": "^1.6.1",
     "todomvc-app-css": "^2.1.0",
     "todomvc-common": "^1.0.3",
     "zone.js": "0.8.12"

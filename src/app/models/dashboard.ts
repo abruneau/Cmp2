@@ -83,8 +83,8 @@ export class Dashboard {
 
 export enum ReportTypes {
   Top,
-  Right,
+  // Right,
   Main,
   Todo,
-  Weather,
+  // Weather,
 }

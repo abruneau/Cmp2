@@ -9,6 +9,7 @@ import { APP_BASE_HREF } from '@angular/common';
 
 import { TabsModule, TypeaheadModule, ModalModule } from 'ngx-bootstrap';
 import { Ng2DeviceDetectorModule } from 'ng2-device-detector';
+import { SortablejsModule } from 'angular-sortablejs'
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -48,7 +49,8 @@ import { DirectivesModule } from './directives/directives.module'
     TypeaheadModule.forRoot(),
     ModalModule,
     Ng2DeviceDetectorModule.forRoot(),
-    DirectivesModule
+    DirectivesModule,
+    SortablejsModule
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: './' }
