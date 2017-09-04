@@ -11,6 +11,7 @@ import { Opportunity } from '../../../models'
 export class AccountsOpportunitiesComponent implements OnInit {
 
   account
+  refreshing = false
 
   @Input()
   set currentAccount(account) {
@@ -43,16 +44,21 @@ export class AccountsOpportunitiesComponent implements OnInit {
 
   updateOpportunities() {
     const self = this;
-    this._sf.getOpportunities(this.account.Id).then((res) => {
-      if (res) {
-        self.oppies = []
-        res.records.map((record) => {
-          const oppy = new Opportunity(record)
-          oppy.save()
-          self.oppies.push(oppy)
-        })
-      }
-    })
+    this.refreshing = true
+    this._sf.getOpportunities(this.account.Id)
+      .then((res) => {
+        if (res) {
+          self.oppies = []
+          res.records.map((record) => {
+            const oppy = new Opportunity(record)
+            oppy.save()
+            self.oppies.push(oppy)
+          })
+        }
+      })
+      .then(() => {
+        this.refreshing = false
+      })
   }
 
   sort(): string {

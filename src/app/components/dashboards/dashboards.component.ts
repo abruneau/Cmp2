@@ -235,13 +235,8 @@ export class DashboardsComponent implements OnInit {
    * @param {string} id Dashboard _id
    */
   getDashboard(id: string): void {
-    const self = this
-    this._sf.connected.subscribe((value: boolean) => {
-      if (value) {
-        Dashboard.get(id).then((dash) => {
-          self.dashboard = dash
-        })
-      }
+    Dashboard.get(id).then((dash) => {
+      this.dashboard = dash
     })
   }
 

@@ -2,8 +2,17 @@
 	<div class="panel">
 		<div class="panel-body" style="padding-bottom:0px;">
 			<div class="col-md-12 col-sm-12">
-				<a (click)="updateAccountInfo()" class="pull-right"><i class="fa fa-refresh"></i></a>
+        <div class="btn-group pull-right">
+          <button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a (click)="updateAccountInfo()">Refresh Account Info</a></li>
+            <li><a (click)="removeAccount()">Remove Account</a></li>
+          </ul>
+        </div>
 				<h3 class="animated fadeInLeft">
+          <span *ngIf="refreshing" class="fa fa-spinner rotate" aria-hidden="true"></span>
 					<span (click)="changeFavoritStatus()" [ngClass]="account.Stared ? 'glyphicon-star' : 'glyphicon-star-empty'" class="glyphicon" aria-hidden="true"></span>
 					<a [appOpenExternal]="sfLoginUrl + '/' + account.Id">{{account.Name}}</a>
             		<small>{{account.Industry}}</small>
@@ -13,7 +22,6 @@
 				<div ng-if="account.Full_Address__c">
 					<i class="fa fa-map-marker"></i> {{account.Full_Address__c}}
 				</div>
-				<a (click)="removeAccount()" class="pull-right"><i class="fa fa-trash-o"></i></a>
 			</div>
 			<ul id="tabs-demo" class="nav nav-tabs content-header-tab" style="padding-top:10px;">
 				<li [ngClass]="{'active': active === 0}" role="presentation">

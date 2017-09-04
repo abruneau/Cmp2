@@ -28,6 +28,7 @@ export class AccountsComponent implements OnInit {
   @ViewChild('staticTabs') staticTabs: TabsetComponent;
 
   account
+  refreshing = false
   sfLoginUrl = ''
   active = 0;
 
@@ -58,12 +59,17 @@ export class AccountsComponent implements OnInit {
   }
 
   updateAccountInfo() {
-    this._sf.getAccount(this.account.Id).then((res) => {
-      if (res) {
-        this.account.update(res.records[0]);
-        this.account.save();
-      }
-    })
+    this.refreshing = true
+    this._sf.getAccount(this.account.Id)
+      .then((res) => {
+        if (res) {
+          this.account.update(res.records[0]);
+          this.account.save();
+        }
+      })
+      .then(() => {
+        this.refreshing = false
+      })
   }
 
   changeFavoritStatus() {

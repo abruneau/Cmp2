@@ -2,10 +2,11 @@
   <div class="col-md-8">
     <div class="panel">
       <div class="panel-heading bg-white border-none">
-        <h4>Forcast</h4>
+        <h4><span *ngIf="forcastLoading" class="fa fa-spinner rotate" aria-hidden="true"></span>Forcast</h4>
       </div>
       <div class="panel-body">
         <div class="col-md-12">
+          <div *ngIf="forcastError">{{forcastError}}</div>
           <div [ngClass]="forcastClass()" *ngFor="let category of forcast">
             <div class="panel box-v1">
               <div class="panel-body text-center">
