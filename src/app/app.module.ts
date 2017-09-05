@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { APP_BASE_HREF } from '@angular/common';
+import { RouteReuseStrategy } from '@angular/router'
 
 import { TabsModule, TypeaheadModule, ModalModule } from 'ngx-bootstrap';
 import { Ng2DeviceDetectorModule } from 'ng2-device-detector';
@@ -17,6 +18,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { TemplatesComponent } from './components/templates/templates.component';
 
 import { AppRoutingModule } from './app-routing.module';
+import { CustomReuseStrategy } from './reuse-strategy';
 import { SharedModule } from './components/shared/shared.module';
 import { AccountsModule } from './components/accounts/accounts.module';
 import { ServicesModule } from './providers/services.module';
@@ -24,7 +26,7 @@ import { ServicesModule } from './providers/services.module';
 import { NgPipesModule } from 'ngx-pipes';
 import { PipesModule } from './pipes/pipes.module';
 import { DashboardsComponent } from './components/dashboards/dashboards.component';
-import { DirectivesModule } from './directives/directives.module'
+import { DirectivesModule } from './directives/directives.module';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,8 @@ import { DirectivesModule } from './directives/directives.module'
     SortablejsModule
   ],
   providers: [
-    { provide: APP_BASE_HREF, useValue: './' }
+    { provide: APP_BASE_HREF, useValue: './' },
+    { provide: RouteReuseStrategy, useClass: CustomReuseStrategy }
   ],
   bootstrap: [AppComponent]
 })
