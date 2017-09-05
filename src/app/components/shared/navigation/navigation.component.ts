@@ -2,7 +2,7 @@ import { Component, AfterViewInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/observable/of';
-import { Router } from '@angular/router';
+import { Router, NavigationStart } from '@angular/router';
 
 import { TypeaheadMatch } from 'ngx-bootstrap';
 
@@ -46,6 +46,15 @@ export class NavigationComponent implements AfterViewInit {
       this.dashboards = list
     })
 
+    _router.events
+      .filter((event) => event instanceof NavigationStart)
+      .subscribe((val: NavigationStart) => {
+        if (val.url === '/blank') {
+          this.showAddon()
+        } else {
+          this.hideAddon()
+        }
+      })
 
   }
 
@@ -73,6 +82,14 @@ export class NavigationComponent implements AfterViewInit {
   public typeaheadOnSelect(e: TypeaheadMatch): void {
     const route = '/account/' + e.item.Id;
     this._router.navigate([route]);
+  }
+
+  private showAddon(): any {
+    this._sharedData.showAddon.next(true)
+  }
+
+  private hideAddon(): any {
+    this._sharedData.showAddon.next(false)
   }
 
 }

@@ -10,6 +10,7 @@ export class SharedDataService {
   public DashboardList = new BehaviorSubject([])
   public identity = new BehaviorSubject<Identity>(null)
   public settings = new BehaviorSubject<Setting>(null)
+  public showAddon = new BehaviorSubject<boolean>(false)
 
   constructor() {
     this.accountsChanges()

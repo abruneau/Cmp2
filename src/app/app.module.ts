@@ -27,6 +27,8 @@ import { NgPipesModule } from 'ngx-pipes';
 import { PipesModule } from './pipes/pipes.module';
 import { DashboardsComponent } from './components/dashboards/dashboards.component';
 import { DirectivesModule } from './directives/directives.module';
+import { AddonsComponent } from './components/addons/addons.component';
+import { BlankComponent } from './components/blank/blank.component'
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { DirectivesModule } from './directives/directives.module';
     ProfileComponent,
     TemplatesComponent,
     DashboardsComponent,
+    AddonsComponent,
+    BlankComponent,
   ],
   imports: [
     BrowserModule,

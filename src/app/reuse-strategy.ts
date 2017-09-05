@@ -30,7 +30,7 @@ export class CustomReuseStrategy implements RouteReuseStrategy {
   shouldDetach(route: ActivatedRouteSnapshot): boolean {
     // check to see if the route's path is in our acceptedRoutes array
     if (this.acceptedRoutes.indexOf(route.routeConfig.path) > -1) {
-      console.log('detaching', route);
+      // console.log('detaching', route);
       return true;
     } else {
       return false; // will be "view/:resultId" when user navigates to result

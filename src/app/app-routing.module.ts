@@ -4,6 +4,7 @@ import { AccountsSearchComponent } from './components/accounts/search/search.com
 import { DashboardsComponent } from './components/dashboards/dashboards.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { TemplatesComponent } from './components/templates/templates.component';
+import { BlankComponent } from './components/blank/blank.component'
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -26,6 +27,9 @@ const routes: Routes = [
   }, {
     path: 'dashboards/:id',
     component: DashboardsComponent
+  }, {
+    path: 'blank',
+    component: BlankComponent
   }
 ];
 
