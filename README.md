@@ -1,5 +1,3 @@
-[![Angular Logo](./logo-angular.jpg)](https://angular.io/) [![Electron Logo](./logo-electron.jpg)](https://electron.atom.io/)
-
 # Cmp2
 
 **Important: This is a OSX only app as it use AppleScript to comunicate with Evernote**
