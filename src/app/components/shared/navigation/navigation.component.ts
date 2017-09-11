@@ -82,6 +82,7 @@ export class NavigationComponent implements AfterViewInit {
   public typeaheadOnSelect(e: TypeaheadMatch): void {
     const route = '/account/' + e.item.Id;
     this._router.navigate([route]);
+    this.search = null;
   }
 
   private showAddon(): any {
