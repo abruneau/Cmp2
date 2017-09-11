@@ -43,4 +43,8 @@ export class SharedDataService {
     })
   }
 
+  getAccountName(Id: string): string {
+    return this.AccountList.getValue().filter(account => account.Id === Id)[0].Name
+  }
+
 }

@@ -17,7 +17,7 @@ export class CustomReuseStrategy implements RouteReuseStrategy {
      */
   storedRoutes: { [key: string]: RouteStorageObject } = {};
 
-  private acceptedRoutes: string[] = [''];
+  private acceptedRoutes: string[] = [];
 
   /**
    * Decides when the route should be stored

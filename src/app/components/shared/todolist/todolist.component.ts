@@ -5,6 +5,7 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
 import * as moment from 'moment'
 
 import { Todo } from '../../../models'
+import { SharedDataService } from '../../../providers'
 
 @Component({
   selector: 'app-todolist',
@@ -28,7 +29,7 @@ export class TodolistComponent {
   todos: Array<Todo> = [];
   newTodoText = '';
 
-  constructor() {
+  constructor(private _shared: SharedDataService) {
     this.getAll()
   }
 
@@ -53,6 +54,7 @@ export class TodolistComponent {
       todo.save().then((t) => {
         this.todos.push(t)
         this.newTodoText = '';
+        this.dt = null
       })
     }
   }
@@ -113,10 +115,14 @@ export class TodolistComponent {
     })
   }
 
-  // setAll(completed: Boolean) {
-  // 	this.todos.forEach((t: Todo) => {
-  // 		t.completed = completed
-  // 		t.save()
-  // 	})
-  // }
+  accountName(id: string): string {
+    return this._shared.getAccountName(id)
+  }
+
+  setAllTo(completed: boolean) {
+    this.todos.forEach((t: Todo) => {
+      t.completed = completed
+      t.save()
+    })
+  }
 }

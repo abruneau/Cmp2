@@ -2,6 +2,7 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~font-awesome/css/font-awesome.css";
 @import "assets/css/miminium.css";
+@import "~ngx-bootstrap/datepicker/bs-datepicker.css";
 
 
 @-webkit-keyframes spin {
@@ -86,4 +87,8 @@
 
 .rotate {
   animation: spin 1.5s linear infinite
+}
+
+.bs-datepicker {
+  z-index: 2;
 }
