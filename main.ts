@@ -4,7 +4,6 @@ import * as runJxa from 'run-jxa';
 import * as ipcPromise from 'ipc-promise';
 import * as whereAmI from '@rainder/where-am-i';
 import * as jxa from './electron/jxa';
-import * as electronContextMenu from 'electron-context-menu'
 import setApplicationMenu from './electron/menu';
 
 
@@ -16,14 +15,6 @@ if (serve) {
   require('electron-reload')(__dirname, {
   });
 }
-
-electronContextMenu({
-  prepend: (params, browserWindow) => [{
-    label: 'Rainbow',
-    // Only show it when right-clicking images
-    visible: params.mediaType === 'image'
-  }]
-})
 
 function createWindow() {
 
