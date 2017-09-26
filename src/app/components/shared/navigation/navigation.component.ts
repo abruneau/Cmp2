@@ -7,11 +7,11 @@ import { Router, NavigationStart } from '@angular/router';
 import { TypeaheadMatch } from 'ngx-bootstrap';
 
 import 'moment';
-import 'bootstrap'
+// import 'bootstrap'
 import * as moment from 'moment'
 declare const $: any;
 
-import { Identity, Account, Dashboard } from '../../../models';
+import { Account, Dashboard } from '../../../models';
 import { SharedDataService } from '../../../providers';
 
 @Component({
@@ -21,7 +21,6 @@ import { SharedDataService } from '../../../providers';
 })
 export class NavigationComponent implements AfterViewInit {
 
-  public identity: Identity = new Identity();
   public accounts: Array<Account> = [];
   public dashboards: Array<Dashboard> = []
   public selected: string;
@@ -32,11 +31,6 @@ export class NavigationComponent implements AfterViewInit {
     .map(() => new Date());
 
   constructor(private _sharedData: SharedDataService, private _router: Router) {
-    _sharedData.identity.subscribe((id) => {
-      if (id) {
-        this.identity = id
-      }
-    })
 
     _sharedData.AccountList.subscribe((list) => {
       this.accounts = list;
@@ -45,16 +39,6 @@ export class NavigationComponent implements AfterViewInit {
     _sharedData.DashboardList.subscribe((list) => {
       this.dashboards = list
     })
-
-    _router.events
-      .filter((event) => event instanceof NavigationStart)
-      .subscribe((val: NavigationStart) => {
-        if (val.url === '/blank') {
-          this.showAddon()
-        } else {
-          this.hideAddon()
-        }
-      })
 
   }
 
@@ -71,26 +55,6 @@ export class NavigationComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.hide();
-  }
-
-  private hide = function() {
-    $('.tree').hide();
-    $('.sub-tree').hide();
-  };
-
-  public typeaheadOnSelect(e: TypeaheadMatch): void {
-    const route = '/account/' + e.item.Id;
-    this._router.navigate([route]);
-    this.search = null;
-  }
-
-  private showAddon(): any {
-    this._sharedData.showAddon.next(true)
-  }
-
-  private hideAddon(): any {
-    this._sharedData.showAddon.next(false)
   }
 
 }

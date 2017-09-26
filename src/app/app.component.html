@@ -1,12 +1,11 @@
-<div>
+<app-header></app-header>
+<div class="app-body">
   <app-navigation></app-navigation>
-</div>
 
-<div id="content">
-  <div id="addons">
-    <app-addons></app-addons>
-  </div>
-  <div class="col-md-12" id="route">
-    <router-outlet></router-outlet>
-  </div>
+  <!-- Main content -->
+  <main class="main">    
+    <div class="container-fluid">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
 </div>

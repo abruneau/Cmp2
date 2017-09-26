@@ -1,8 +1,8 @@
-<div class="panel box-v3">
-  <div class="panel-heading bg-white border-none">
-    <h4>Todo List</h4>
+<div class="card">
+  <div class="card-header">
+    Todo List
   </div>
-  <div class="panel-body">
+  <div class="card-body">
     <section id="todoapp" class="todoapp">
       <header class="header">
         <div class="form-inline">
@@ -14,7 +14,7 @@
           </div>
         </div>
       </header>
-      <section class="main" *ngIf="todos.length > 0">
+      <section *ngIf="todos.length > 0">
         <input class="toggle-all" type="checkbox" *ngIf="todos.length" #toggleall [checked]="allCompleted()" (click)="setAllTo(toggleall.checked)">
         <ul class="todo-list">
           <li *ngFor="let todo of todos" [class.completed]="todo.completed" [class.editing]="todo.editing">

@@ -18,8 +18,7 @@
     "about-window": "^1.7.0",
     "run-jxa": "^1.1.0",
     "ipc-promise": "^0.1.4",
-    "@rainder/where-am-i": "0.0.1",
-    "electron-spellchecker": "^1.2.0"
+    "@rainder/where-am-i": "0.0.1"
   }
 
 }

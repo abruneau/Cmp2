@@ -1,0 +1,27 @@
+// Here you can add other styles
+
+// .sidebar {
+//   height: 100%;
+// }
+
+.form-group.form-animate-text .form-text {
+  font-size: 18px;
+  padding: 10px 10px 10px 5px;
+  display: block;
+  width: 100%;
+  border: none;
+  background: none;
+  border-bottom: 1px solid #757575;
+}
+
+.form-animate-text .form-text:focus, .form-animate-text .form-text {
+  width: 100%;
+  border: none !important;
+  border-bottom: 1px solid #ddd !important;
+  -webkit-box-shadow: none !important;
+  -ms-box-shadow: none !important;
+  -o-box-shadow: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 10px;
+}

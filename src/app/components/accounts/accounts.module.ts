@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { TabsModule } from 'ngx-bootstrap';
 import { ModalModule, TooltipModule } from 'ngx-bootstrap';
+import { BsDropdownModule } from 'ngx-bootstrap';
 import { NgPipesModule } from 'ngx-pipes';
 
 import { SharedModule } from '../shared/shared.module';
@@ -31,7 +32,8 @@ import { AccountsOpportunitiesComponent } from './opportunities/opportunities.co
     NgPipesModule,
     TabsModule.forRoot(),
     ModalModule.forRoot(),
-    TooltipModule.forRoot()
+    TooltipModule.forRoot(),
+    BsDropdownModule.forRoot(),
   ],
   declarations: [
     AccountsComponent,

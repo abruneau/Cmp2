@@ -1,0 +1,25 @@
+<header class="app-header navbar">
+  <button class="navbar-toggler d-lg-none" type="button" appMobileSidebarToggler>&#9776;</button>
+  <a class="navbar-brand" href="#"><b>Cmp2</b></a>
+  <button class="navbar-toggler d-md-down-none" type="button" appSidebarToggler>&#9776;</button>
+  <ul class="nav navbar-nav d-md-down-none">
+    <li class="nav-item">
+      <div class="search form-animate-text">
+        <input (typeaheadOnSelect)="typeaheadOnSelect($event)" [(ngModel)]="selected" [typeahead]="accounts" typeaheadOptionField="Name" typeaheadOptionsLimit="7" type="text" class="form-text" name="search" placeholder="Search Account.." required>
+      </div>
+    </li>
+  </ul>
+  <ul class="nav navbar-nav ml-auto">
+    <li class="nav-item d-md-down-none">
+      <span>{{identity.display_name || 'Unknow User'}}</span>
+    </li>
+    <li class="nav-item dropdown" dropdown>
+      <a href class="nav-link dropdown-toggle" dropdownToggle (click)="false">
+        <img src="../../../../assets/images/avatar.jpg" class="img-avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" />
+      </a>
+      <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
+        <a class="dropdown-item" href="#/profile"><span class="fa fa-user"></span> My Profile</a>
+      </div>
+    </li>
+  </ul>
+</header>

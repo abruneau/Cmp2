@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { OpenExternalDirective } from './open-external.directive'
-import { LeftMenuDirective } from './left-menu.directive';
-import { TreeToggleDirective } from './tree-toggle.directive';
-import { SubTreeToggleDirective } from './sub-tree-toggle.directive'
+import { SIDEBAR_TOGGLE_DIRECTIVES } from './sidebar.directive';
+import { AsideToggleDirective } from './aside.directive';
+import { NAV_DROPDOWN_DIRECTIVES } from './nav-dropdown.directive';
 
 @NgModule({
   imports: [
@@ -12,15 +12,15 @@ import { SubTreeToggleDirective } from './sub-tree-toggle.directive'
   ],
   declarations: [
     OpenExternalDirective,
-    LeftMenuDirective,
-    TreeToggleDirective,
-    SubTreeToggleDirective
+    SIDEBAR_TOGGLE_DIRECTIVES,
+    AsideToggleDirective,
+    NAV_DROPDOWN_DIRECTIVES
   ],
   exports: [
     OpenExternalDirective,
-    LeftMenuDirective,
-    TreeToggleDirective,
-    SubTreeToggleDirective
+    SIDEBAR_TOGGLE_DIRECTIVES,
+    AsideToggleDirective,
+    NAV_DROPDOWN_DIRECTIVES
   ]
 })
 export class DirectivesModule { }

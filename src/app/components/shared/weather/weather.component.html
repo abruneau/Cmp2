@@ -1,27 +1,29 @@
-<div class="panel" *ngIf="weather">
-	<div class="panel-body">
-		<div class="col-md-12">
-			<div class="search">
-				<div class="form-group form-animate-text">
-					<input [(ngModel)]="search" (keyup.enter)="loadWeather(search)" type="text" class="form-text">
-				</div>
-			</div>
-		</div>
-		<div class="col-md-8 col-sm-8 text-right">
-			<h3 style="color:#DDDDDE;">
+<div class="card" *ngIf="weather">
+  <div class="card-body">
+    <div class="col-md-12">
+      <div class="search">
+        <div class="form-group form-animate-text">
+          <input [(ngModel)]="search" (keyup.enter)="loadWeather(search)" type="text" class="form-text">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8 col-sm-8 text-right">
+        <h3 style="color:#DDDDDE;">
 				<span class="fa  fa-map-marker"></span>
 				{{weather.city}}, {{weather.region}}
 			</h3>
-			<h1 *ngIf="weather.temp" style="margin-top: -10px;color: #ddd;">
+        <h1 *ngIf="weather.temp" style="margin-top: -10px;color: #ddd;">
 				{{weather.temp}}&deg;{{weather.units.temp}}
 			</h1>
-		</div>
-		<div class="col-md-4 col-sm-4">
-			<div class="weather-icon">
-				<img src="{{weather.image}}" alt="{{weather.currently}}" width="150">
-				<br/>
-				<i>{{weather.currently}}</i>
-			</div>
-		</div>
-	</div>
+      </div>
+      <div class="col-md-4 col-sm-4">
+        <div class="weather-icon">
+          <img src="{{weather.image}}" alt="{{weather.currently}}" width="150">
+          <br/>
+          <i>{{weather.currently}}</i>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

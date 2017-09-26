@@ -1,11 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { ThemeSpinnerService } from './providers';
-import { DatabaseMigrationService } from './providers'
-
-// import $ from 'jquery';
-import * as bootstrap from 'bootstrap';
-
-import { NavigationComponent } from './components/shared/navigation/navigation.component'
+import { DatabaseMigrationService } from './providers';
 
 @Component({
   selector: 'app-root',

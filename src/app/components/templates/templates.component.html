@@ -1,4 +1,4 @@
-<div class="panel-body">
+<div class="row" style=" padding: 20px;">
   <div class="col-md-3">
     <button id="compose" type="button" class="btn btn-sm btn-success btn-block" (click)="staticModal.show()">
       COMPOSE
@@ -38,8 +38,8 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide()">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <span aria-hidden="true">&times;</span>
+      </button>
         <h4 class="modal-title" id="myModalLabel">Create a new template</h4>
       </div>
       <div class="modal-body">
@@ -56,3 +56,5 @@
     </div>
   </div>
 </div>
+
+<!-- TODO: change z-index for header -->

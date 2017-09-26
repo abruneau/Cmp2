@@ -1,17 +1,17 @@
 <div class="row" style=" padding: 20px;">
   <div class="col-md-8">
-    <div class="panel">
-      <div class="panel-heading bg-white border-none">
-        <h4><span *ngIf="forcastLoading" class="fa fa-spinner rotate" aria-hidden="true"></span>Forcast</h4>
+    <div class="card">
+      <div class="card-header">
+        <span *ngIf="forcastLoading" class="fa fa-spinner rotate" aria-hidden="true"></span>Forcast
       </div>
-      <div class="panel-body">
-        <div class="col-md-12">
-          <div *ngIf="forcastError">{{forcastError}}</div>
+      <div class="card-body">
+        <div *ngIf="forcastError">{{forcastError}}</div>
+        <div class="row">
           <div [ngClass]="forcastClass()" *ngFor="let category of forcast">
-            <div class="panel box-v1">
-              <div class="panel-body text-center">
-                <h1>{{category.amount | meganumber}}</h1>
-                <p>{{category.ForecastCategoryName}}</p>
+            <div class="card">
+              <div class="card-body text-center">
+                <div class="h2 py-3">{{(category.amount || 0) | meganumber}}</div>
+                <div class="text-muted small text-uppercase font-weight-bold">{{category.ForecastCategoryName}}</div>
               </div>
             </div>
           </div>

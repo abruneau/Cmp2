@@ -1,47 +1,49 @@
 <div *ngIf="dashboard" class="row" style=" padding: 20px;">
   <div class="col-md-12">
-    <div class="btn-group pull-right">
-      <button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <div class="nav-item dropdown pull-right" dropdown>
+      <button type="button" class="btn btn-link dropdown-toggle" dropdownToggle aria-haspopup="true" aria-expanded="false">
         <span class="caret"></span>
       </button>
-      <ul class="dropdown-menu">
-        <li><a (click)="refreshDashboard()">Refresh Dashboard</a></li>
-        <li><a (click)="dashboardModal.show()">Change Title</a></li>
-        <li><a (click)="newReportModal.show()">Add Report</a></li>
-        <li><a (click)="deleteDashboard()">Delete Dashboard</a></li>
-      </ul>
+      <div *dropdownMenu class="dropdown-menu dropdown-menu-right" aria-labelledby="simple-dropdown">
+        <a class="dropdown-item" (click)="refreshDashboard()">Refresh Dashboard</a>
+        <a class="dropdown-item" (click)="dashboardModal.show()">Change Title</a>
+        <a class="dropdown-item" (click)="newReportModal.show()">Add Report</a>
+        <a class="dropdown-item" (click)="deleteDashboard()">Delete Dashboard</a>
+      </div>
     </div>
     <h2>{{dashboard.title}}</h2>
   </div>
 
   <!-- Dashboard Top -->
-  <div *ngIf="dashboard.top">
-    <div *ngFor="let report of dashboard.top; let idx = index" class="col-md-12">
-      <div class="panel">
-        <div class="panel-heading bg-white border-none">
-          <div class="btn-group pull-right">
-            <button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-              <li><a (click)="updateReport(report)">Update Report</a></li>
-              <li><a (click)="refreshReport(report)">Refresh Report</a></li>
-              <li><a (click)="deleteReport('Top', idx)">Delete Report</a></li>
-            </ul>
+  <div *ngIf="dashboard.top" class="col-md-12">
+    <div class="row">
+      <div *ngFor="let report of dashboard.top; let idx = index" class="col-md-12">
+        <div class="card">
+          <div class="card-header bg-white border-none">
+            <div class="nav-item dropdown pull-right" dropdown>
+              <button type="button" class="btn btn-link dropdown-toggle" dropdownToggle aria-haspopup="true" aria-expanded="false">
+                <span class="caret"></span>
+              </button>
+              <div *dropdownMenu class="dropdown-menu dropdown-menu-right" aria-labelledby="simple-dropdown">
+                <a class="dropdown-item" (click)="updateReport(report)">Update Report</a>
+                <a class="dropdown-item" (click)="refreshReport(report)">Refresh Report</a>
+                <a class="dropdown-item" (click)="deleteReport('Top', idx)">Delete Report</a>
+              </div>
+            </div>
+            <h4 *ngIf="report.title"><span *ngIf="report.refreshing" class="fa fa-spinner rotate" aria-hidden="true"></span> {{report.title}}</h4>
           </div>
-          <h4 *ngIf="report.title"><span *ngIf="report.refreshing" class="fa fa-spinner rotate" aria-hidden="true"></span> {{report.title}}</h4>
-        </div>
-        <div class="panel-body">
-          <div class="col-md-12">
+          <div class="card-body">
             <div *ngIf="report.error; else topdash">
               {{report.error}}
             </div>
             <ng-template #topdash>
-              <div [ngClass]="topReportClass(report)" *ngFor="let row of report.data">
-                <div class="panel box-v1">
-                  <div class="panel-body text-center">
-                    <h1>{{row[report.columns[1].key] | meganumber}}</h1>
-                    <p>{{row[report.columns[0].key]}}</p>
+              <div class="row">
+                <div [ngClass]="topReportClass(report)" *ngFor="let row of report.data">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <div class="h2 py-3">{{row[report.columns[1].key] | meganumber}}</div>
+                      <div class="text-muted small text-uppercase font-weight-bold">{{row[report.columns[0].key]}}</div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -59,21 +61,21 @@
     </div>
     <div *ngIf="dashboard.main" [sortablejs]="dashboard.main" [sortablejsOptions]="options" class="row">
       <div *ngFor="let report of dashboard.main; let idx = index" class="col-md-12">
-        <div class="panel">
-          <div class="panel-heading bg-white border-none">
-            <div class="btn-group pull-right">
-              <button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div class="card">
+          <div class="card-header bg-white border-none">
+            <div class="nav-item dropdown pull-right" dropdown>
+              <button type="button" class="btn btn-link dropdown-toggle" dropdownToggle aria-haspopup="true" aria-expanded="false">
                 <span class="caret"></span>
               </button>
-              <ul class="dropdown-menu">
-                <li><a (click)="updateReport(report)">Update Report</a></li>
-                <li><a (click)="refreshReport(report)">Refresh Report</a></li>
-                <li><a (click)="deleteReport('Main', idx)">Delete Report</a></li>
-              </ul>
+              <div *dropdownMenu class="dropdown-menu dropdown-menu-right" aria-labelledby="simple-dropdown">
+                <a class="dropdown-item" (click)="updateReport(report)">Update Report</a>
+                <a class="dropdown-item" (click)="refreshReport(report)">Refresh Report</a>
+                <a class="dropdown-item" (click)="deleteReport('Main', idx)">Delete Report</a>
+              </div>
             </div>
             <h4 *ngIf="report.title"><span *ngIf="report.refreshing" class="fa fa-spinner rotate" aria-hidden="true"></span> {{report.title}}</h4>
           </div>
-          <div class="panel-body">
+          <div class="card-body">
             <div *ngIf="report.error; else mainTable">
               {{report.error}}
             </div>
@@ -108,7 +110,7 @@
     <div *ngIf="dashboard.right" class="row">
       <div *ngFor="let report of dashboard.right; let idx = index" class="col-md-12">
         <div class="panel">
-          <div class="panel-heading bg-white border-none">
+          <div class="card-header bg-white border-none">
             <div class="btn-group pull-right">
               <button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="caret"></span>
@@ -121,7 +123,7 @@
             </div>
             <h4 *ngIf="report.title">{{report.title}}</h4>
           </div>
-          <div class="panel-body">
+          <div class="card-body">
           </div>
         </div>
       </div>

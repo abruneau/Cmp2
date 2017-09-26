@@ -9,6 +9,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { RouteReuseStrategy } from '@angular/router'
 
 import { TabsModule, TypeaheadModule, ModalModule } from 'ngx-bootstrap';
+import { BsDropdownModule } from 'ngx-bootstrap';
 import { Ng2DeviceDetectorModule } from 'ng2-device-detector';
 import { SortablejsModule } from 'angular-sortablejs'
 
@@ -27,8 +28,6 @@ import { NgPipesModule } from 'ngx-pipes';
 import { PipesModule } from './pipes/pipes.module';
 import { DashboardsComponent } from './components/dashboards/dashboards.component';
 import { DirectivesModule } from './directives/directives.module';
-import { AddonsComponent } from './components/addons/addons.component';
-import { BlankComponent } from './components/blank/blank.component'
 
 @NgModule({
   declarations: [
@@ -37,8 +36,6 @@ import { BlankComponent } from './components/blank/blank.component'
     ProfileComponent,
     TemplatesComponent,
     DashboardsComponent,
-    AddonsComponent,
-    BlankComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,6 +52,7 @@ import { BlankComponent } from './components/blank/blank.component'
     TypeaheadModule.forRoot(),
     ModalModule,
     Ng2DeviceDetectorModule.forRoot(),
+    BsDropdownModule.forRoot(),
     DirectivesModule,
     SortablejsModule
   ],
