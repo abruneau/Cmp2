@@ -23,8 +23,10 @@ export class Report {
     this.refreshing = true
     return sf.query(this.query).then((res) => {
       this.data = res.records
+      this.error = null
     }).catch((e) => {
       this.error = e
+      this.data = null
     }).then(() => {
       this.refreshing = false
     })
