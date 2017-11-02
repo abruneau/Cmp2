@@ -1,5 +1,5 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
-import {NgForm} from '@angular/forms';
+import { NgForm } from '@angular/forms';
 
 import * as moment from 'moment';
 
@@ -32,7 +32,7 @@ export class AccountsNotesComponent {
   set currentAccount(account) {
     this.markdown = ''
     this.account = account;
-    this.getAllNotes(account.Name)
+    this.getAllNotes(account.Id)
   }
   constructor() {
     Template.getAll().then((templates) => {
@@ -45,8 +45,8 @@ export class AccountsNotesComponent {
     this.changed = true
   }
 
-  getAllNotes(notebook: string) {
-    Note.getAll(this.account).then((notes) => {
+  getAllNotes(AccountId: string) {
+    Note.getList(AccountId).then((notes) => {
       this.notes = notes
     })
   }
@@ -56,14 +56,13 @@ export class AccountsNotesComponent {
   }
 
   loadNote(note) {
-    const self = this
-    this.note = note
-    note.getMarkdown().then((md) => {
-      self.markdown = md
+    Note.get(note._id).then((n) => {
+      this.note = n
+      this.markdown = n.markdown
+      if (this.autosave && !this.saving) {
+        this.save();
+      }
     })
-    if (this.autosave && !this.saving) {
-      this.save();
-    }
   }
 
   save() {
@@ -100,7 +99,12 @@ export class AccountsNotesComponent {
       md = this.newMd
     }
     const self = this
-    Note.create(this.account.Name, newNote.Title, md).then((note) => {
+
+    const n = new Note({
+      AccountId: this.account.Id,
+      title: newNote.Title,
+      markdown: md
+    }).save().then((note) => {
       self.notes.push(note);
       self.loadNote(note)
     })

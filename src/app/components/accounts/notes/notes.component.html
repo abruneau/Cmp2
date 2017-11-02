@@ -8,8 +8,8 @@
 
         <div class="mini-timeline-panel">
           <a (click)="loadNote(note)">
-            <h5 class="time">{{formatDate(note.creationDate).calendar()}}</h5>
-            <p>{{note.title}}</p>
+            <h5 class="time">{{note.title}}</h5>
+            <p>{{note.createdAt | date:'short'}}</p>
           </a>
         </div>
 

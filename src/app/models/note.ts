@@ -1,77 +1,87 @@
-import { EvernoteService, FsService } from '../providers';
+import { Database } from './database'
 
 export class Note {
-  protected static _evernote = new EvernoteService()
+  protected static database = new Database('notes').database
 
+  _id: string;
+  AccountId: string;
+  title: string;
+  markdown: string;
+  createdAt: Date;
+  updatedAt: Date;
 
-  title: string
-  creationDate: string
-  path: string
-  noteLink: string
-  notebook: string
+  static getAll(AccountId?): Promise<Note[]> {
 
-  private _fs: FsService
+    const query = AccountId ? { 'AccountId': AccountId } : {}
 
-  static getAll(account): Promise<Array<Note>> {
-    return Note._evernote.getAllNotes(account.Name).then((results) => {
-      return results.map((note) => new Note(note))
+    return Note.database.findAsync(query).then((notes) => {
+      if (notes.length) {
+        return notes.map((t) => {
+          return new Note(t)
+        })
+      } else {
+        return []
+      }
     })
   }
 
-  static create(notebook: string, title: string, md: string): Promise<Note> {
-    return Note._evernote.createNote(notebook, title, md).then((note) => {
-      return new Note(note)
+  static getList(AccountId?): Promise<any[]> {
+    const query = AccountId ? { 'AccountId': AccountId } : {}
+
+    return Note.database.findAsync({}, { title: 1, createdAt: 1, updatedAt: 1 })
+  }
+
+  static get(id): Promise<Note> {
+    return Note.database.findOneAsync({ _id: id }).then((note) => {
+      return new Note(note);
     })
   }
 
   constructor(object?) {
     if (object) {
+      this._id = object._id;
+      this.AccountId = object.AccountId;
       this.title = object.title;
-      this.creationDate = object.creationDate;
-      this.path = object.path;
-      this.noteLink = object.noteLink;
-      this.notebook = object.notebook;
+      this.markdown = object.markdown;
+      this.createdAt = object.createdAt;
+      this.updatedAt = object.updatedAt;
     }
-
   }
 
-  getHtml(): Promise<string> {
-    return Note._evernote.getHtml(this)
+  save(): Promise<any> {
+    const note = new Note({
+      _id: this._id,
+      AccountId: this.AccountId,
+      title: this.title,
+      markdown: this.markdown,
+      updatedAt: new Date()
+    })
+
+    if (this._id) {
+      return Note.database.updateAsync({
+        _id: this._id
+      }, note, {});
+    } else {
+      note.createdAt = note.updatedAt
+      return Note.database.insertAsync(note).then(function(newDoc) {
+        note._id = newDoc._id;
+        return note;
+      });
+    }
   }
 
-  getMarkdown(): Promise<string> {
-    return Note._evernote.getMarkdown(this)
+  updateMd(md: string): Promise<any> {
+    this.markdown = md;
+    this.updatedAt = new Date()
+
+    return Note.database.updateAsync({
+      _id: this._id
+    }, this, {});
   }
 
-  updateMd(md: string) {
-    Note._evernote.updateHtmlFromMd(this, md)
+  delete(): Promise<any> {
+    return Note.database.removeAsync({
+      _id: this._id
+    }, {});
   }
-
-  delete() {
-    Note._evernote.deleteNote(this)
-  }
-
-
-
-
-  // static syncNotes(account) {
-  //
-  // }
-  //
-  // static getAll(account, _fs) {
-  //   const list = _fs.ls(account.path + '/.notes')
-  //     .filter((f) => { return f.directory === false && f.type === '.md'; })
-  //     .map((f) => { return Note.fromFile(f, account.Name, _fs) })
-  // }
-  //
-  //
-  // private static fromFile(file, notebook, _fs): Note {
-  //   return new Note({
-  //     title: _fs.fileName(file.path).replace('.md', ''),
-  //     creationDate: _fs.creationDate(file.path),
-  //     notebook: notebook,
-  //     path: file.path,
-  //   })
-  // }
-
 }
