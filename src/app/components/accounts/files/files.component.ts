@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import {FsService} from '../../../providers';
+import { FsService } from '../../../providers';
 
 @Component({
   selector: 'app-accounts-files',
@@ -16,8 +16,12 @@ export class AccountsFilesComponent implements OnInit {
 
   @Input()
   set account(account) {
-    this.filePath = account.path;
-    this.updateList(this.filePath);
+    this.fileList = []
+    this.breadcrum = []
+    if (this._fs.exists(account.path)) {
+      this.filePath = account.path;
+      this.updateList(this.filePath);
+    }
   }
 
   constructor(private _fs: FsService) { }
@@ -26,8 +30,8 @@ export class AccountsFilesComponent implements OnInit {
   }
 
   updateList(path: string) {
-    if (path) {
-      let list = [];
+    if (path && this._fs.exists(path)) {
+      const list = [];
 
       // Add Go back link
       if (path !== this.filePath) {
