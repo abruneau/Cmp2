@@ -112,7 +112,6 @@
     "postcss-url": "7.0.0",
     "protractor": "5.1.2",
     "raw-loader": "0.5.1",
-    "run-jxa": "^1.1.0",
     "sass-loader": "6.0.6",
     "script-loader": "0.7.0",
     "source-map-loader": "0.2.1",
