@@ -1,5 +1,5 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
-import {NgForm} from '@angular/forms';
+import { NgForm } from '@angular/forms';
 
 import * as moment from 'moment';
 
@@ -7,6 +7,7 @@ import { ModalModule } from 'ngx-bootstrap';
 
 import { Note, Template } from '../../../models';
 import { EditorComponent } from '../../shared/editor/editor.component'
+import { SharedDataService } from '../../../providers'
 
 @Component({
   selector: 'app-accounts-notes',
@@ -26,17 +27,25 @@ export class AccountsNotesComponent {
   autosave = true;
   lastSaved = moment();
 
+  evernoteImport = false
+  useEvernote = false
+
   private saving = false
 
   @Input()
   set currentAccount(account) {
     this.markdown = ''
     this.account = account;
-    this.getAllNotes(account.Name)
+    this.note = null;
+    this.getAllNotes(account.Id)
   }
-  constructor() {
+  constructor(private _sharedData: SharedDataService) {
     Template.getAll().then((templates) => {
       this.templates = templates
+    })
+
+    _sharedData.settings.subscribe((set) => {
+      this.useEvernote = set.useEvernote
     })
   }
 
@@ -45,8 +54,8 @@ export class AccountsNotesComponent {
     this.changed = true
   }
 
-  getAllNotes(notebook: string) {
-    Note.getAll(this.account).then((notes) => {
+  getAllNotes(AccountId: string) {
+    Note.getList(AccountId).then((notes) => {
       this.notes = notes
     })
   }
@@ -56,14 +65,13 @@ export class AccountsNotesComponent {
   }
 
   loadNote(note) {
-    const self = this
-    this.note = note
-    note.getMarkdown().then((md) => {
-      self.markdown = md
+    Note.get(note._id).then((n) => {
+      this.note = n
+      this.markdown = n.markdown
+      if (this.autosave && !this.saving) {
+        this.save();
+      }
     })
-    if (this.autosave && !this.saving) {
-      this.save();
-    }
   }
 
   save() {
@@ -71,7 +79,7 @@ export class AccountsNotesComponent {
     const self = this
     const loop = setInterval(function() {
       if (self.changed && self.note) {
-        self.note.updateMd(self.newMd)
+        self.note.updateMd(self.newMd, this.useEvernote, self.account.Name)
         self.lastSaved = moment()
         self.changed = false
       }
@@ -100,14 +108,28 @@ export class AccountsNotesComponent {
       md = this.newMd
     }
     const self = this
-    Note.create(this.account.Name, newNote.Title, md).then((note) => {
+
+    const n = new Note({
+      AccountId: this.account.Id,
+      title: newNote.Title,
+      markdown: md
+    }).save(this.useEvernote, self.account).then((note) => {
       self.notes.push(note);
       self.loadNote(note)
     })
   }
 
+  importEvernote() {
+    this.evernoteImport = true
+    Note.importEvernoteNotes(this.account).then(() => {
+      return this.getAllNotes(this.account.Id)
+    }).then(() => {
+      this.evernoteImport = false
+    })
+  }
+
   deleteNote() {
-    this.note.delete()
+    this.note.delete(this.useEvernote)
     const index = this.notes.indexOf(this.note)
     this.notes.splice(index, 1)
     this.markdown = ''

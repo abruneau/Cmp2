@@ -1,4 +1,3 @@
-export { EvernoteService } from './evernote.service'
 export { FsService } from './fs.service'
 export { JxaService } from './jxa.service'
 export { MarkdownService } from './markdown.service'

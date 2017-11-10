@@ -1,31 +1,31 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import {remote} from 'electron';
+import { remote } from 'electron';
 
 @Component({
-	selector: 'app-accounts-settings',
-	templateUrl: './settings.component.html',
-	styleUrls: ['./settings.component.scss']
+  selector: 'app-accounts-settings',
+  templateUrl: './settings.component.html',
+  styleUrls: ['./settings.component.scss']
 })
 export class AccountsSettingsComponent implements OnInit {
 
-	@Input() account
+  @Input() account
 
-	@Output()
-	update: EventEmitter<string> = new EventEmitter<string>();
+  @Output()
+  update: EventEmitter<string> = new EventEmitter<string>();
 
-	constructor() { }
+  constructor() { }
 
-	ngOnInit() {
-	}
+  ngOnInit() {
+  }
 
-	selectDirectory() {
-		const self = this;
-		remote.dialog.showOpenDialog({
-			properties: ['openDirectory', 'createDirectory']
-		}, function(path) {
-			self.account.path = path[0];
-			self.account.save()
-			self.update.emit(self.account.Id)
-		});
-	}
+  selectDirectory() {
+    const self = this;
+    remote.dialog.showOpenDialog({
+      properties: ['openDirectory', 'createDirectory']
+    }, function(path) {
+      self.account.path = path[0];
+      self.account.save()
+      self.update.emit(self.account.Id)
+    });
+  }
 }

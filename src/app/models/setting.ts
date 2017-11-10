@@ -3,6 +3,7 @@ import { Database } from './database'
 export class Setting {
   protected static database = new Database('settings').database
   _id: string;
+  useEvernote = false;
   sf: {
     loginUrl: '',
     email: '',
@@ -24,6 +25,7 @@ export class Setting {
     if (object) {
       this._id = object._id
       this.sf = object.sf // TODO : should not be like this
+      this.useEvernote = object.useEvernote || false
     }
   }
 
