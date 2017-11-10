@@ -129,7 +129,7 @@ export class AccountsNotesComponent {
   }
 
   deleteNote() {
-    this.note.delete(useEvernote)
+    this.note.delete(this.useEvernote)
     const index = this.notes.indexOf(this.note)
     this.notes.splice(index, 1)
     this.markdown = ''
