@@ -3,7 +3,8 @@
     <div class="card">
       <div class="card-body text-center">
         <div class="h2 py-3">
-          {{closed | meganumber}} {{account.CurrencyIsoCode}}
+          {{closed | meganumber}}
+          {{account.CurrencyIsoCode}}
         </div>
         <div class="text-muted small text-uppercase font-weight-bold">Closed</div>
       </div>
@@ -13,20 +14,14 @@
     <div class="card">
       <div class="card-body text-center">
         <div class="h2 py-3">
-          {{forcast | meganumber}} {{account.CurrencyIsoCode}}
+          {{forcast | meganumber}}
+          {{account.CurrencyIsoCode}}
         </div>
         <div class="text-muted small text-uppercase font-weight-bold">Forcast</div>
       </div>
     </div>
   </div>
   <div class="col-md-12">
-    <div class="card">
-      <div class="card-header">
-        Todo List
-      </div>
-      <div class="card-body">
-        <app-todolist [currentAccount]="account"></app-todolist>
-      </div>
-    </div>
+    <app-todolist [currentAccount]="account"></app-todolist>
   </div>
 </div>
