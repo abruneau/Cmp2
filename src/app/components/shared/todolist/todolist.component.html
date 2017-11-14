@@ -1,26 +1,20 @@
-<div class="card">
-  <div class="card-header">
-    Todo List
-  </div>
-  <div class="card-body">
-    <section id="todoapp" class="todoapp">
-      <header class="header">
-        <div class="form-inline">
-          <div class="form-group">
-            <input class="new-todo" placeholder="What needs to be done?" autofocus="" [(ngModel)]="newTodoText" (keyup.enter)="addTodo()" />
-          </div>
-          <div class="form-group">
-            <input class="new-todo" type="text" bsDatepicker #dp="bsDatepicker" [(ngModel)]="dt" placeholder="Due date ?">
-          </div>
-        </div>
-      </header>
-      <section *ngIf="todos.length > 0">
-        <input class="toggle-all" type="checkbox" *ngIf="todos.length" #toggleall [checked]="allCompleted()" (click)="setAllTo(toggleall.checked)">
-        <ul class="todo-list">
-          <li *ngFor="let todo of todos" [class.completed]="todo.completed" [class.editing]="todo.editing">
-            <div class="view">
-              <input class="toggle" type="checkbox" (click)="toggleCompletion(todo)" [checked]="todo.completed">
-              <label (dblclick)="editTodo(todo)">
+<section id="todoapp" class="todoapp">
+  <header class="header">
+    <div class="input-group mb-2 mb-sm-0">
+      <input class="new-todo" placeholder="What needs to be done?" autofocus="" [(ngModel)]="newTodoText" (keyup.enter)="addTodo()" />
+      <div class="input-group-addon">
+        <input style="width: 0px; visibility: hidden;" type="text" bsDatepicker #dp="bsDatepicker" [(ngModel)]="dt" placeholder="Due date ?">
+        <i class="fa fa-calendar" aria-hidden="true" (click)="dp.toggle()"></i>
+      </div>
+    </div>
+  </header>
+  <section *ngIf="todos.length > 0">
+    <input class="toggle-all" type="checkbox" *ngIf="todos.length" #toggleall [checked]="allCompleted()" (click)="setAllTo(toggleall.checked)">
+    <ul class="todo-list">
+      <li *ngFor="let todo of todos" [class.completed]="todo.completed" [class.editing]="todo.editing">
+        <div class="view">
+          <input class="toggle" type="checkbox" (click)="toggleCompletion(todo)" [checked]="todo.completed">
+          <label (dblclick)="editTodo(todo)">
                 <a *ngIf="todo.AccountId && !isAccountPage; else elseBlock" [routerLink]="['/account', todo.AccountId]">
                   {{accountName(todo.AccountId)}}: {{todo.task}}
                   <br>
@@ -36,16 +30,14 @@
                   </small>
                 </ng-template>
               </label>
-              <button class="destroy" (click)="remove(todo)"></button>
-            </div>
-            <input class="edit" *ngIf="todo.editing" [value]="todo.task" #editedtodo (blur)="stopEditing(todo, editedtodo.value)" (keyup.enter)="updateEditingTodo(todo, editedtodo.value)" (keyup.escape)="cancelEditingTodo(todo)">
-          </li>
-        </ul>
-      </section>
-      <footer style="height: 40px" class="footer" *ngIf="todos.length > 0">
-        <span class="todo-count"><strong>{{getNbRemaining()}}</strong> {{getNbRemaining() == 1 ? 'item' : 'items'}} left</span>
-        <button class="clear-completed" *ngIf="getNbComplited() > 0" (click)="removeCompleted()">Clear completed</button>
-      </footer>
-    </section>
-  </div>
-</div>
+          <button class="destroy" (click)="remove(todo)"></button>
+        </div>
+        <input class="edit" *ngIf="todo.editing" [value]="todo.task" #editedtodo (blur)="stopEditing(todo, editedtodo.value)" (keyup.enter)="updateEditingTodo(todo, editedtodo.value)" (keyup.escape)="cancelEditingTodo(todo)">
+      </li>
+    </ul>
+  </section>
+  <footer style="height: 40px" class="footer" *ngIf="todos.length > 0">
+    <span class="todo-count"><strong>{{getNbRemaining()}}</strong> {{getNbRemaining() == 1 ? 'item' : 'items'}} left</span>
+    <button class="clear-completed" *ngIf="getNbComplited() > 0" (click)="removeCompleted()">Clear completed</button>
+  </footer>
+</section>
