@@ -1,17 +1,18 @@
-<div class="tabs-wrapper" *ngIf="account">
-  <div class="card">
-    <div class="card-body" style="padding-bottom:0px;">
-      <div class="col-md-12 col-sm-12">
-        <div class="nav-item dropdown pull-right" dropdown>
-          <button type="button" class="btn btn-link dropdown-toggle" dropdownToggle aria-haspopup="true" aria-expanded="false">
+<!-- <div class="container-fluid"> -->
+  <div class="tabs-wrapper" *ngIf="account">
+    <div class="card">
+      <div class="card-body" style="padding-bottom:0px;">
+        <div class="col-md-12 col-sm-12">
+          <div class="nav-item dropdown pull-right" dropdown>
+            <button type="button" class="btn btn-link dropdown-toggle" dropdownToggle aria-haspopup="true" aria-expanded="false">
             <span class="caret"></span>
           </button>
-          <div *dropdownMenu class="dropdown-menu dropdown-menu-right" aria-labelledby="simple-dropdown">
-            <a class="dropdown-item" (click)="updateAccountInfo()">Refresh Account Info</a>
-            <a class="dropdown-item" (click)="removeAccount()">Remove Account</a>
+            <div *dropdownMenu class="dropdown-menu dropdown-menu-right" aria-labelledby="simple-dropdown">
+              <a class="dropdown-item" (click)="updateAccountInfo()">Refresh Account Info</a>
+              <a class="dropdown-item" (click)="removeAccount()">Remove Account</a>
+            </div>
           </div>
-        </div>
-        <h3 class="animated fadeInLeft">
+          <h3 class="animated fadeInLeft">
           <span *ngIf="refreshing" class="fa fa-spinner rotate" aria-hidden="true"></span>
 					<span (click)="changeFavoritStatus()" [ngClass]="account.Stared ? 'glyphicon-star' : 'glyphicon-star-empty'" class="glyphicon" aria-hidden="true"></span>
 					<a [appOpenExternal]="sfLoginUrl + '/' + account.Id">{{account.Name}}</a>
@@ -19,46 +20,47 @@
             		<small *ngIf="account.IsPartner">(Parner)</small>
             		<small>| {{account.Type}}</small>
           		</h3>
-        <div ng-if="account.Full_Address__c">
-          <i class="fa fa-map-marker"></i> {{account.Full_Address__c}}
+          <div ng-if="account.Full_Address__c">
+            <i class="fa fa-map-marker"></i> {{account.Full_Address__c}}
+          </div>
         </div>
+        <ul id="tabs-demo" class="nav nav-tabs content-header-tab" style="padding-top:10px;">
+          <li [ngClass]="{'active': active === 0}" role="presentation">
+            <a (click)="selectTab(0)">Account</a>
+          </li>
+          <li [ngClass]="{'active': active === 1}" role="presentation">
+            <a (click)="selectTab(1)">Opportunities</a>
+          </li>
+          <li [ngClass]="{'active': active === 2}">
+            <a (click)="selectTab(2)">Notes</a>
+          </li>
+          <li [ngClass]="{'active': active === 3}">
+            <a (click)="selectTab(3)">Files</a>
+          </li>
+          <li [ngClass]="{'active': active === 4}">
+            <a (click)="selectTab(4)">Settings</a>
+          </li>
+        </ul>
       </div>
-      <ul id="tabs-demo" class="nav nav-tabs content-header-tab" style="padding-top:10px;">
-        <li [ngClass]="{'active': active === 0}" role="presentation">
-          <a (click)="selectTab(0)">Account</a>
-        </li>
-        <li [ngClass]="{'active': active === 1}" role="presentation">
-          <a (click)="selectTab(1)">Opportunities</a>
-        </li>
-        <li [ngClass]="{'active': active === 2}">
-          <a (click)="selectTab(2)">Notes</a>
-        </li>
-        <li [ngClass]="{'active': active === 3}">
-          <a (click)="selectTab(3)">Files</a>
-        </li>
-        <li [ngClass]="{'active': active === 4}">
-          <a (click)="selectTab(4)">Settings</a>
-        </li>
-      </ul>
+    </div>
+    <div class="col-md-12 tab-page">
+      <tabset #staticTabs>
+        <tab heading="Other">
+          <app-account [currentAccount]="account"></app-account>
+        </tab>
+        <tab heading="Opportunities">
+          <app-accounts-opportunities [currentAccount]="account"></app-accounts-opportunities>
+        </tab>
+        <tab heading="Notes">
+          <app-accounts-notes [currentAccount]="account"></app-accounts-notes>
+        </tab>
+        <tab heading="Files">
+          <app-accounts-files [account]="account"></app-accounts-files>
+        </tab>
+        <tab heading="Settings">
+          <app-accounts-settings [account]="account" (update)="getAccount($event)"></app-accounts-settings>
+        </tab>
+      </tabset>
     </div>
   </div>
-  <div class="col-md-12 tab-page">
-    <tabset #staticTabs>
-      <tab heading="Other">
-        <app-account [currentAccount]="account"></app-account>
-      </tab>
-      <tab heading="Opportunities">
-        <app-accounts-opportunities [currentAccount]="account"></app-accounts-opportunities>
-      </tab>
-      <tab heading="Notes">
-        <app-accounts-notes [currentAccount]="account"></app-accounts-notes>
-      </tab>
-      <tab heading="Files">
-        <app-accounts-files [account]="account"></app-accounts-files>
-      </tab>
-      <tab heading="Settings">
-        <app-accounts-settings [account]="account" (update)="getAccount($event)"></app-accounts-settings>
-      </tab>
-    </tabset>
-  </div>
-</div>
+<!-- </div> -->
