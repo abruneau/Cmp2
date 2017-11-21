@@ -7,7 +7,7 @@ import { ModalModule } from 'ngx-bootstrap';
 
 import { Note, Template } from '../../../models';
 import { EditorComponent } from '../../shared/editor/editor.component'
-import { SharedDataService } from '../../../providers'
+import { SharedDataService, ExternalNoteService } from '../../../providers'
 
 @Component({
   selector: 'app-accounts-notes',
@@ -28,7 +28,6 @@ export class AccountsNotesComponent {
   lastSaved = moment();
 
   evernoteImport = false
-  useEvernote = false
 
   private saving = false
 
@@ -39,13 +38,9 @@ export class AccountsNotesComponent {
     this.note = null;
     this.getAllNotes(account.Id)
   }
-  constructor(private _sharedData: SharedDataService) {
+  constructor(private _sharedData: SharedDataService, private _extenalNote: ExternalNoteService) {
     Template.getAll().then((templates) => {
       this.templates = templates
-    })
-
-    _sharedData.settings.subscribe((set) => {
-      this.useEvernote = set.useEvernote
     })
   }
 
@@ -79,7 +74,10 @@ export class AccountsNotesComponent {
     const self = this
     const loop = setInterval(function() {
       if (self.changed && self.note) {
-        self.note.updateMd(self.newMd, this.useEvernote, self.account.Name)
+        self.note.markdown = self.newMd
+        self.note.updateMd(self.newMd).then(() => {
+          self._extenalNote.update(self.note, self.account.Name).catch(console.log)
+        })
         self.lastSaved = moment()
         self.changed = false
       }
@@ -113,9 +111,10 @@ export class AccountsNotesComponent {
       AccountId: this.account.Id,
       title: newNote.Title,
       markdown: md
-    }).save(this.useEvernote, self.account).then((note) => {
+    }).save().then((note) => {
       self.notes.push(note);
       self.loadNote(note)
+      self._extenalNote.create(note, self.account.Name).catch(console.log)
     })
   }
 
@@ -129,12 +128,15 @@ export class AccountsNotesComponent {
   }
 
   deleteNote() {
-    this.note.delete(this.useEvernote)
-    const index = this.notes.indexOf(this.note)
-    this.notes.splice(index, 1)
-    this.markdown = ''
-    this.note = null
-    this.changed = false
+    this.note.delete().then(() => {
+      return this._extenalNote.delete(this.note, this.account.Name).catch(console.log)
+    }).catch(console.log).then(() => {
+      const index = this.notes.indexOf(this.note)
+      this.notes.splice(index, 1)
+      this.markdown = ''
+      this.note = null
+      this.changed = false
+    })
   }
 
 }

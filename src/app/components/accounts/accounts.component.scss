@@ -1,8 +1,8 @@
-.tab-container .nav-tabs {
+#account-tabs .tab-container .nav-tabs {
   display: none;
 }
 
-.btn-link {
+#account-tabs .btn-link {
   box-shadow: none;
   border: none;
   background-color: transparent;
@@ -25,7 +25,6 @@
   float: left;
   margin-bottom: -1px;
 }
-
 .nav > li {
   position: relative;
   display: block;
@@ -54,7 +53,7 @@
   padding: 10px 15px;
 }
 
-.tab-content {
+#account-tabs .tab-content {
   margin-top: -1px;
   background: transparent;
   border: none;
