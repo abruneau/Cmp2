@@ -130,13 +130,13 @@ export class AccountsNotesComponent {
   deleteNote() {
     this.note.delete().then(() => {
       return this._extenalNote.delete(this.note, this.account.Name).catch(console.log)
-    }).catch(console.log).then(() => {
-      const index = this.notes.indexOf(this.note)
-      this.notes.splice(index, 1)
-      this.markdown = ''
-      this.note = null
-      this.changed = false
-    })
+    }).catch(console.log)
+      .then(() => {
+        this.getAllNotes(this.account.Id)
+        this.markdown = ''
+        this.note = null
+        this.changed = false
+      })
   }
 
 }
