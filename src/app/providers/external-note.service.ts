@@ -151,7 +151,6 @@ class Apple {
         return folder[0]
       })
       .catch((e) => {
-        console.log(e)
         return AppleNotes.Folder.create(notebook)
       }).then((folder: AppleNotes.Folder) => {
         return new AppleNotes.Note({
@@ -173,14 +172,12 @@ class Apple {
           return folder[0]
         })
         .catch((e) => {
-          console.log(e)
           return AppleNotes.Folder.create(notebook)
         }).then((folder: AppleNotes.Folder) => {
           return folder.findNote(note.title).then((n: AppleNotes.Note) => {
             n.body = body
             return n.update()
           }).catch((e) => {
-            console.log(e)
             return new AppleNotes.Note({
               body,
               name: note.title
