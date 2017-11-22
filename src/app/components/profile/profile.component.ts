@@ -47,8 +47,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   public update() {
     this.settings.update().then(() => {
-      this._sharedData.settingsChanges()
-    });
+      return this._sharedData.settingsChanges()
+    })
   }
 
   public updateIdentity() {

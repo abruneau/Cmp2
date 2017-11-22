@@ -134,4 +134,6 @@ interface ExternalNoteInfo {
   EvernoteNoteLink?: string
   EvernoteNotebook?: string
   EvernoteNoteId?: string
+  AppleNoteNotebookId?: string
+  AppleNoteId?: string
 }
