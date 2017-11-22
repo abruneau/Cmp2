@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
 import * as moment from 'moment'
 
 import { SalesforceService, SharedDataService } from '../../providers';
@@ -10,27 +11,13 @@ import { TodolistComponent } from '../shared/todolist/todolist.component'
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
-  public forcast = []
-  public forcastLoading = false
-  public forcastError: string
+export class HomeComponent implements OnInit, AfterViewInit {
   public greeting = 'Good ' + this.getGreetingTime(moment())
+  public clock = Observable
+    .interval(1000)
+    .map(() => new Date());
 
   constructor(private _sharedData: SharedDataService, private sf: SalesforceService) {
-    sf.connected.subscribe((value: boolean) => {
-      if (value) {
-        this.forcastLoading = true
-        sf.dashboard().then(res => {
-          this.forcastError = null
-          this.forcast = res.records;
-        }).catch((e) => {
-          this.forcastError = e
-        }).then(() => {
-          this.forcastLoading = false
-        });
-      }
-    });
-
     _sharedData.identity.subscribe((identity) => {
       if (identity) {
         if (identity.display_name) {
@@ -40,11 +27,12 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  forcastClass(): string {
-    return 'col-md-' + (12 / this.forcast.length)
-  }
 
   ngOnInit() {
+  }
+
+  ngAfterViewInit() {
+    document.querySelector('body').classList.add('sidebar-hidden')
   }
 
   private getGreetingTime(m) {
