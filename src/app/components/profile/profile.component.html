@@ -77,10 +77,17 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label class="switch switch-icon switch-pill switch-success">
-                    <input [ngModel]="settings?.useEvernote" (ngModelChange)="settings.useEvernote=$event" name="evernote" class="switch-input" type="checkbox">
-                    <span class="switch-label" data-off="" data-on=""></span>
-                    <span class="switch-handle"></span>
-                  </label> Sync notes with Evernote
+                      <input [ngModel]="settings?.useEvernote" (ngModelChange)="settings.useEvernote=$event" name="evernote" class="switch-input" type="checkbox">
+                      <span class="switch-label" data-off="" data-on=""></span>
+                      <span class="switch-handle"></span>
+                    </label> Sync notes with Evernote
+                  </div>
+                  <div class="form-group">
+                    <label class="switch switch-icon switch-pill switch-success">
+                      <input [ngModel]="settings?.useAppleNote" (ngModelChange)="settings.useAppleNote=$event" name="apple_note" class="switch-input" type="checkbox">
+                      <span class="switch-label" data-off="" data-on=""></span>
+                      <span class="switch-handle"></span>
+                    </label> Sync notes with Apple Notes
                   </div>
                 </div>
               </div>

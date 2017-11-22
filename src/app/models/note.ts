@@ -1,10 +1,6 @@
 import * as EvernoteHelper from 'evernote-helper';
 import { Database } from './database'
 import * as Evernote from 'jxa-evernote'
-import { MarkdownService } from '../providers';
-
-
-const _md = new MarkdownService();
 
 export class Note {
   protected static database = new Database('notes').database
@@ -85,7 +81,7 @@ export class Note {
     }
   }
 
-  save(evernote = false, notebook?: string): Promise<any> {
+  save(): Promise<any> {
     const note = new Note({
       _id: this._id,
       AccountId: this.AccountId,
@@ -95,7 +91,6 @@ export class Note {
     })
 
     if (this._id) {
-      this.updateHtmlInEvernote(_md.toHtml(this.markdown), notebook)
       return Note.database.updateAsync({
         _id: this._id
       }, {
@@ -115,85 +110,22 @@ export class Note {
     }
   }
 
-  updateMd(md: string, evernote = false, notebook?: string): Promise<any> {
-    if (evernote) {
-      this.updateHtmlInEvernote(_md.toHtml(md), notebook)
-    }
-
+  updateMd(md: string): Promise<any> {
     return Note.database.updateAsync({
       _id: this._id
     }, { $set: { markdown: md, updatedAt: new Date() } }, {});
   }
 
-  delete(evernote = false): Promise<any> {
-    if (evernote) {
-      this.deleteFromEvernote();
-    }
+  delete(): Promise<any> {
     return Note.database.removeAsync({
       _id: this._id
     }, {});
   }
 
-  private evernoteInfoExists(): boolean {
-    if (this.externalInfo && (this.externalInfo.EvernoteNoteLink ||
-      (this.externalInfo.EvernoteNoteId && this.externalInfo.EvernoteNotebook))) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  private deleteFromEvernote() {
-    if (this.evernoteInfoExists()) {
-      const eNote = new Evernote.Note({
-        noteLink: this.externalInfo.EvernoteNoteLink,
-        id: this.externalInfo.EvernoteNoteId,
-        notebook: this.externalInfo.EvernoteNotebook
-      }).delete()
-    }
-  }
-
-  private createHtmlEvernote(html: string, notebook: string) {
-    Evernote.Note.create(this.title, notebook, undefined, html)
-      .then((note) => {
-        Note.database.updateAsync({
-          _id: this._id
-        }, {
-            $set: {
-              'externalInfo.EvernoteNoteLink': note.noteLink,
-              'externalInfo.EvernoteNoteId': note.id,
-              'externalInfo.EvernoteNotebook': note.notebook
-            }
-          }, {});
-      })
-  }
-
-  private updateHtmlInEvernote(html: string, notebook: string) {
-    if (this.evernoteInfoExists()) {
-      return new Evernote.Note({
-        noteLink: this.externalInfo.EvernoteNoteLink,
-        id: this.externalInfo.EvernoteNoteId,
-        notebook: this.externalInfo.EvernoteNotebook
-      }).updateHtml(html)
-    } else {
-      Evernote.Note.findByTitle(this.title, notebook)
-        .then((note) => {
-          if (note.title) {
-            Note.database.updateAsync({
-              _id: this._id
-            }, {
-                $set: {
-                  'externalInfo.EvernoteNoteLink': note.noteLink,
-                  'externalInfo.EvernoteNoteId': note.id,
-                  'externalInfo.EvernoteNotebook': note.notebook
-                }
-              }, {});
-            note.updateHtml(html);
-          } else {
-            this.createHtmlEvernote(html, notebook)
-          }
-        })
-    }
+  setExternalInfo(info): Promise<any> {
+    return Note.database.updateAsync({
+      _id: this._id
+    }, { $set: info }, {});
   }
 
 }
@@ -202,4 +134,6 @@ interface ExternalNoteInfo {
   EvernoteNoteLink?: string
   EvernoteNotebook?: string
   EvernoteNoteId?: string
+  AppleNoteNotebookId?: string
+  AppleNoteId?: string
 }

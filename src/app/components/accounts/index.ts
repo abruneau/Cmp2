@@ -1,0 +1,6 @@
+export { AccountComponent } from './account/account.component'
+export { AccountsFilesComponent } from './files/files.component'
+export { AccountsNotesComponent } from './notes/notes.component'
+export { AccountsOpportunitiesComponent } from './opportunities/opportunities.component'
+export { AccountsSearchComponent } from './search/search.component'
+export { AccountsSettingsComponent } from './settings/settings.component'

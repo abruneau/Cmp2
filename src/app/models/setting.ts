@@ -4,6 +4,7 @@ export class Setting {
   protected static database = new Database('settings').database
   _id: string;
   useEvernote = false;
+  useAppleNote = false;
   sf: {
     loginUrl: '',
     email: '',
@@ -26,6 +27,7 @@ export class Setting {
       this._id = object._id
       this.sf = object.sf // TODO : should not be like this
       this.useEvernote = object.useEvernote || false
+      this.useAppleNote = object.useAppleNote || false
     }
   }
 

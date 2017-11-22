@@ -8,7 +8,7 @@ import { SalesforceService } from './salesforce.service'
 import { SharedDataService } from './shared-data.service'
 import { ThemeSpinnerService } from './theme-spinner.service'
 import { DatabaseMigrationService } from './database-migration.service'
-
+import { ExternalNoteService } from './external-note.service'
 
 
 @NgModule({
@@ -23,6 +23,7 @@ import { DatabaseMigrationService } from './database-migration.service'
     SharedDataService,
     ThemeSpinnerService,
     DatabaseMigrationService,
+    ExternalNoteService,
   ]
 })
 export class ServicesModule { }
