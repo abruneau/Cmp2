@@ -1,6 +1,10 @@
 @import "~todomvc-common/base.css";
 @import "~todomvc-app-css/index.css";
 
+.todoapp {
+  margin-top: 15px;
+}
+
 .todo-list li label {
   white-space: inherit;
 }
