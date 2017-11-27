@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import * as moment from 'moment'
 
@@ -17,7 +18,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
     .interval(1000)
     .map(() => new Date());
 
-  constructor(private _sharedData: SharedDataService, private sf: SalesforceService) {
+  public image_src = ''
+
+  constructor(private _sharedData: SharedDataService, private sf: SalesforceService, private http: Http) {
     _sharedData.identity.subscribe((identity) => {
       if (identity) {
         if (identity.display_name) {
@@ -33,6 +36,20 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     document.querySelector('body').classList.add('sidebar-hidden')
+    const url = 'http://unsplash.com/rss';
+    const rssToJsonServiceBaseUrl = 'https://rss2json.com/api.json?rss_url='
+    this.http.get(rssToJsonServiceBaseUrl + url)
+      .subscribe(data => {
+        const json = data.json()
+        const min = 0;
+        const max = json.items.length;
+        const random = Math.floor(Math.random() * (max - min)) + min;
+        console.log(random)
+        const str = json.items[random].content;
+        const regex = /<img.*?src="(.*?)"/;
+        this.image_src = regex.exec(str)[1];
+      })
+
   }
 
   private getGreetingTime(m) {

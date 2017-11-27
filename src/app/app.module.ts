@@ -8,6 +8,7 @@ import { HttpModule } from '@angular/http';
 import { APP_BASE_HREF } from '@angular/common';
 import { RouteReuseStrategy } from '@angular/router'
 
+
 import { TabsModule, TypeaheadModule, ModalModule } from 'ngx-bootstrap';
 import { BsDropdownModule } from 'ngx-bootstrap';
 import { Ng2DeviceDetectorModule } from 'ng2-device-detector';
