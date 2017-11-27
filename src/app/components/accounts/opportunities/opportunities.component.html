@@ -4,7 +4,6 @@
       <div class="col-sm-6">
         <div class="form-inline">
           <div class="form-group">
-            <span *ngIf="refreshing" class="fa fa-spinner rotate" aria-hidden="true"></span>
             <label class="sr-only" for="search">Search</label>
             <input type="text" class="form-control" name="search" placeholder="Search" [(ngModel)]="search" />
           </div>
@@ -16,7 +15,7 @@
       </div>
       <div class="col-sm-6">
         <a class="pull-right" (click)="updateOpportunities()">
-          			<i class="fa fa-refresh"></i>
+          			<i [ngClass]="{'rotate': refreshing}" class="fa fa-refresh"></i>
         		</a>
       </div>
     </div>
