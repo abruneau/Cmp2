@@ -17,6 +17,7 @@ import { AccountsSearchComponent } from './search/search.component';
 import { AccountsSettingsComponent } from './settings/settings.component';
 import { AccountsFilesComponent } from './files/files.component';
 import { AccountsNotesComponent } from './notes/notes.component';
+import { AccountsContactsComponent } from './contacts/contacts.component';
 
 import { AccountsOpportunitiesComponent } from './opportunities/opportunities.component';
 
@@ -43,6 +44,7 @@ import { AccountsOpportunitiesComponent } from './opportunities/opportunities.co
     AccountsFilesComponent,
     AccountsNotesComponent,
     AccountsOpportunitiesComponent,
+    AccountsContactsComponent,
   ]
 })
 export class AccountsModule { }

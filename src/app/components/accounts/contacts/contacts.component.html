@@ -1,0 +1,30 @@
+<div class="panel-body">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-inline">
+        <div class="form-group">
+          <label class="sr-only" for="search">Search</label>
+          <input type="text" class="form-control" name="search" placeholder="Search" [(ngModel)]="search" />
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <a class="pull-right" (click)="updateContacts()">
+        <i [ngClass]="{'rotate': refreshing}" class="fa fa-refresh"></i>
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    <div *ngFor="let contact of contacts | orderBy: 'Name' | filterBy: ['Name']: search" class="col-4">
+      <div class="card">
+        <div class="card-body">
+          <h6><a [appOpenExternal]="sfLoginUrl + '/' + contact.Id">{{contact.Name}}</a></h6>
+          <p *ngIf="contact.Title">{{contact.Title}}</p>
+          <div *ngIf="contact.Email">@ {{contact.Email}}</div>
+          <div *ngIf="contact.Phone"><i class="fa fa-phone" aria-hidden="true"></i> {{contact.Phone}}</div>
+          <div *ngIf="contact.MobilePhone"><i class="fa fa-mobile" aria-hidden="true"></i> {{contact.MobilePhone}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

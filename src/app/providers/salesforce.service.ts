@@ -76,7 +76,12 @@ export class SalesforceService {
     return this.query('SELECT AccountId,AE_Next_Steps__c,Amount,Expansion_Amount__c,First_Year_ACV__c,First_Year_Amount__c,Fiscal,Id,IsClosed,IsDeleted,IsWon,Name,SE_Next_Steps__c,SE_Opportunity_Rating__c,StageName, (SELECT Name, TeamMemberRole FROM OpportunityTeamMembers) FROM Opportunity WHERE AccountId = \'' + AccountId + '\'')
   }
 
+  getContacts(AccountId: string): Promise<any> {
+    return this.query('SELECT Id, AccountId, Email,FirstName,LastName,MobilePhone,Name,Phone,Title FROM Contact WHERE AccountId = \'' + AccountId + '\'')
+  }
+
   query(q): Promise<any> {
+    console.log(q)
     if (this.connectedSource.getValue()) {
       return this.connection.query(q);
     } else {

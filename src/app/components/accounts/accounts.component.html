@@ -38,7 +38,10 @@
             <a (click)="selectTab(3)">Files</a>
           </li>
           <li [ngClass]="{'active': active === 4}">
-            <a (click)="selectTab(4)">Settings</a>
+            <a (click)="selectTab(4)">Contacts</a>
+          </li>
+          <li [ngClass]="{'active': active === 5}">
+            <a (click)="selectTab(5)">Settings</a>
           </li>
         </ul>
       </div>
@@ -56,6 +59,9 @@
         </tab>
         <tab heading="Files">
           <app-accounts-files [account]="account"></app-accounts-files>
+        </tab>
+        <tab heading="Contacts">
+          <app-accounts-contacts [account]="account"></app-accounts-contacts>
         </tab>
         <tab heading="Settings">
           <app-accounts-settings [account]="account" (update)="getAccount($event)"></app-accounts-settings>

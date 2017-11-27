@@ -1,4 +1,5 @@
 export { Account } from './account'
+export { Contact } from './contact'
 export { Dashboard, ReportTypes } from './dashboard'
 export { Identity } from './identity'
 export { Note } from './note';
