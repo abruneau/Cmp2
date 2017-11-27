@@ -66,8 +66,8 @@
     "simplemde": "^1.11.2",
     "simpleweather": "^3.1.0",
     "sortablejs": "^1.6.1",
-    "todomvc-app-css": "^2.1.0",
-    "todomvc-common": "^1.0.3",
+    "todomvc-app-css": "^2.0.0",
+    "todomvc-common": "^1.0.1",
     "zone.js": "0.8.12"
   },
   "devDependencies": {
