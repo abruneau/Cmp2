@@ -1,0 +1,23 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th *ngFor="let col of table.columns">
+        <a (click)="sortType = col.value; sortReverse = !sortReverse">
+          {{col.value}}
+          <span *ngIf="sortType == col.value && !sortReverse" class="fa fa-caret-down"></span>
+          <span *ngIf="sortType == col.value && sortReverse" class="fa fa-caret-up"></span>
+        </a>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let row of table.data | orderBy: sort()">
+      <tr>
+        <td *ngFor="let col of table.columns">
+          <a *ngIf="col.key === 'Id'; else elseBlock" [appOpenExternal]="sfLoginUrl + '/' + row[col.key]">{{ row[col.key] | shorten: 4: '...' }}</a>
+          <ng-template #elseBlock>{{ row[col.key] | meganumber }}</ng-template>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>

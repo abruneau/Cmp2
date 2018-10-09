@@ -6,10 +6,10 @@
         <span class="caret"></span>
       </button>
         <div *dropdownMenu class="dropdown-menu dropdown-menu-right" aria-labelledby="simple-dropdown">
-          <a class="dropdown-item" (click)="refreshDashboard()">Refresh Dashboard</a>
-          <a class="dropdown-item" (click)="dashboardModal.show()">Change Title</a>
-          <a class="dropdown-item" (click)="newReportModal.show()">Add Report</a>
-          <a class="dropdown-item" (click)="deleteDashboard()">Delete Dashboard</a>
+          <a class="dropdown-item" (click)="refreshDashboard()"><i class="fa fa-refresh"></i>Refresh Dashboard</a>
+          <a class="dropdown-item" (click)="dashboardModal.show()"><i class="fa fa-pencil"></i>Change Title</a>
+          <a class="dropdown-item" (click)="newReportModal.show()"><i class="fa fa-plus"></i>Add Report</a>
+          <a class="dropdown-item" (click)="deleteDashboard()"><i class="fa fa-trash-o"></i>Delete Dashboard</a>
         </div>
       </div>
       <h2>{{dashboard.title}}</h2>
@@ -26,9 +26,9 @@
                 <span class="caret"></span>
               </button>
                 <div *dropdownMenu class="dropdown-menu dropdown-menu-right" aria-labelledby="simple-dropdown">
-                  <a class="dropdown-item" (click)="updateReport(report)">Update Report</a>
-                  <a class="dropdown-item" (click)="refreshReport(report)">Refresh Report</a>
-                  <a class="dropdown-item" (click)="deleteReport('Top', idx)">Delete Report</a>
+                  <a class="dropdown-item" (click)="refreshReport(report)"><i class="fa fa-refresh"></i>Refresh Report</a>
+                  <a class="dropdown-item" (click)="updateReport(report)"><i class="fa fa-pencil"></i>Update Report</a>
+                  <a class="dropdown-item" (click)="deleteReport('Top', idx)"><i class="fa fa-trash-o"></i>Delete Report</a>
                 </div>
               </div>
               <h4 *ngIf="report.title"><span *ngIf="report.refreshing" class="fa fa-spinner rotate" aria-hidden="true"></span> {{report.title}}</h4>
@@ -69,9 +69,9 @@
                 <span class="caret"></span>
               </button>
                 <div *dropdownMenu class="dropdown-menu dropdown-menu-right" aria-labelledby="simple-dropdown">
-                  <a class="dropdown-item" (click)="updateReport(report)">Update Report</a>
-                  <a class="dropdown-item" (click)="refreshReport(report)">Refresh Report</a>
-                  <a class="dropdown-item" (click)="deleteReport('Main', idx)">Delete Report</a>
+                  <a class="dropdown-item" (click)="refreshReport(report)"><i class="fa fa-refresh"></i>Refresh Report</a>
+                  <a class="dropdown-item" (click)="updateReport(report)"><i class="fa fa-pencil"></i>Update Report</a>
+                  <a class="dropdown-item" (click)="deleteReport('Main', idx)"><i class="fa fa-trash-o"></i>Delete Report</a>
                 </div>
               </div>
               <h4 *ngIf="report.title"><span *ngIf="report.refreshing" class="fa fa-spinner rotate" aria-hidden="true"></span> {{report.title}}</h4>
@@ -81,21 +81,7 @@
                 {{report.error}}
               </div>
               <ng-template #mainTable>
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th *ngFor="let col of report.columns">{{col.value}}</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let row of report.data">
-                      <td *ngFor="let col of report.columns">
-                        <a *ngIf="col.key === 'Id'; else elseBlock" [appOpenExternal]="sfLoginUrl + '/' + row[col.key]">{{ row[col.key] | shorten: 4: '...' }}</a>
-                        <ng-template #elseBlock>{{ row[col.key] | meganumber }}</ng-template>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                <app-smart-table [table]="report"></app-smart-table>
               </ng-template>
             </div>
           </div>

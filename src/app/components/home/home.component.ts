@@ -44,7 +44,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
         const min = 0;
         const max = json.items.length;
         const random = Math.floor(Math.random() * (max - min)) + min;
-        console.log(random)
         const str = json.items[random].content;
         const regex = /<img.*?src="(.*?)"/;
         this.image_src = regex.exec(str)[1];

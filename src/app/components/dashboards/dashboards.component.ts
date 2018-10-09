@@ -5,6 +5,7 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 
 import { Dashboard, Report, ReportTypes } from '../../models'
 import { SalesforceService, SharedDataService } from '../../providers';
+import { SmartTableComponent } from '../shared/smart-table/smart-table.component';
 
 
 @Component({

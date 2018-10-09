@@ -51,6 +51,7 @@
     "font-awesome": "^4.7.0",
     "jquery": "^3.2.1",
     "jsforce": "^1.7.1",
+    "jxa-evernote": "^1.1.1",
     "markdown-it": "^8.3.1",
     "markdown-it-checkbox": "^1.1.0",
     "markdown-it-contents": "0.0.1",
